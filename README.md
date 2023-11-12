@@ -10,11 +10,15 @@ This project includes a Flask server, a Nginx load balancer, and a ReactJS clien
 
 Make sure you have Docker and Docker Compose installed on your machine.
 
-Make sure proxy in `package.json` is set to `http://localhost:5000"`
-
 ### To Deploy:
 
-1. Build and run the containers:
+1. Set environment:
+
+    ```bash
+    ./set-environment
+    ```
+
+2. Build and run the containers:
 
     ```bash
     docker-compose up -d --build --scale flask-app=3
@@ -22,13 +26,13 @@ Make sure proxy in `package.json` is set to `http://localhost:5000"`
 
     This command builds the images, starts the containers, and scales the Flask app service to three instances. Adjust the scale value based on your requirements.
 
-2. To stop and remove the containers:
+3. To stop and remove the containers:
 
     ```bash
     docker-compose down
     ```
 
-3. View running containers:
+4. View running containers:
 
     ```bash
     docker ps
