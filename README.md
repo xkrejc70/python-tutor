@@ -15,7 +15,7 @@ Make sure you have Docker and Docker Compose installed on your machine.
 1. Set environment:
 
     ```bash
-    ./set-env
+    ./set-env.sh
     ```
 
 2. Build and run containers:
@@ -38,14 +38,20 @@ Make sure you have Docker and Docker Compose installed on your machine.
     docker ps
     ```
 
+5. App is running on `http://localhost:3000/`
+
 ### Development
 
-For developing there is no need to use Docker and load balancing.
+For developing there is no need to use Docker and scaling.
 
-To run the project for development, use the provided start script:
+1. To run the project for development, use the provided start script:
 
 ```bash
 ./start.sh
 ```
 
 It changes proxy in `package.json` to `http://localhost:5000`
+
+Frontend is running on `http://localhost:3000/`
+
+Backend is running on `http://localhost:5000/`
