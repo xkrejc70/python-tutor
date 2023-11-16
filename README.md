@@ -21,7 +21,7 @@ Make sure you have Docker and Docker Compose installed on your machine.
 2. Build and run containers:
 
     ```bash
-    docker-compose up -d --build --scale flask-app=3
+    docker compose up -d --build --scale flask-app=3
     ```
 
     This command builds the images, starts containers, and scales the Flask app service to three instances. Adjust the scale value based on your requirements.
@@ -44,14 +44,18 @@ Make sure you have Docker and Docker Compose installed on your machine.
 
 For developing there is no need to use Docker and scaling.
 
-1. To run the project for development, use the provided start script:
+1. To run the project for development, use tese commands:
 
 ```bash
-./start.sh
+./start-client.sh
 ```
 
-It changes proxy in `package.json` to `http://localhost:5000`
+For client, It changes proxy in `package.json` to `http://localhost:5000`
 
 Frontend is running on `http://localhost:3000/`
+
+```bash
+python3 server/app/wsgi.py
+```
 
 Backend is running on `http://localhost:5000/`
