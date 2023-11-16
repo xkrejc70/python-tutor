@@ -1,6 +1,64 @@
 import axios from 'axios';
 
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
+
+import Sidebar from "./components/Sidebar";
+import Evaluation from "./pages/Evaluation";
+import Home from "./pages/Home";
+import NoPage from "./pages/NoPage";
+
+import "./components/Sidebar.css";
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+function App() {
+  return (
+
+	<BrowserRouter>
+		<Routes>
+			<Route index element={<Home />}></Route>
+			<Route path="/home" element={<Home />}></Route>
+			<Route path="/evaluation" element={<Evaluation />}></Route>
+			<Route path="*" element={<NoPage />}></Route>
+		</Routes>
+	</BrowserRouter>
+
+    // <Fragment>
+    //   <Sidebar/>
+    // </Fragment>
+  );
+}
+
+/*
+
+import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+
+import { RiPencilLine } from "react-icons/ri";
+
+class App extends Component {
+
+
+	render() {
+
+		return (
+
+			<Sidebar>
+				<Menu>
+					<SubMenu label="Charts">
+					<MenuItem> Pie charts </MenuItem>
+					<MenuItem> Line charts </MenuItem>
+					</SubMenu>
+					<MenuItem> Documentation </MenuItem>
+					<MenuItem icon={<RiPencilLine />}>Author</MenuItem>
+					<MenuItem> Calendar </MenuItem>
+				</Menu>
+			</Sidebar>
+		)
+	}
+}
+
+
+/* Upload button
 
 class App extends Component {
 
@@ -70,9 +128,6 @@ class App extends Component {
 
 		return (
 			<div>
-				<h1>
-					GeeksforGeeks
-				</h1>
 				<h3>
 					File Upload using React!
 				</h3>
@@ -87,5 +142,6 @@ class App extends Component {
 		);
 	}
 }
+*/
 
 export default App;

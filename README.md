@@ -29,7 +29,7 @@ Make sure you have Docker and Docker Compose installed on your machine.
 3. To stop and remove containers:
 
     ```bash
-    docker-compose down
+    docker compose down
     ```
 
 4. View running containers:
@@ -44,13 +44,13 @@ Make sure you have Docker and Docker Compose installed on your machine.
 
 For developing there is no need to use Docker and scaling.
 
-1. To run the project for development, use tese commands:
+1. To run the project for development, use these commands:
 
 ```bash
 ./start-client.sh
 ```
 
-For client, It changes proxy in `package.json` to `http://localhost:5000`
+For client, it changes proxy in `package.json` to `http://localhost:5000` (no use of load balancer)
 
 Frontend is running on `http://localhost:3000/`
 

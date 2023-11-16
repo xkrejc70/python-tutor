@@ -4,7 +4,7 @@ import socket
 import os
 
 
-UPLOAD_FOLDER = 'server/app/uploads'
+UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'py'}
 
 
