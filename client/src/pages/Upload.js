@@ -7,7 +7,7 @@ import "assets/global.css";
 function Upload() {
     const [selectedFile, setSelectedFile] = useState(null);
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-    const [selectedProject, setSelectedProject] = useState('');
+    const [selectedProject, setSelectedProject] = useState('project1');
 
     // TODO: move to utils
     const onSidebarCollapsedChange = (collapsed) => {

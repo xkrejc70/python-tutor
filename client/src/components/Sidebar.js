@@ -1,3 +1,4 @@
+// Move styles to index.css
 import React, { useState } from 'react';
 import { Sidebar, SubMenu, Menu, MenuItem } from 'react-pro-sidebar';
 // icons
@@ -22,6 +23,7 @@ function Sidebars({ onCollapsedChange }) {
   };
 
   return (
+    <div style={{ display: "flex" }}>
       <Sidebar
         className={`app ${toggled ? "toggled" : ""}`}
         style={{ height: "100%", position: "absolute", display: "inline-block" }}
@@ -41,14 +43,16 @@ function Sidebars({ onCollapsedChange }) {
               <MenuItem
                 suffix={<FiChevronsLeft />}
                 onClick={handleCollapsedChange}
+                className="menu-item"
               >
-                <div class="title">PYTHON TUTOR</div>
+                <div className="title">PYTHON TUTOR</div>
               </MenuItem>
             )}
             <hr />
           </Menu>
 
           <Menu>
+          {/* Warning cuz of double <a> can use NavLink, but it breaks submenu */}
             <Link to="/upload">
               <MenuItem icon={<FaUpload />}>
                 Odevzdání
@@ -62,6 +66,7 @@ function Sidebars({ onCollapsedChange }) {
           </Menu>
         </main>
       </Sidebar>
+    </div>
   );
 }
 export default Sidebars;
