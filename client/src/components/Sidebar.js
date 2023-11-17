@@ -1,45 +1,30 @@
-// Move styles to index.css
-import "./Sidebar.css";
-import React, { useState } from "react";
-import {
-  RiHome4Line,
-  RiTeamLine,
-  RiCalendar2Line,
-  RiFolder2Line,
-  RiUserFollowLine,
-  RiPlantLine,
-  RiStackLine,
-  RiUserUnfollowLine
-} from "react-icons/ri";
-import { FiChevronsLeft, FiChevronsRight } from "react-icons/fi/";
-import {
-  Sidebar,
-  SubMenu,
-  Menu,
-  MenuItem
-  //useProSidebar
-} from "react-pro-sidebar";
-import { Link, createBrowserRouter } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Sidebar, SubMenu, Menu, MenuItem } from 'react-pro-sidebar';
+// icons
+import { RiTeamLine, RiCalendar2Line, RiUserUnfollowLine } from 'react-icons/ri';
+import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi';
+import { FaCode, FaUpload} from 'react-icons/fa';
+import { Link } from 'react-router-dom'
+// css
+import 'assets/global.css';
 
+function Sidebars({ onCollapsedChange }) {
 
-function Sidebars() {
-  //const { collapseSidebar } = useProSidebar();
   const [collapsed, setCollapsed] = useState(false);
-
   const [toggled, setToggled] = useState(false);
 
   const handleCollapsedChange = () => {
     setCollapsed(!collapsed);
+    onCollapsedChange(!collapsed); // Notify the parent component about the state change
   };
   const handleToggleSidebar = (value) => {
     setToggled(value);
   };
 
   return (
-    <div>
       <Sidebar
         className={`app ${toggled ? "toggled" : ""}`}
-        style={{ height: "100%", position: "absolute" }}
+        style={{ height: "100%", position: "absolute", display: "inline-block" }}
         collapsed={collapsed}
         toggled={toggled}
         handleToggleSidebar={handleToggleSidebar}
@@ -57,17 +42,7 @@ function Sidebars() {
                 suffix={<FiChevronsLeft />}
                 onClick={handleCollapsedChange}
               >
-                <div
-                  style={{
-                    padding: "9px",
-                    // textTransform: "uppercase",
-                    fontWeight: "bold",
-                    fontSize: 14,
-                    letterSpacing: "1px"
-                  }}
-                >
-                  PYTHON TUTOR
-                </div>
+                <div class="title">PYTHON TUTOR</div>
               </MenuItem>
             )}
             <hr />
@@ -75,19 +50,18 @@ function Sidebars() {
 
           <Menu>
             <Link to="/evaluation">
-              <MenuItem icon={<RiHome4Line />}>
-                Vyhodnocení
+              <MenuItem icon={<FaUpload />}>
+                Odevzdání
               </MenuItem>
             </Link>
             <SubMenu defaultOpen label={"Example"} icon={<RiTeamLine />}>
-              <MenuItem icon={<RiUserFollowLine />}>Regex</MenuItem>
+              <MenuItem icon={<FaCode />}>Regex</MenuItem>
               <MenuItem icon={<RiUserUnfollowLine />}>List</MenuItem>
               <MenuItem icon={<RiCalendar2Line />}>Set</MenuItem>
             </SubMenu>
           </Menu>
         </main>
       </Sidebar>
-    </div>
   );
 }
 export default Sidebars;

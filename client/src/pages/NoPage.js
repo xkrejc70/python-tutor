@@ -2,9 +2,10 @@ import React from 'react';
 
 function Home() {
     return (
-        <div>
+        // TODO: add sidebar
+        <div class="main-layout">
             <h1>
-            404
+                404 - Page not found
             </h1>
         </div>
     );

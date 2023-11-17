@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif !important;
+}
+
+/* Sidebar */
+hr {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    opacity: 0.15;
+}
+
+a, .fpTHfu, .ps-sidebar-container {
+    background-color: #72b1e9 !important;
+}
+a:hover {
+    font-size: 1.1rem;
+}
+a:link, a:visited {
+    color: #000000;
+    text-decoration: none;
+}
+.title {
+    padding: 9px;
+    font-weight: bold;
+    font-size: 14;
+    letter-spacing: 1px;
+}
+
+
+/* pages */
+.main-layout {
+    padding: 20px;
+}

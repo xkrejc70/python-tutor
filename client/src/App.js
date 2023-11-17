@@ -1,32 +1,22 @@
+import React from 'react';
 import axios from 'axios';
-
-import React, { Fragment, Component } from 'react';
-
-import Sidebar from "./components/Sidebar";
-import Evaluation from "./pages/Evaluation";
-import Home from "./pages/Home";
-import NoPage from "./pages/NoPage";
-
-import "./components/Sidebar.css";
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// pages
+import Evaluation from "pages/Evaluation";
+import Home from "pages/Home";
+import NoPage from "pages/NoPage";
 
 function App() {
-  return (
-
-	<BrowserRouter>
-		<Routes>
-			<Route index element={<Home />}></Route>
-			<Route path="/home" element={<Home />}></Route>
-			<Route path="/evaluation" element={<Evaluation />}></Route>
-			<Route path="*" element={<NoPage />}></Route>
-		</Routes>
-	</BrowserRouter>
-
-    // <Fragment>
-    //   <Sidebar/>
-    // </Fragment>
-  );
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route index element={<Home />}></Route>
+				<Route path="/home" element={<Home />}></Route>
+				<Route path="/evaluation" element={<Evaluation />}></Route>
+				<Route path="*" element={<NoPage />}></Route>
+			</Routes>
+		</BrowserRouter>
+	);
 }
 
 /*
@@ -82,7 +72,7 @@ class App extends Component {
 		// Create an object of formData
 		const formData = new FormData();
 
-    // TODO: check if is selected
+	// TODO: check if is selected
 
 		// Update the formData object
 		formData.append(
