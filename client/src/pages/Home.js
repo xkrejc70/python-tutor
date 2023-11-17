@@ -13,7 +13,7 @@ function Home() {
     return (
         <div>
             <Sidebar onCollapsedChange={handleSidebarCollapsedChange} />
-            <div class="main-layout" style={{ marginLeft: sidebarCollapsed ? "80px" : "250px" }}>
+            <div className={"main-layout"} style={{ marginLeft: sidebarCollapsed ? "80px" : "250px" }}>
                 <h1>
                     Home
                 </h1>

@@ -24,11 +24,15 @@ def return_home():
 @app.route("/api/upload", methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
-        # check if the post request has the file part
+        # check if the post request has all needed parts
         if 'file' not in request.files:
             app.logger.debug('No file part')
             return redirect(request.url)
+        if 'project' not in request.form:
+            app.logger.debug('No project part')
+            return redirect(request.url)
         file = request.files['file']
+        project = request.form['project']
         # If the user does not select a file, the browser submits an
         # empty file without a filename.
         if file.filename == '':
@@ -37,7 +41,10 @@ def upload():
         if file and allowed_file(file.filename):
             app.logger.debug('it is py')
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+            project_folder = os.path.join(app.config['UPLOAD_FOLDER'], project)
+            os.makedirs(project_folder, exist_ok=True)
+            file.save(os.path.join(project_folder, filename))
         else:
             app.logger.debug('not .py')
 

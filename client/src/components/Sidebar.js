@@ -49,7 +49,7 @@ function Sidebars({ onCollapsedChange }) {
           </Menu>
 
           <Menu>
-            <Link to="/evaluation">
+            <Link to="/upload">
               <MenuItem icon={<FaUpload />}>
                 Odevzdání
               </MenuItem>
