@@ -1,5 +1,6 @@
 from app import app
 from flask import jsonify, request
+
 from app.uploads.upload_handler import upload_handler
 
 # TODO: delete
