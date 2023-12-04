@@ -5,8 +5,7 @@ import { Sidebar, SubMenu, Menu, MenuItem } from 'react-pro-sidebar';
 import { RiTeamLine, RiCalendar2Line, RiUserUnfollowLine } from 'react-icons/ri';
 import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi';
 import { FaCode, FaUpload} from 'react-icons/fa';
-import { Link } from 'react-router-dom'
-// css
+import { Link } from 'react-router-dom';
 import 'assets/global.css';
 
 function Sidebars({ onCollapsedChange }) {
@@ -53,14 +52,12 @@ function Sidebars({ onCollapsedChange }) {
 
           <Menu>
           {/* Warning cuz of double <a> can use NavLink, but it breaks submenu */}
-            <Link to="/upload">
-              <MenuItem icon={<FaUpload />}>
+              <MenuItem icon={<FaUpload />} component={<Link to="/upload" />}>
                 Odevzdání
               </MenuItem>
-            </Link>
             <SubMenu defaultOpen label={"Example"} icon={<RiTeamLine />}>
-              <MenuItem icon={<FaCode />}>Regex</MenuItem>
-              <MenuItem icon={<RiUserUnfollowLine />}>List</MenuItem>
+              <MenuItem icon={<FaCode />} component={<Link to="/evaluation" />}>Regex</MenuItem>
+              <MenuItem icon={<RiUserUnfollowLine />} component={<Link to="/" />} >List</MenuItem>
               <MenuItem icon={<RiCalendar2Line />}>Set</MenuItem>
             </SubMenu>
           </Menu>

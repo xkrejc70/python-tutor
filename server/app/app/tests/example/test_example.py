@@ -1,5 +1,5 @@
 from app import app
-from app.tests.utils.file_importer import import_function_from_file
+from app.tests.test_utils import import_function_from_file
 
 # TODO: load function name, inputs and output from test_example_config.py
 # TODO: delete
@@ -15,7 +15,12 @@ def test_example(file_path):
     app.logger.debug(f"Result of foo(14) from uploaded file: {result}")
 
     if result == 14:
-        evaluation = "success"
+        evaluation = {
+            "comment": "some comment",
+            "failed": 1,
+            "passed": 4,
+            "total": 5
+        }
     else:
         evaluation = "bad result, try different solution"
     

@@ -39,3 +39,86 @@ a:link, a:visited {
 .main-layout {
     padding: 20px;
 }
+
+/* Upload.css */
+.status {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #dc3545;
+}
+
+.upload-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.upload-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px;
+    background-color: #72b1e9;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #429ae7;
+}
+
+/* evaluation */
+.main-layout {
+    margin-left: 250px;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.expandable-container {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.container-title {
+    padding: 10px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+.container-content {
+    padding: 10px;
+}
+
+.container-divider {
+    border: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+.expanded .container-title {
+    border-bottom: 1px solid #ccc;
+}
+
+.collapsed .container-title {
+    border: 1px solid #ccc;
+    border-bottom: none;
+}
+  

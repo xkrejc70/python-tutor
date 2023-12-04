@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Sidebar from "components/Sidebar";
-// css
+import { useNavigate } from 'react-router-dom';
 import "assets/global.css";
 
 function Upload() {
+    const navigate = useNavigate();
+
     const [selectedFile, setSelectedFile] = useState(null);
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-    const [selectedProject, setSelectedProject] = useState('project1');
+    const [selectedProject, setSelectedProject] = useState('proj1');
+    const [status, setStatus] = useState('');
 
-    // TODO: move to utils
     const onSidebarCollapsedChange = (collapsed) => {
         setSidebarCollapsed(collapsed);
     };
@@ -34,17 +36,22 @@ function Upload() {
 
             axios.post("/api/upload", formData, config)
                 .then(response => {
-                    // Handle success
-                    console.log(response.data);
+                    if (response.status === 200) {
+                        setStatus('File uploaded successfully!');
+                        navigate("/evaluation", { state: { test: response.data } });
+                    } else {
+                        setStatus(`Error: ${response.data}`);
+                    }
                 })
                 .catch(error => {
-                    // Handle error
-                    console.error(error);
+                    if (error.response) {
+                        setStatus(`Error: ${error.response.data.error}`);
+                    } else {
+                        setStatus(`Error: ${error.response.data}`);
+                    }
                 });
         } else {
-            // Handle case when no file is selected
-            // TODO: set text bellow upload button "please select file"
-            console.warn('Please select a file to upload.');
+            setStatus(`Please select a file to upload.`);
         }
     };
 
@@ -52,21 +59,20 @@ function Upload() {
         <div>
             <Sidebar onCollapsedChange={onSidebarCollapsedChange} />
             <div className={"main-layout"} style={{ marginLeft: sidebarCollapsed ? "80px" : "250px" }}>
-                <h1>
-                    Upload
-                </h1>
-                <br/>
-                <div>
-                    <input type="file" onChange={onFileChange} />
-                    
-                    <select value={selectedProject} onChange={handleProjectChange}>
-                        <option value="project1">Project 1</option>
-                        <option value="project2">Project 2</option>
-                    </select>
-                    
-                    <button onClick={onFileUpload}>
-                        Upload!
-                    </button>
+                <h1>Odevzdání projektů</h1>
+                <br />
+                <div className="upload-container">
+                    <h3>Nahrejte řešení projektu</h3>
+                    <br />
+                    {status && <p className={`status`}>{status}</p>}
+                    <div className="upload-form">
+                        <input type="file" onChange={onFileChange} />
+                        <select value={selectedProject} onChange={handleProjectChange}>
+                            <option value="proj1">Project 1</option>
+                            <option value="proj2">Project 2</option>
+                        </select>
+                        <button onClick={onFileUpload}>Odeslat!</button>
+                    </div>
                 </div>
             </div>
         </div>

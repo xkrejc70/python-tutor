@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Sidebar from "components/Sidebar";
-// css
 import "assets/global.css";
 
 function Home() {

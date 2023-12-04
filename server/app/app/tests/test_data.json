@@ -1,0 +1,25 @@
+{
+    "functions": {
+      "camel_to_snake_case": [
+        {
+          "input": "camelCaseNameAllowed",
+          "expected_output": "camel_case_name_allowed"
+        },
+        {
+          "input": "anotherCamelCase",
+          "expected_output": "another_camel_case"
+        }
+      ],
+      "other_function": [
+        {
+          "input": "input1",
+          "expected_output": "output1"
+        },
+        {
+          "input": "input2",
+          "expected_output": "output2"
+        }
+      ]
+    }
+  }
+  
