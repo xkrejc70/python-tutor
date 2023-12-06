@@ -5,7 +5,6 @@ import os
 import re
 
 from app.uploads.uploads_config import UploadsConfig
-from app.tests.test_handler import test
 
 # Config
 app.config.from_object(UploadsConfig)
@@ -28,7 +27,7 @@ def check_filename(filename, project):
     else:
         return False
 
-# Check and Save file to project folder
+# Check and Save file to project folder, run tests
 def upload_handler(request):
     if request.method == 'POST':
         # Check if the post request has all needed parts
@@ -66,16 +65,7 @@ def upload_handler(request):
             # TODO: if exists, rename (keep all uploaded projects)
             file.save(file_path)
             app.logger.debug('File successfully uploaded')
-
-            # Run tests move to different try
-            test_result = test(file_path, project)
-
-            response_data = {
-                "success": True,
-                "message": "File successfully uploaded.",
-                "test": test_result,
-            }
-            return jsonify(response_data), 200
+            return [file_path, project], 200
         except Exception as e:
             app.logger.error(f"Error during file upload: {str(e)}")
             return jsonify({"error": "An error occurred during file upload."}), 500

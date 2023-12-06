@@ -1,13 +1,29 @@
 from app import app
+import yaml
+import os
+from app.tests.proj1.test_project1 import test_project1
 
-from app.tests.proj1.test_proj1 import test_proj1
+def not_found():
+    return "test function not found"
+
+def run_tests_for_project(file_path, project, tests):
+    test_functions = {
+        'proj1': test_project1
+    }
+
+    # Get the test project function
+    test_function = test_functions.get(project, not_found)
+    return test_function(file_path, tests)
 
 def test(file_path, project):
 
-    function_name = f"test_{project}"
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    file_p = os.path.join(script_dir, 'test_data.yaml')
+    with open(file_p, 'r') as file:
+        test_data = yaml.safe_load(file)
 
-    if function_name in globals() and callable(globals()[function_name]):
-        function_to_call = globals()[function_name]
-        return function_to_call(file_path)
-    else:
-        return "No function found for project"
+    result = run_tests_for_project(file_path, project, test_data)
+
+    return result
+
+    # TODO: jsonify({"state": "error"})

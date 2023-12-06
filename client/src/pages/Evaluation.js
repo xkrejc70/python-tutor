@@ -34,15 +34,19 @@ function Evaluation() {
         setSidebarCollapsed(collapsed);
     };
 
+    const numTests = uploadData?.test?.test_result?.num_tests;
+    const passed = uploadData?.test?.test_result?.passed;
+    const percentage = numTests > 0 ? ((passed / numTests) * 100).toFixed(2) : 0;
+
     return (
         <div>
             <Sidebar onCollapsedChange={handleSidebarCollapsedChange} />
             <div className={"main-layout"} style={{ marginLeft: sidebarCollapsed ? "80px" : "250px" }}>
-                <h1>Evaluation</h1>
+                <h1>Vyhodnocení</h1>
 
                 <br />
 
-                <ExpandableContainer title="Výsledky testů (4/5)">
+                <ExpandableContainer title={`Vyhodnocení automatických testů: ${passed}/${numTests} = ${percentage}%`} >
                     <pre>{JSON.stringify(uploadData, null, 2)}</pre>
                 </ExpandableContainer>
 

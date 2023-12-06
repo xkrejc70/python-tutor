@@ -1,0 +1,13 @@
+proj1:
+  camel_to_snake_case:
+    - in: camelCaseNameAllowed
+      out: camel_case_name_allowed
+    - in: anotherCamelCase
+      out: another_camel_case
+    - in: longVATNumber
+      out: long_vat_number
+  not_both_titles:
+    - in: 'doc. Josef Tyl, Rudolf Srp, Ph.D., Pavel Vlk, doc. RNDr. Petr Berka, Ph.D., Jan Hora'
+      out: ['doc. Josef Tyl', 'Rudolf Srp, Ph.D.', 'Pavel Vlk', 'Jan Hora']
+    - in: ''
+      out: ''
