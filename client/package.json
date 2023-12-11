@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000",
+  "proxy": "http://nginx:4000",
   "dependencies": {
     "@fontsource/montserrat": "^5.0.15",
     "@testing-library/jest-dom": "^5.17.0",
