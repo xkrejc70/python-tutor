@@ -82,8 +82,12 @@ def print_distribution(values, name):
     print(f"mean / median: {np.mean(values)}, {np.median(values)}")
     print(f"p5 / p95: {np.quantile(values, 0.1)}, {np.quantile(values, 0.9)}")
 
+with open("train_data/config.json", "r") as config_file:
+    config = json.load(config_file)
+
+# Extract data_path from the config
+data_path = config.get("data_path", "")
 # Test laoding and format
-data_path = "data/proj4_data_1.jsonl"
 test_data(data_path)
 
 # Warnings and tokens counts
@@ -134,3 +138,7 @@ n_billing_tokens_in_dataset = sum(min(MAX_TOKENS_PER_EXAMPLE, length) for length
 print(f"Dataset has ~{n_billing_tokens_in_dataset} tokens that will be charged for during training")
 print(f"By default, you'll train for {n_epochs} epochs on this dataset")
 print(f"By default, you'll be charged for ~{n_epochs * n_billing_tokens_in_dataset} tokens")
+
+cost_per_100k_tokens = 0.80
+cost = ((n_epochs * n_billing_tokens_in_dataset) / 100000) * cost_per_100k_tokens
+print(f"Cost for fine-tuning should be ${cost}")

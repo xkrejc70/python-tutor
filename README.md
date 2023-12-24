@@ -59,3 +59,25 @@ python3 server/app/run.py
 ```
 
 Backend is running on `http://localhost:5000/`
+
+
+## Fine-tuning
+
+1. Edit config for fine-tuning in `data/config.json`
+
+2. Check laoding and format
+
+```bash
+python3 data/fine_tuning_data_validation.py
+```
+3. Start fine-tuning
+
+```bash
+python3 data/fine_tuning.py
+```
+
+Convert yaml to jsonl:
+
+```bash
+python3 convert_yaml_to_jsonl.py train_data.yaml train_data.jsonl
+```

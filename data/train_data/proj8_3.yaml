@@ -1,0 +1,343 @@
+# system
+# You are expert python tutor providing specific feedback on code efficiency.
+
+# set instead of list
+
+- assistant: Consider using a set for more efficient membership tests.
+- user: |
+    def first_with_given_key(iterable, key=lambda x: x):
+        keys_in_list = []
+        for it in iterable:
+        if key(it) not in keys_in_list:
+            keys_in_list.append(key(it))
+            yield it
+
+- assistant: Consider using a set for more efficient membership tests.
+- user: |
+    def first_with_given_key(iterable, key=lambda value: value):
+        it = iter(iterable)
+        saved_keys = []
+        while True:
+            try:
+                value = next(it)
+                if key(value) not in saved_keys:
+                    saved_keys.append(key(value))
+                    yield value
+            except StopIteration:
+                break
+
+- assistant: Consider using a set for more efficient membership tests.
+- user: |
+    def first_with_given_key(iterable, key=None):
+        if key is None:
+            key = lambda x: x
+        item_list = []
+        key_set = set()
+        for item in iterable:
+            generated_item = key(item)
+            if generated_item not in item_list:
+                item_list.append(generated_item)
+                yield item
+
+- assistant: Consider using a set for more efficient membership tests.
+- user: |
+    def first_with_given_key(iterable, key=lambda k: k):
+        used = []
+        it   = iter(iterable)
+        while True:
+            try:
+                val = next(it)
+                if key(val) not in used:
+                    yield val
+                    used.append(key(val))
+            except StopIteration:
+                break
+
+- assistant: Consider using a set for more efficient membership tests. Use yield for memory-efficient processing, particularly with large input iterables.
+- user: |
+    def first_with_given_key(iterable, key=None):
+        result, existing = [], []
+        for x in iterable:
+            if x not in result and (not key or not key(x) in existing):
+                if key:
+                    existing.append(key(x))
+                result.append(x)
+        return result
+
+- assistant: Consider using a set for more efficient membership tests.
+- user: |
+    def first_with_given_key(iterable, key=lambda value: value):
+        it = iter(iterable)
+        saved_keys = []
+        while True:
+            try:
+                value = next(it)
+                if key(value) not in saved_keys:
+                    saved_keys.append(key(value))
+                    yield value
+            except StopIteration:
+                break
+
+- assistant: Consider using a set for more efficient membership tests.
+- user: |
+    def first_with_given_key(iterable, key=None):
+        if key is None:
+            key = id
+        d = []
+        for val in iterable:
+            hashed_val = hash(key(val))
+            val_key = key(val)
+            if val_key not in d:
+                d.append(val_key)
+                yield val
+
+- assistant: Consider using a set for more efficient membership tests.
+- user: |
+    def first_with_given_key(iterable, key=None):
+        if key is None:
+            key = id
+        d = []
+        for val in iterable:
+            val_key = key(val)
+            if val_key not in d:
+                d.append(val_key)
+                yield val
+
+- assistant: Consider using a set for more efficient membership tests.
+- user: |
+    def first_with_given_key(iterable, key=lambda x: x):
+        keys=[]
+        for i in iterable:
+            if key(i) not in keys:
+                yield i
+                keys.append(key(i))
+
+- assistant: Consider using a set for more efficient membership tests.
+- user: |
+    def first_with_given_key(iterable, key=lambda y: y):
+        done=list() 
+        it=iter(iterable) 
+        while not False: 
+            try:
+                val=next(it) 
+                if key(val) not in done: 
+                    yield val 
+                    done.insert(-1,key(val)) 
+            except StopIteration: 
+                break
+
+- assistant: Consider using a set for more efficient membership tests.
+- user: |
+    def first_with_given_key(iterable, key=lambda x: x):
+        keys = []
+        for i in iterable:
+            try:
+                val = hash(key(i))
+            except TypeError:
+                val = repr(key(i))
+            if val in keys:
+                continue
+            keys.append(val)
+            yield i
+
+- assistant: Consider using a set for more efficient membership tests. Avoid unnecessary indexing, especially if iterable is large or infinite.
+- user: |
+    def first_with_given_key(the_iterable, key=lambda x: x):
+        temp_keys=[]
+        for i in range(len(the_iterable)):
+            if (key(the_iterable[i]) not in temp_keys):
+                temp_keys.append(key(the_iterable[i]))
+                yield the_iterable[i]
+        del temp_keys
+
+- assistant: Consider using a set for more efficient membership tests. Avoid unnecessary indexing, especially if iterable is large or infinite.
+- user: |
+    def first_with_given_key(iterable, key = lambda x: x):
+        tmp=[]
+        for i in range(len(iterable)):
+            if (key(iterable[i]) not in tmp):
+                yield iterable[i]
+                tmp.append(key(iterable[i]))
+        del tmp
+
+- assistant: Consider using a set for more efficient membership tests.
+- user: |
+    def first_with_given_key(iterable, key):
+        filterList = []
+        my_set = set()
+        result = []
+        for item in iterable:
+            if key(item) not in filterList:
+                filterList.append(key(item))
+                yield item
+
+# set instead of dictionary
+
+- assistant: Consider using set for more efficient and natural tracking of unique keys over dictionary.
+- user: |
+    def first_with_given_key(iterable, key=repr):
+        prev_keys = {}
+        lamb_key = lambda item: key(item)
+        for obj in iterable:
+            obj_key = lamb_key(obj)
+            if(obj_key) in prev_keys.keys():
+                continue
+            try:
+                prev_keys[hash(obj_key)] = repr(obj)
+            except TypeError:
+                prev_keys[repr(obj_key)] = repr(obj)
+            yield obj
+
+- assistant: Consider using set for more efficient and natural tracking of unique keys over dictionary.
+- user: |
+    def first_with_given_key(iterable, key=repr):
+        used_keys = dict()
+        get_key = lambda index: key(index)
+        for index in iterable:
+            index_key = get_key(index)
+            if index_key in used_keys.keys():
+                continue
+            try:
+                used_keys[hash(index_key)] = repr(index)
+            except TypeError:
+                used_keys[repr(index_key)] = repr(index)
+            yield index
+
+- assistant: Consider using set for more efficient and natural tracking of unique keys over dictionary.
+- user: |
+    def first_with_given_key(iterable, key=lambda x: x):
+        keys_used = {}
+        for item in iterable:
+            rp = repr(key(item))
+            if rp not in keys_used.keys():
+                keys_used[rp] = repr(item)
+                yield item
+
+- assistant: Consider using set for more efficient and natural tracking of unique keys over dictionary.
+- user: |
+    def first_with_given_key(iterable, key=lambda x: x):
+        keys_used = {}
+        set_of_used_keys = ()
+        for item in iterable:
+            rp = repr(key(item))
+            if rp not in keys_used.keys():
+                keys_used[rp] = repr(item)
+                yield item
+
+- assistant: Consider using set for more efficient and natural tracking of unique keys over dictionary.
+- user: |
+    def first_with_given_key(iterable, key = lambda x: x):
+        found_keys={}
+        for i in iterable:
+            if key(i) not in found_keys.keys():
+                found_keys[key(i)]=i
+                yield i
+
+- assistant: Consider using set for more efficient and natural tracking of unique keys over dictionary.
+- user: |
+    def first_with_given_key(iterable, key=repr):
+        used_keys = {}
+        get_key = return_key(key)
+        for item in iterable:
+            item_key = get_key(item)
+            if item_key in used_keys.keys():
+                continue
+            try:
+                used_keys[hash(item_key)] = repr(item)
+            except TypeError:
+                used_keys[repr(item_key)] = repr(item)
+            yield item
+
+- assistant: Consider using set for more efficient and natural tracking of unique keys over dictionary.
+- user: |
+    def first_with_given_key(iterable, key=lambda x: x):
+        gotkeys = {}
+        for i in iterable:
+            k = repr(key(i))
+            if gotkeys.get(k, None) is None:
+                gotkeys[k] = k
+                yield i
+
+- assistant: Consider using set for more efficient and natural tracking of unique keys over dictionary.
+- user: |
+    def first_with_given_key(iterable, key = repr):
+        first_items = {}
+        for item in iterable:
+            new_key = (lambda x, func: func(x))(item, key)
+            if new_key in first_items:
+                continue
+            try:
+                first_items[hash(new_key)] = repr(item)
+            except TypeError:
+                first_items[repr(new_key)] = repr(item)
+            yield item
+
+# perfect solution
+
+- assistant: Perfect solution.
+- user: |
+    def first_with_given_key(lst, key = lambda x: x):
+        res = set()
+        for i in lst:
+            if repr(key(i)) not in res:
+                res.add(repr(key(i)))
+                yield i
+
+- assistant: Perfect solution.
+- user: |
+    def first_with_given_key(iterable, key=repr):
+        set_of_keys = set()
+        lambda_key = (lambda x: key(x))
+        for item in iterable:
+            key = lambda_key(item)
+            try:
+                key_for_set = hash(key)
+            except TypeError:
+                key_for_set = repr(key)
+            if key_for_set in set_of_keys:
+                continue
+            set_of_keys.add(key_for_set)
+            yield item
+
+- assistant: Perfect solution.
+- user: |
+    def first_with_given_key(iterable, key=None):
+        if key is None:
+            key = identity
+        appeared_keys = set()
+        for item in iterable:
+            generated_key = key(item)
+            if not generated_key.__hash__:
+                generated_key = repr(generated_key)
+            if generated_key not in appeared_keys:
+                appeared_keys.add(generated_key)
+                yield item
+
+- assistant: Perfect solution.
+- user: |
+    def first_with_given_key(iterable, key=repr):
+        found_keys = set()
+        lambda_func = lambda x: key(x)
+        for item in iterable:
+            key_of_item = lambda_func(item)
+            try:
+                new_key = hash(key_of_item)
+            except TypeError:
+                new_key = repr(key_of_item)
+            if new_key in found_keys:
+                continue
+            found_keys.add(new_key)
+            yield item
+
+- assistant: Perfect solution.
+- user: |
+    def first_with_given_key(iterable, key=lambda item: item):
+        returned_keys = set()
+        for item in iterable:
+            key_val = key(item)
+            if key_val not in returned_keys:
+                try:
+                    returned_keys.add(key_val)
+                except TypeError:
+                    returned_keys.add(repr(key_val))
+                yield item
