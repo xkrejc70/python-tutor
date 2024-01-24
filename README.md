@@ -55,7 +55,7 @@ For client, it changes proxy in `package.json` to `http://localhost:5000` (no us
 Frontend is running on `http://localhost:3000/`
 
 ```bash
-python3 server/app/run.py
+python3 server/flask/run.py
 ```
 
 Backend is running on `http://localhost:5000/`

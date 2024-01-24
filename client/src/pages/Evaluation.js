@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
 import Sidebar from "components/Sidebar";
 import { useLocation } from 'react-router-dom';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { coy } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import "assets/global.css";
 
-function ExpandableContainer({ title, children }) {
-    const [isExpanded, setIsExpanded] = useState(false);
+/**
+ * ExpandableContainer Component
+ * @param {Object} props - React component properties.
+ * @param {string} props.title - The title of the expandable container.
+ * @param {ReactNode} props.children - The content to be displayed within the container.
+ * @param {boolean} [props.defaultOpen=false] - Determines whether the container is expanded by default.
+ * @param {boolean} [props.useSyntaxHighlighting=false] - Determines whether to apply syntax highlighting (for Python code) to the container.
+ * @returns {JSX.Element} - React JSX Element representing the ExpandableContainer.
+ */
+function ExpandableContainer({ title, children, defaultOpen = false, useSyntaxHighlighting = false }) {
+    const [isExpanded, setIsExpanded] = useState(defaultOpen);
 
     const toggleExpansion = () => {
         setIsExpanded((prev) => !prev);
@@ -17,13 +28,23 @@ function ExpandableContainer({ title, children }) {
             </div>
             {isExpanded && (
                 <div className="container-content">
-                    {children}
-                </div>
+                {useSyntaxHighlighting ? (
+                    <SyntaxHighlighter language="python" style={coy}>
+                        {children}
+                    </SyntaxHighlighter>
+                ) : (
+                    <pre>{children}</pre>
+                )}
+            </div>
             )}
         </div>
     );
 }
 
+/**
+ * Evaluation Component
+ * @returns {JSX.Element} - React JSX Element representing the Evaluation component.
+ */
 function Evaluation() {
     let location = useLocation();
     // rename
@@ -34,9 +55,12 @@ function Evaluation() {
         setSidebarCollapsed(collapsed);
     };
 
+    const file_content = uploadData?.test?.file_content;
     const numTests = uploadData?.test?.test_result?.num_tests;
     const passed = uploadData?.test?.test_result?.passed;
     const percentage = numTests > 0 ? ((passed / numTests) * 100).toFixed(2) : 0;
+    
+    const model_response = uploadData?.test?.test_result?.model_response;
 
     return (
         <div>
@@ -52,9 +76,8 @@ function Evaluation() {
 
                 <hr className="container-divider" />
 
-                <ExpandableContainer title="Doporučení (3)">
-                    <p>Content for Container 2</p>
-                    <p>Content for Container 2</p>
+                <ExpandableContainer title="Doporučení Model (1)">
+                    <p>{model_response}</p>
                 </ExpandableContainer>
 
                 <hr className="container-divider" />
@@ -62,6 +85,12 @@ function Evaluation() {
                 <ExpandableContainer title="Tipy na samostudium (1)">
                     <p>Odkaz na sekci zde </p>
                     <p>Odkaz na tutorial jinde</p>
+                </ExpandableContainer>
+
+                <hr className="container-divider" />
+
+                <ExpandableContainer title="Nahraný soubor" defaultOpen={true} useSyntaxHighlighting={true}>
+                    {file_content}
                 </ExpandableContainer>
             </div>
         </div>

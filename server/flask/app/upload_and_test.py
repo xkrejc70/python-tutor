@@ -10,18 +10,19 @@ def upload_and_test(request):
     if upload_result[1] == 200:
         # File uploaded successfully
 
-        file_path = upload_result[0][0]
-        project = upload_result[0][1]
+        file_path = upload_result[0]["file_path"]
+        project = upload_result[0]["project"]
+        file_content = upload_result[0]["file_content"]
 
         try:
             # Test
             test_result = test(file_path, project)
-
             response_data = {
-                "test_result": test_result
+                "test_result": test_result,
+                "file_content": file_content
             }
             return jsonify(response_data), 200
-        
+      
         except Exception as e:
             app.logger.error(f"Error during test: {str(e)}")
             return jsonify({"error": f"An error occurred during test: {str(e)}"}), 500

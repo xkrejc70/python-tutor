@@ -11,3 +11,9 @@ proj1:
       out: ['doc. Josef Tyl', 'Rudolf Srp, Ph.D.', 'Pavel Vlk', 'Jan Hora']
     - in: ''
       out: ''
+proj8:
+  first_with_given_key:
+    - in: [[1], [1, 3], [1, 2, 3], [1], [2, 3]]
+      out: [[1], [1, 3], [1, 2, 3]]
+    - in: ["first", "second", "third", "fourth", "one"]
+      out: ["first", "second", "one"]

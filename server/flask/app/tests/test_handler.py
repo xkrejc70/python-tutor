@@ -2,16 +2,18 @@ from app import app
 import yaml
 import os
 from app.tests.proj1.test_project1 import test_project1
+from app.tests.proj8.test_project8 import test_project8
 
 def not_found():
     return "test function not found"
 
 def run_tests_for_project(file_path, project, tests):
     test_functions = {
-        'proj1': test_project1
+        'proj1': test_project1,
+        'proj8': test_project8
     }
 
-    # Get the test project function
+    # Get test project function
     test_function = test_functions.get(project, not_found)
     return test_function(file_path, tests)
 

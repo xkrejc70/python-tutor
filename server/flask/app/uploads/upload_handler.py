@@ -65,7 +65,16 @@ def upload_handler(request):
             # TODO: if exists, rename (keep all uploaded projects)
             file.save(file_path)
             app.logger.debug('File successfully uploaded')
-            return [file_path, project], 200
+
+            # Read the content of the uploaded file and save it to 'file_content'
+            with open(file_path, 'r') as f:
+                file_content = f.read()
+
+            return {
+                "file_path": file_path,
+                "project": project,
+                "file_content": file_content
+            }, 200
         except Exception as e:
             app.logger.error(f"Error during file upload: {str(e)}")
             return jsonify({"error": "An error occurred during file upload."}), 500
