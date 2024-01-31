@@ -1,0 +1,50 @@
+sentence,label
+"    perms = all_permutations_substrings(string)
+return {word for word in words if hash(word) in {hash(looking) for looking in perms}} ",0
+"    perms = all_permutations_substrings(string)
+return {w for w in words if w in perms}",0
+"    perms = all_permutations_substrings(string)
+return {word for word in words if hash(word) in {hash(search) for search in perms}}",0
+"    perms = all_permutations_substrings(string)
+return set(i for i in words if i in perms)",0
+"    perms = all_permutations_substrings(string)
+return {i for i in words if i in perms}",0
+"    perms = all_permutations_substrings(string)
+result = perms.intersection(words)
+set1 = set()
+    for i in perms:
+        if i in words:
+            set1.add(i)
+return set1",0
+"    perms = all_permutations_substrings(string)
+return {each for each in words if hash(each) in {hash(find) for find in perms }}",0
+"    perms = all_permutations_substrings(string)
+return {word for word in words if word in set(perms)}",0
+"    perms = all_permutations_substrings(string)
+return set(list(set(perms) & set(words)))",0
+"    perms = all_permutations_substrings(string)
+res = [x for x in list(perms) + words if x in list(perms) and x in words]
+return  set(res)",0
+"    perms = all_permutations_substrings(string)
+set1 = set()
+    for i in perms:
+        if i in words:
+            set1.add(i)
+return set1",0
+"    perms = all_permutations_substrings(string)
+return_list = {permutation for permutation in perms if permutation in words}
+return return_list",0
+"    perms = all_permutations_substrings(string)
+return {word for word in words if hash(word) in {hash(looking) for looking in perms}}",0
+"    perms = all_permutations_substrings(string)
+return  perms.intersection(words)",1
+"    perms = all_permutations_substrings(string)
+	
+return set(perms).intersection(words)",1
+"    perms = all_permutations_substrings(string)
+if set(words) & set(perms):
+    res = (set(words) & set(perms))",1
+"    perms = all_permutations_substrings(string)
+return set( perms.intersection(words)) ",1
+"    perms = all_permutations_substrings(string)
+return perms.intersection(words)",1

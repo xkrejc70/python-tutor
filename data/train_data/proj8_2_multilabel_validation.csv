@@ -1,0 +1,375 @@
+text,set,list,dict
+"def first_with_given_key(iterable, key=lambda a : a):
+    done = list()
+    for value in iterable:
+        if key(value) not in done:
+            done.append(key(value))
+            yield value",0,1,0
+"def first_with_given_key(iterable, key=repr):
+    used_keys = {}
+    get_key = return_key(key)
+    for item in iterable:
+        item_key = get_key(item)
+        if item_key in used_keys.keys():
+            continue
+        try:
+            used_keys[hash(item_key)] = repr(item)
+        except TypeError:
+            used_keys[repr(item_key)] = repr(item)
+        yield item",0,0,1
+"def first_with_given_key(iterable, key=lambda x: x):
+    keys = list()
+    itrbl = iter(iterable)
+    while not False:
+        try:
+            val = next(itrbl)
+            if key(val) not in keys:
+                yield val
+                keys.insert(-1, key(val))
+        except StopIteration:
+            break",0,1,0
+"def first_with_given_key(iterable, key=repr):
+    used_keys = {}
+    uniq_keys = set()
+    get_key = return_key(key)
+    for i in iterable:
+        item_key = get_key(i)
+        if item_key not in used_keys.keys():
+            try:
+                uniq_keys.add(repr(i))
+                used_keys[hash(item_key)] = repr(i)
+            except TypeError:
+                used_keys[repr(item_key)] = repr(i)
+            yield i",0,0,1
+"def first_with_given_key(iterable, key=lambda y: y):
+    it=iter(iterable)
+    li=list()
+    while not False:
+        try:
+            hodnota=next(it)
+            if key(hodnota) not in li:
+                yield hodnota
+                li.insert(-1,key(hodnota))
+        except StopIteration:
+            break",0,1,0
+"def first_with_given_key(iterable, key=lambda x: x):
+    done=list()
+    for value in iterable:
+        if key(value) not in done:
+            yield value
+            done.insert(-1,key(value))",0,1,0
+"def first_with_given_key(iterable, key=repr):
+    used_keys = {}
+    get_key = return_key(key)
+    for item in iterable:
+        item_key = get_key(item)
+        if item_key in used_keys.keys():
+            continue
+        try:
+            used_keys[hash(item_key)] = repr(item)
+        except TypeError:
+            used_keys[repr(item_key)] = repr(item)
+        yield item",0,0,1
+"def first_with_given_key(iterable, key=lambda x: x):
+	it = iter(iterable)
+	keys = list()
+	while True:
+		try:
+			item = next(it)
+			if key(item) in keys:
+				continue
+			keys.insert(0, key(item))
+			yield item
+		except StopIteration:
+			break",0,1,0
+"def first_with_given_key(iterable, key=repr):
+    
+    get_key = set_key(key)
+    keys_arr = {}
+
+
+    for x in iterable:
+        key = get_key(x)
+        if key in keys_arr.keys():
+            continue
+        try:
+            keys_arr[hash(key)] = repr(x)
+        except TypeError:
+            keys_arr[repr(key)] = repr(x)
+        yield x",0,0,1
+"def first_with_given_key(iterable, key=repr):
+    used_keys = {}
+    get_key = return_key(key)
+    for item in iterable:
+        item_key = get_key(item)
+        if item_key in used_keys.keys():
+            continue
+        try:
+            used_keys[hash(item_key)] = repr(item)
+        except TypeError:
+            used_keys[repr(item_key)] = repr(item)
+        yield item",0,0,1
+"def first_with_given_key(i, key=lambda x: x):
+    key_tmp = []
+    for j in range(len(i)):
+        if (key(i[j]) not in key_tmp):
+            yield i[j]
+            key_tmp.append(key(i[j]))",0,1,0
+"def first_with_given_key(iterable, key=lambda y: y):
+    hashed = list()
+    for value in iterable:
+        if repr(key(value)) not in hashed:
+            hashed.append(repr(key(value)))
+            yield value",0,1,0
+"def first_with_given_key(iterable, key=repr):
+    keys_depleted = {}
+    key_retreive = return_key(key)
+    for item in iterable:
+        item_key = key_retreive(item)
+        if item_key not in keys_depleted.keys():
+            try:
+                keys_depleted[hash(item_key)] = repr(item)
+            except KeyError:
+                keys_depleted[repr(item_key)] = repr(item)
+            yield item",0,0,1
+"def first_with_given_key(iterable, key=lambda val: val):
+    keys = []
+    for item in iterable:
+        if key(item) in keys:
+            pass
+        else:
+            keys.append(key(item))
+            yield item",0,1,0
+"def first_with_given_key(iterable, key = lambda k: k):
+    seen = []
+    iterator = iter(iterable)
+    
+    while True:
+        try:
+            value = next(iterator)
+            key_value = key(value)
+            if key_value not in seen:
+                seen.append(key_value)
+                yield value
+        except StopIteration:
+            return",0,1,0
+"def first_with_given_key(iterable, key=lambda y: y):
+    done=list()
+    keys = set()
+    it=iter(iterable)
+    while not False:
+        try:
+            value=next(it)
+            if key(value) not in done:
+                yield value
+                done.insert(-1,key(value))
+        except StopIteration:
+            break",0,1,0
+"def first_with_given_key(iterable, key=None):
+    key = repr if key == None else key
+    key_value = return_key(key)
+    already_used = {}
+    for item in iterable:
+        item_key = key_value(item)
+        if item_key in already_used.keys(): continue
+        try:
+            already_used[hash(item_key)] = repr(item)
+        except TypeError:
+            already_used[repr(item_key)] = repr(item)
+        yield item",0,0,1
+"def first_with_given_key(iterable, key=repr):
+	get_key = get_key_l(key)
+	used_keys = []
+	for item in iterable:
+		key_item = get_key(item)
+			
+		if key_item in used_keys:
+			continue
+		
+		try:
+			used_keys.append(hash(key_item))
+		except TypeError:
+			used_keys.apppend(repr(key_item))
+			
+		yield item",0,1,0
+"def first_with_given_key(iterable, key = repr):
+    old_keys = {}
+    get_key = lam_key(key)
+    for iter in iterable:
+        iter_key = get_key(iter)
+        if iter_key in old_keys.keys():
+            continue
+        old_keys[iter_key] = key(iter)
+        yield iter",0,0,1
+"def first_with_given_key(iterable, key=lambda x: x):
+    stored_key_values = []
+    for item in iterable:
+        if key(item) not in stored_key_values:
+            yield item
+            stored_key_values.append(key(item))",0,1,0
+"def first_with_given_key(iterable, key=repr):
+    gimme_key = get_key(key)
+    keys = {}
+    for item in iterable:
+        item_key = gimme_key(item)
+        if (item_key not in keys.keys()):
+            keys[hash(item_key)] = repr(item)
+            yield item",0,0,1
+"def first_with_given_key(iterable, key=lambda x: x):
+    keys_yielded = {}
+    for i in iterable:
+        k = repr(key(i))
+        if keys_yielded.get(k, None) is None:
+            keys_yielded[k] = k
+            yield i",0,0,1
+"def first_with_given_key(iterable, key=lambda y: y):
+    result = list()
+    func_it = iter(iterable)
+    while True:
+        try:
+            value = next(func_it)
+            if key(value) not in result:
+                yield value
+                result.insert(-1, key(value))
+        except StopIteration:
+            break",0,1,0
+"def first_with_given_key(iterable, key = lambda a: a):
+    added = []
+    for item in iterable:
+
+        rep = repr(key(item))
+        if not (rep in added):
+            
+            added.append(rep)
+            yield item",0,1,0
+"def first_with_given_key(iterable, key=lambda x: x):
+
+    values = []
+    unique_keys = []
+    it = iter(iterable)
+    
+    while True:
+        try:
+            value = next(it)
+        except StopIteration:
+            break
+
+        if key(value) not in unique_keys:
+            values.append(value)
+            unique_keys.append(key(value))
+
+    return values",0,1,0
+"def first_with_given_key(iterable, key=lambda item : item):
+    key_list = set()
+    it = iter(iterable)
+    while True:
+        try:
+            item = next(it)
+            value = key(item)
+            try:
+                value = hash(value)
+            except TypeError:
+                value = repr(value)
+            if value not in key_list:
+                key_list.add(value)
+                yield item
+        except StopIteration:
+            break",1,0,0
+"def first_with_given_key(iterable, key=lambda x: x):
+    finish = set()
+    iterator = iter(iterable)
+    while True:
+        try:
+            iterator_value = next(iterator)
+            size = len(finish)
+            finish.add(key(iterator_value))
+            if size != len(finish):
+                yield iterator_value
+        except StopIteration:
+            break",1,0,0
+"def first_with_given_key(iterable, key=lambda a: a):
+    appeared = set()
+    for item in iterable:
+        keyed = repr(key(item))
+        if keyed not in appeared:
+            appeared.add(keyed)
+            yield item",1,0,0
+"def first_with_given_key(iterable, key=lambda a: a):
+    appeared = set()
+    my_list = list()
+    for item in iterable:
+        keyed = repr(key(item))
+        if keyed not in appeared:
+            appeared.add(keyed)
+            yield item",1,0,0
+"def first_with_given_key(iterable, key=lambda a: a):
+    appeared = set()
+    for item in iterable:
+        keyed = repr(key(item))
+        if keyed not in appeared:
+            appeared.add(keyed)
+            yield item",1,0,0
+"def first_with_given_key(iterable, key=repr):
+    res = []
+    keys = set()
+    for item in iterable:
+        if key(item) not in keys:
+            keys.add(key(item))
+    return res",1,0,0
+"def first_with_given_key(iterable, key=None):
+    key = key or (lambda x: x)
+    keys_found = set()
+
+    for item in iterable:
+        item_key = key(item)
+        item_key = item_key if item_key.__hash__ is not None else repr(item_key)
+        if item_key not in keys_found:
+            keys_found.add(item_key)
+            yield item",1,0,0
+"def first_with_given_key(iterable, key=lambda f:f):
+    myiter = (i for i in iterable)
+    save = set()
+    while 1:
+        try:
+            element = next(myiter)
+            if hash(key(repr(element))) not in save:
+                save.add((hash(key(repr(element)))))
+                yield element
+        except StopIteration:
+            break",1,0,0
+"def first_with_given_key(iterable, key=repr):
+    set_of_keys = set()
+    key_lambda = _get_lambda(key)
+    for item in iterable:
+        key = key_lambda(item)
+        try:
+            key_to_set = hash(key)
+        except TypeError:
+            key_to_set = repr(key)
+
+        if key_to_set in set_of_keys:
+            continue
+        set_of_keys.add(key_to_set)
+        yield item",1,0,0
+"def first_with_given_key(iterable, key=repr):
+    found_keys = set()
+    lambda_func = lambda x: key(x)
+    for item in iterable:
+        key_of_item = lambda_func(item)
+        try:
+            new_key = hash(key_of_item)
+        except TypeError:
+            new_key = repr(key_of_item)
+
+        if new_key in found_keys:
+            continue
+        found_keys.add(new_key)
+        yield item",1,0,0
+"def first_with_given_key(iterable, key=lambda x : x):
+    keys=set()
+
+    for obj in iterable:
+        key_res=repr(key(obj))
+        if key_res not in keys:
+            keys.add(key_res)
+            yield obj",1,0,0
