@@ -8,6 +8,18 @@ services:
     ports:
       - "5000"
     image: flask-app-image
+    networks:
+      - app-network
+
+  # model
+  model:
+    build:
+      context: ./server/model
+    ports:
+      - "6000"
+    image: model-image
+    networks:
+      - app-network
 
   # nginx load balancer
   nginx:
@@ -18,6 +30,8 @@ services:
       - flask-app
     ports:
       - "4000:4000"
+    networks:
+      - app-network
 
   # client reactjs
   react-app:
@@ -28,3 +42,9 @@ services:
     ports:
      - "3000:3000"
     image: react-app-image
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
