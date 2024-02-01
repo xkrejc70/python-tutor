@@ -4,6 +4,7 @@ from app.tests.test_utils import import_function_from_file, clean_function_strin
 from app.tests.openai_api import model
 import inspect
 import re
+import requests
 
 # TODO: delete folder above
 # Test project 8
@@ -33,7 +34,7 @@ def test_project8(file_path, test_data):
             except Exception as e:
                 comment.append(str(e))
 
-    # ============= Lang model evaluation =============
+    # ============= Model evaluation =============
     function_string = inspect.getsource(p8_first_with_given_key[0])
 
     model_response = "no hint"
@@ -42,8 +43,11 @@ def test_project8(file_path, test_data):
     if len(function_string) > 1000:
         model_response = "[ERROR]: Over limit"
     else:
-        #model_response = model(function_string)
-        pass
+        url = 'http://localhost:5050/proj8'
+        data = {'input_string': function_string}
+
+        response = requests.post(url, json=data)
+        model_response = response.json()
 
     # ============= Final evaluation =============
     evaluation = {

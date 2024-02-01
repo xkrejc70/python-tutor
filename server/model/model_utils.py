@@ -5,7 +5,7 @@ from sentence_transformers.losses import CosineSimilarityLoss
 
 def save_locally():
     model_id = "hojzas/proj8-lab2"
-    save_directory = "/models/proj8/"
+    save_directory = "./models/proj8/"
 
     os.makedirs(save_directory, exist_ok=True)
 
@@ -30,3 +30,6 @@ def load():
         ]
     )
     print(preds)
+
+# save_locally()
+# load()

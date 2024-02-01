@@ -7,17 +7,24 @@ import requests
 # TODO: delete
 import socket
 
-@app.route('/model')
+@app.route('/proj8')
 def make_prediction():
-    # Make a request to the Hugging Face model service
-    model_url = 'http://localhost:6000/predict'
-    response = requests.get(model_url)
 
-    # Extract prediction from the response
-    prediction = response.json()
+    url = 'http://localhost:5050/proj8'
+    data = {'input_string': """
+    def first_with_given_key(iterable, key = lambda x: x):
+                seen = set()
+                for x in iterable:
+                    if repr(key(x)) not in seen:
+                        seen.add(repr(key(x)))
+                        yield x
+    """}
+
+    response = requests.post(url, json=data)
+    result = response.json()
 
     # Process the prediction as needed
-    return jsonify({'prediction': prediction})
+    return jsonify({'model_response': result})
 
 # TODO: delete
 @app.route("/api/test", methods=['GET', 'POST'])
