@@ -10,7 +10,7 @@ import socket
 @app.route('/model')
 def make_prediction():
     # Make a request to the Hugging Face model service
-    model_url = 'http://model:6000/predict'
+    model_url = 'http://localhost:6000/predict'
     response = requests.get(model_url)
 
     # Extract prediction from the response

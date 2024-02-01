@@ -1,2 +1,5 @@
 flask
 gunicorn
+sentence_transformers
+setfit
+datasets

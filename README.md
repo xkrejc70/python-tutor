@@ -60,6 +60,11 @@ python3 server/flask/run.py
 
 Backend is running on `http://localhost:5000/`
 
+```bash
+python3 server/model/app.py
+```
+
+Model is running on `http://localhost:6000/`
 
 ## Fine-tuning
 
