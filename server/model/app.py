@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from model_utils import save_locally
 
 app = Flask(__name__)
 
@@ -25,6 +26,8 @@ def proj8():
 from setfit import SetFitModel
 
 # ============= PROJECT 8 =============
+
+save_locally()
 
 # Load the pre-trained models saved locally
 model_proj8 = SetFitModel.from_pretrained("./models/proj8/")
