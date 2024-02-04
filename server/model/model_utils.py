@@ -31,5 +31,5 @@ def load():
     )
     print(preds)
 
-# save_locally()
+save_locally()
 # load()
