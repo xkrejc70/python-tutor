@@ -7,6 +7,21 @@ import requests
 # TODO: delete
 import socket
 
+@app.route('/proj4')
+def make_prediction():
+
+    url = 'http://localhost:5050/proj4'
+    data = {'input_string': """
+        perms = all_permutations_substrings(string)
+        return set(words) & set(perms) 
+    """}
+
+    response = requests.post(url, json=data)
+    result = response.json()
+
+    # Process the prediction as needed
+    return jsonify({'model_response': result})
+
 @app.route('/proj8')
 def make_prediction():
 

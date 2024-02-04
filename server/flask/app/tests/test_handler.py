@@ -2,7 +2,7 @@ from app import app
 import yaml
 import os
 from app.tests.proj1.test_project1 import test_project1
-from app.tests.proj8.test_project8 import test_project8
+from app.tests.test_project8 import test_project8
 
 def not_found():
     return "test function not found"

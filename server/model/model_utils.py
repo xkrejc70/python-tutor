@@ -3,8 +3,8 @@ import os
 from setfit import SetFitModel, SetFitTrainer, sample_dataset
 from sentence_transformers.losses import CosineSimilarityLoss
 
-def save_locally():
-    model_id = "hojzas/proj8-lab2"
+def save_locally(id, dir):
+    model_id = id
     save_directory = "./models/proj8/"
 
     os.makedirs(save_directory, exist_ok=True)
@@ -31,5 +31,5 @@ def load():
     )
     print(preds)
 
-save_locally()
+# save_locally()
 # load()

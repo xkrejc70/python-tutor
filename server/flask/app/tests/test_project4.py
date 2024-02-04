@@ -6,14 +6,14 @@ import inspect
 import re
 import requests
 
-# TODO: delete folder above
-# Test project 8
-def test_project8(file_path, test_data):
+# Test project 4
+def test_project4(file_path, test_data):
     passed = 0
     num_tests = 0
     comment = []
 
-    # ============= Test first_with_given_key =============
+    # ============= Test match_permutations_substrings =============
+    # TODO: rewrite to proj4
     p8_first_with_given_key = import_function_from_file(file_path, Function.FIRST_WITH_GIVEN_KEY)
     tests = test_data.get(Project.P8, {}).get(Function.FIRST_WITH_GIVEN_KEY, [])
 
@@ -45,6 +45,16 @@ def test_project8(file_path, test_data):
     else:
         url = 'http://localhost:5050/proj8'
         data = {'input_string': function_string}
+
+        # dev
+        data = """
+            def first_with_given_key(iterable, key = lambda x: x):
+                seen = set()
+                for x in iterable:
+                    if repr(key(x)) not in seen:
+                        seen.add(repr(key(x)))
+                        yield x
+                """
 
         response = requests.post(url, json=data)
         model_response = response.json()
