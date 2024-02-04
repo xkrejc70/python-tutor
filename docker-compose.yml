@@ -16,7 +16,7 @@ services:
     build:
       context: ./server/model
     ports:
-      - "6000"
+      - "5050"
     image: model-image
     networks:
       - app-network

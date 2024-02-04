@@ -1,7 +1,28 @@
 from flask import Flask, jsonify, request
-from setfit import SetFitModel
 
 app = Flask(__name__)
+
+"""
+@app.route('/proj8', methods=['POST'])
+def proj8():
+    # Get the input string from the request
+    data = request.json
+    input_string = data.get('input_string', '')
+
+    # Extract predictions as needed
+    result = {
+        'input_string': input_string,
+        'classification': "Set"
+    }
+
+    return jsonify(result)
+"""
+
+
+
+"""
+"""
+from setfit import SetFitModel
 
 # ============= PROJECT 8 =============
 
@@ -40,6 +61,7 @@ def proj8():
     }
 
     return jsonify(result)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5050)
