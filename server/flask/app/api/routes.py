@@ -8,7 +8,7 @@ import requests
 import socket
 
 @app.route('/proj4')
-def make_prediction():
+def proj4():
 
     url = 'http://localhost:5050/proj4'
     data = {'input_string': """
@@ -23,7 +23,7 @@ def make_prediction():
     return jsonify({'model_response': result})
 
 @app.route('/proj8')
-def make_prediction():
+def proj8():
 
     url = 'http://localhost:5050/proj8'
     data = {'input_string': """
