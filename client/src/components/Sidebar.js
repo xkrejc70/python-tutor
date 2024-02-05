@@ -25,7 +25,7 @@ function Sidebars({ onCollapsedChange }) {
     <div style={{ display: "flex" }}>
       <Sidebar
         className={`app ${toggled ? "toggled" : ""}`}
-        style={{ height: "100%", position: "absolute", display: "inline-block" }}
+        style={{ height: "100%", position: "fixed", display: "inline-block" }}
         collapsed={collapsed}
         toggled={toggled}
         handleToggleSidebar={handleToggleSidebar}

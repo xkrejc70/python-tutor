@@ -1,0 +1,83 @@
+sentence,label
+"    it = list(dict.fromkeys(it))
+    it.sort()
+    return it",0
+"    sequence = []
+    for i in it:
+        if i in sequence:
+           pass
+        else:
+            sequence.append(i)
+    sequence.sort()
+    return sequence",0
+"    unique = list(set(it))
+    unique.sort()
+    return unique",0
+"    ordered_items = []
+    for i in it:
+        if i not in ordered_items:
+            ordered_items.append(i)
+    ordered_items.sort()
+    return ordered_items",0
+"    sorted_list = []
+    for a in it:
+        if a not in sorted_list:
+            sorted_list.append(a)
+    sorted_list.sort()
+    return sorted_list",0
+"    it = list(set(it))
+    it.sort() 
+    return it ",0
+"    nonUniqueList = list(it)
+    uniqueList = list(set(nonUniqueList))
+    uniqueList.sort()
+    return  uniqueList",0
+"    out = set(it)
+    out = list(out)
+    out.sort()
+    return out ",0
+"    uniq_list = list(set(it))
+    uniq_list.sort()
+    return uniq_list",0
+"    values = set()
+    for thing in it:
+        values.add(thing)
+    values = [*values,]
+    values.sort()
+    return values",0
+"return sorted(list({word : it.count(word) for (word) in set(it)}.keys())) ",2
+"return list(dict.fromkeys(sorted(it)))",2
+"return sorted((list(dict.fromkeys(it)))) ",2
+"return sorted({k for k in list(it)})",2
+"    it = sorted(it)
+    outputSequence = []
+    for input in it:
+        found = 0
+        for output in outputSequence:
+            if output == input:
+                found = 1
+                break
+        if not found:
+            outputSequence.append(input)
+    return outputSequence",2
+"return sorted(list(dict.fromkeys(it).keys()))",2
+"    sequence_list = list(it)
+    unique_list = list(set(sequence_list))
+    sorted_list = sorted(unique_list, reverse=False)
+    return sorted_list",2
+"    seen = set()
+    unique_elems = (elem for elem in it if elem not in seen and not seen.add(elem))
+    return sorted(unique_elems)",2
+"    unique_items = set(it)
+    return sorted(list(unique_items))",1
+"    letters = set(it)
+    sorted_letters = sorted(letters)
+    return sorted_letters",1
+"return list(sorted(set(it)))",1
+"it=sorted(set(list(it)))
+    return it",1
+" return sorted(list({x for x in it})) ",1
+"return   sorted(set(list(it))) ",1
+"return sorted(list(set(it)))",1
+"return sorted(set(it)) ",1
+"return sorted([*set(it)]) ",1

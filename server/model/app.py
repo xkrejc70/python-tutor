@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
-from model_utils import save_locally
 
 app = Flask(__name__)
+
 
 """
 @app.route('/proj8', methods=['POST'])
@@ -13,16 +13,14 @@ def proj8():
     # Extract predictions as needed
     result = {
         'input_string': input_string,
-        'classification': "Set"
+        'classification': "Use specific set operation for more efficient and readable solution."
     }
 
     return jsonify(result)
-"""
 
 
+"""
 
-"""
-"""
 from setfit import SetFitModel
 
 def map_classification_result(prediction, classification_mapping):
@@ -33,12 +31,17 @@ def map_classification_result(prediction, classification_mapping):
 # ============= PROJECT 4 =============
 
 # Load the pre-trained models saved locally
-model_proj4 = SetFitModel.from_pretrained("hojzas/proj4-match_permutations_substrings-lab1")
+model_proj4 = SetFitModel.from_pretrained("hojzas/proj4-all-labs")
 
 # Feedback
 classification_mapping_proj4 = {
     0: "Use specific set operation for more efficient and readable solution.",
     1: "Perfect solution.",
+    2: "There is a easier and more readable implementation approach.",
+    3: "Consider using specific function to sort elements of an iterable.",
+    4: "Perfect solution.",
+    5: "Explore a technique for quickly initializing a dictionary with default values for specified keys.",
+    6: "Perfect solution.",
 }
 
 @app.route('/proj4', methods=['POST'])

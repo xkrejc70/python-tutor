@@ -31,23 +31,23 @@ def test_project8(file_path, test_data):
                     if all_items == expected_output:
                         passed += 1
             except Exception as e:
-                comment.append(str(e))
+                comment.append("Error: " + str(e))
 
     # ============= Model evaluation =============
     function_string = inspect.getsource(p8_first_with_given_key[0])
 
-    model_response = "no hint"
+    model_response = []
     function_string = clean_function_string(p8_first_with_given_key[0])
 
     if len(function_string) > 1000:
-        model_response = "[ERROR]: Over limit"
+        model_response.append("[ERROR]: Over limit")
     else:
         url = 'http://localhost:5050/proj8'
         data = {'input_string': function_string}
 
 
         response = requests.post(url, json=data)
-        model_response = response.json()
+        model_response.append(response.json()['classification'])
 
     # ============= Final evaluation =============
     evaluation = {

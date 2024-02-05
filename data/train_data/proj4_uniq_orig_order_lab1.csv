@@ -1,0 +1,56 @@
+sentence,label
+"    outputSequence = []
+    for input in it:
+        found = 0
+        for output in outputSequence:
+            if output == input:
+                found = 1
+                break
+        if not found:
+            outputSequence.append(input)
+    return outputSequence",0
+"  uniq = []
+  for char in it:
+    if not char in uniq:
+      uniq.append(char)
+  return uniq",0
+"return sorted(set(it), key=lambda y: it.index(y)) ",0
+"    d={}
+    res=[]
+    for x in it:
+        d[x]=0
+    for k in d:
+        res.append(k)
+    return res",0
+"    registered = set()
+    register = registered.add
+    return [x for x in it if not (x in registered or register(x))]",0
+"    array=[]
+    for i in it:
+        if i not in array:
+            array.append(i)
+    return array ",0
+"    seen = set()
+    return [x for x in it if not (x in seen or seen.add(x))]",0
+"    seen = set() 
+    seen_add = seen.add 
+    return [x for x in it if not (x in seen or seen_add(x))]",0
+"return [l for i, l in enumerate(it) if i == it.index(l)]",0
+"    seen = set()
+    result = []
+    for word in it:
+        if word not in seen:
+            result.append(word)
+            seen.add(word)
+    return result",0
+"return (x for y, x in enumerate(it) if it.index(x) == y)",0
+"return [value for key, value in enumerate(it) if value not in it[:key]]",0
+"return sorted(set(it), key=it.index)",0
+"return [tmp for tmp in dict.fromkeys(it).keys()]",1
+"return [i for i in dict.fromkeys(it)]",1
+"return list(dict.fromkeys(it))",1
+"return list(dict.fromkeys(it).keys())",1
+"return list(dict.fromkeys(it))",1
+"return [x for x in dict.fromkeys(it).keys()]",1
+"return list(dict.fromkeys(it).keys()) ",1
+"return list(dict.fromkeys(it))",1

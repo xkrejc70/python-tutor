@@ -19,6 +19,13 @@ function ExpandableContainer({ title, children, defaultOpen = false, useSyntaxHi
 
     const toggleExpansion = () => {
         setIsExpanded((prev) => !prev);
+
+        const containerContent = document.querySelector(".ps-sidebar-container");
+        if (containerContent) {
+            console.log(window.innerHeight);
+            containerContent.style.height = `${window.innerHeight + 100- containerContent.offsetTop}px`;
+        }
+        
     };
 
     return (
@@ -59,8 +66,10 @@ function Evaluation() {
     const numTests = uploadData?.test?.test_result?.num_tests;
     const passed = uploadData?.test?.test_result?.passed;
     const percentage = numTests > 0 ? ((passed / numTests) * 100).toFixed(2) : 0;
+    const comments = uploadData?.test?.test_result?.comment;
     
     const model_response = uploadData?.test?.test_result?.model_response;
+    const response_len = model_response ? model_response.length : 0;
 
     return (
         <div>
@@ -70,21 +79,31 @@ function Evaluation() {
 
                 <br />
 
-                <ExpandableContainer title={`Vyhodnocení automatických testů: ${passed}/${numTests} = ${percentage}%`} >
-                    <pre>{JSON.stringify(uploadData, null, 2)}</pre>
+                <ExpandableContainer title={`Output (ToBeDeleted)`} defaultOpen={true} >
+                    {JSON.stringify(uploadData, null, 2)}
                 </ExpandableContainer>
 
                 <hr className="container-divider" />
 
-                <ExpandableContainer title="Doporučení Model (1)">
-                    <p>{model_response}</p>
+                <ExpandableContainer title={`Vyhodnocení testů: ${passed}/${numTests} = ${percentage}%`} >
+                    {comments && comments.map((item, index) => (
+                        <p key={index}>{item}</p>
+                    ))}
+                </ExpandableContainer>
+
+                <hr className="container-divider" />
+
+                <ExpandableContainer title={`Doporučení: (${response_len})`}>
+                    {model_response && model_response.map((item, index) => (
+                        <p key={index}>{item}</p>
+                    ))}
                 </ExpandableContainer>
 
                 <hr className="container-divider" />
 
                 <ExpandableContainer title="Tipy na samostudium (1)">
-                    <p>Odkaz na sekci zde </p>
-                    <p>Odkaz na tutorial jinde</p>
+                    <p>Odkaz na sekci k procvičení zde </p>
+                    <p>Odkaz na tutorial jinam</p>
                 </ExpandableContainer>
 
                 <hr className="container-divider" />

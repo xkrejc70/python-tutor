@@ -13,7 +13,7 @@ hr {
 }
 
 a, .fpTHfu, .ps-sidebar-container {
-    background-color: #72b1e9 !important;
+    background-color: #89C4F4 !important;
 }
 a:hover {
     font-size: 1.1rem;
@@ -77,14 +77,14 @@ select {
 
 button {
     padding: 10px;
-    background-color: #72b1e9;
+    background-color: #89C4F4;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #429ae7;
+    background-color: #64b3f5;
 }
 
 /* evaluation */
@@ -120,5 +120,9 @@ button:hover {
 .collapsed .container-title {
     border: 1px solid #ccc;
     border-bottom: none;
+}
+
+pre {
+    white-space: pre-wrap; 
 }
   
