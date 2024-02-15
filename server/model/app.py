@@ -4,6 +4,7 @@ app = Flask(__name__)
 
 
 """
+
 @app.route('/proj8', methods=['POST'])
 def proj8():
     # Get the input string from the request
@@ -74,9 +75,9 @@ model_proj8 = SetFitModel.from_pretrained("hojzas/proj8-lab2")
 
 # Feedback
 classification_mapping_proj8 = {
-    0: "List",
-    1: "Set",
-    2: "Dictionary",
+    0: "Consider using a set instead of a list to improve efficiency, sets provide faster membership checks.",
+    1: "Perfect solution.",
+    2: "For unique key tracking, a set is more natural and efficient than storing key-value pairs in dictionary.",
 }
 
 @app.route('/proj8', methods=['POST'])
@@ -101,8 +102,8 @@ def proj8():
 
     return jsonify(result)
 
-
-
+"""
+"""
 
 
 if __name__ == '__main__':
