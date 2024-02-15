@@ -1,31 +1,14 @@
 from app import app
 from flask import jsonify
+from datetime import datetime
 from werkzeug.utils import secure_filename
 import os
-import re
 
 from app.uploads.uploads_config import UploadsConfig
+from app.uploads.upload_utils import generate_unique_filename, check_filename, allowed_file
 
 # Config
 app.config.from_object(UploadsConfig)
-
-# Allowed file type
-# TODO: unittest
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
-
-# TODO: move to uplaod utils
-# TODO: unittest
-def check_filename(filename, project):
-    # Define the regex pattern for the filename
-    pattern = re.compile(r'^isj_proj[1-9]_x[a-zA-Z]{5}\d{2}\.py$')
-    expected_project = f'{project}'
-
-    # Check if the filename matches the pattern and the project is correct
-    if re.match(pattern, filename) and expected_project in filename:
-        return True
-    else:
-        return False
 
 # Check and Save file to project folder, run tests
 def upload_handler(request):
@@ -59,10 +42,18 @@ def upload_handler(request):
         try:
             # Save uploaded file into project folder
             filename = secure_filename(file.filename)
-            project_folder = os.path.join(app.config['UPLOAD_FOLDER'], project)
+            current_year = datetime.now().year
+            
+            project_folder = os.path.join(app.config['UPLOAD_FOLDER'], str(current_year), project)
             os.makedirs(project_folder, exist_ok=True)
-            file_path = os.path.join(project_folder, filename)
-            # TODO: if exists, rename (keep all uploaded projects)
+
+
+            # Generate a unique filename
+            unique_filename = generate_unique_filename(project_folder, filename)
+
+            file_path = os.path.join(project_folder, unique_filename)
+
+            # Save the file
             file.save(file_path)
             app.logger.debug('File successfully uploaded')
 
