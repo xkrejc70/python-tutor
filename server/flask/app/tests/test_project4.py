@@ -1,9 +1,6 @@
 from app import app
 from app.tests.test_utils import RestrictedEnvironment, Project, Function
-from app.tests.test_utils import import_function_from_file, clean_function_string
-import inspect
-import builtins
-import re
+from app.tests.test_utils import import_function_or_class_from_file, clean_function_string
 import requests
 
 # Test project 4
@@ -14,7 +11,7 @@ def test_project4(file_path, test_data):
     model_response = []
 
     # ============= Test match_permutations_substrings =============
-    p4_match_permutations_substrings = import_function_from_file(file_path, Function.MATCH_PERMUTATIONS_SUBSTRINGS)
+    p4_match_permutations_substrings = import_function_or_class_from_file(file_path, Function.MATCH_PERMUTATIONS_SUBSTRINGS)
     tests = test_data.get(Project.P4, {}).get(Function.MATCH_PERMUTATIONS_SUBSTRINGS, [])
 
     if p4_match_permutations_substrings[1] != 200:
@@ -50,7 +47,7 @@ def test_project4(file_path, test_data):
         model_response.append('match_permutations_substrings: ' + response.json()['classification'])
 
     # ============= Test uniq_srt =============
-    p4_uniq_srt = import_function_from_file(file_path, Function.UNIQ_SRT)
+    p4_uniq_srt = import_function_or_class_from_file(file_path, Function.UNIQ_SRT)
     tests = test_data.get(Project.P4, {}).get(Function.UNIQ_SRT, [])
 
     if p4_uniq_srt[1] != 200:
@@ -85,7 +82,7 @@ def test_project4(file_path, test_data):
         model_response.append('uniq_srt: ' + response.json()['classification'])
 
     # ============= Test uniq_orig_order =============
-    p4_uniq_orig_order = import_function_from_file(file_path, Function.UNIQ_ORIG_ORDER)
+    p4_uniq_orig_order = import_function_or_class_from_file(file_path, Function.UNIQ_ORIG_ORDER)
     tests = test_data.get(Project.P4, {}).get(Function.UNIQ_ORIG_ORDER, [])
 
     if p4_uniq_orig_order[1] != 200:

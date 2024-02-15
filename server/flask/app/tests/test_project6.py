@@ -1,45 +1,42 @@
 from app import app
-from app.tests.test_utils import RestrictedEnvironment, Project, Function
+from app.tests.test_utils import RestrictedEnvironment, Project, Function, Classes
 from app.tests.test_utils import import_function_or_class_from_file, clean_function_string
-import inspect
-import builtins
-import re
-import requests
 
-# Test project 8
-def test_project8(file_path, test_data):
+# Test project 6
+def test_project6(file_path, test_data):
     passed = 0
     num_tests = 0
     comment = []
     model_response = []
 
-    # ============= Test first_with_given_key =============
-    p8_first_with_given_key = import_function_or_class_from_file(file_path, Function.FIRST_WITH_GIVEN_KEY)
-    tests = test_data.get(Project.P8, {}).get(Function.FIRST_WITH_GIVEN_KEY, [])
+    # ============= Test Polynomial =============
+    p6_polynomial = import_function_or_class_from_file(file_path, Classes.POLYNOMIAL)
+    tests = test_data.get(Project.P6, {}).get(Classes.POLYNOMIAL, [])
 
-    if p8_first_with_given_key[1] != 200:
-        comment.append(p8_first_with_given_key[0])
+    if p6_polynomial[1] != 200:
+        comment.append(p6_polynomial[0])
     else:
         for test_case in tests:
-            input_data = test_case.get('in')
+            input_data_str = test_case.get('in')
+            input_data = [int(x) for x in input_data_str.split(',')]
             expected_output = test_case.get('out')
-            input_key_str = test_case.get('key')
-            input_key = getattr(builtins, input_key_str, lambda x: x)
 
             num_tests += 1
             try:
+                app.logger.debug(p6_polynomial)
                 with RestrictedEnvironment():
-                    result = p8_first_with_given_key[0](input_data, key=input_key)
-                    all_items = [item for item in result]
-                    if all_items == expected_output:
+                    result = p6_polynomial[0](input_data)
+                    str_result = str(result)
+                    if str_result == expected_output:
                         passed += 1
                     else:
-                        comment.append(f"Test case failed: {input_data}. Expected {expected_output}, but got {all_items}.")
+                        comment.append(f"Test case failed: {input_data}. Expected {expected_output}, but got {str_result}.")
             except Exception as e:
                 comment.append("Error: " + str(e))
 
+    """
     # Model evaluation
-    function_string = clean_function_string(p8_first_with_given_key[0])
+    function_string = clean_function_string(p6_polynomial[0])
 
     if len(function_string) > 1000:
         model_response.append("[ERROR]: Over limit")
@@ -50,6 +47,7 @@ def test_project8(file_path, test_data):
 
         response = requests.post(url, json=data)
         model_response.append(response.json()['classification'])
+    """
 
     if num_tests == passed:
         comment.append("Success: All tests passed without errors.")

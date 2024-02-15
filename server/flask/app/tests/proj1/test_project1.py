@@ -1,5 +1,5 @@
 from app import app
-from app.tests.test_utils import RestrictedEnvironment, Project, Function, import_function_from_file
+from app.tests.test_utils import RestrictedEnvironment, Project, Function, import_function_or_class_from_file
 
 # TODO: delete folder above
 # Test project 1
@@ -9,7 +9,7 @@ def test_project1(file_path, test_data):
     comment = []
 
     # ============= Test camel_to_snake_case =============
-    p1_camel_to_snake_case = import_function_from_file(file_path, Function.CAMEL_TO_SNAKE_CASE)
+    p1_camel_to_snake_case = import_function_or_class_from_file(file_path, Function.CAMEL_TO_SNAKE_CASE)
     tests = test_data.get(Project.P1, {}).get(Function.CAMEL_TO_SNAKE_CASE, [])
 
     if p1_camel_to_snake_case[1] != 200:
@@ -30,7 +30,7 @@ def test_project1(file_path, test_data):
                 
 
     # ============= Test not_both_titles =============
-    p1_not_both_titles = import_function_from_file(file_path, Function.NOT_BOTH_TITLES)
+    p1_not_both_titles = import_function_or_class_from_file(file_path, Function.NOT_BOTH_TITLES)
     tests = test_data.get(Project.P1, {}).get(Function.NOT_BOTH_TITLES, [])
 
     if p1_not_both_titles[1] != 200:

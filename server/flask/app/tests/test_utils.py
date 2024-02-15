@@ -21,7 +21,14 @@ class Project:
     P2 = 'proj2'
     P3 = 'proj3'
     P4 = 'proj4'
+    P5 = 'proj5'
+    P6 = 'proj6'
+    P7 = 'proj7'
     P8 = 'proj8'
+
+# Classes
+class Classes:
+    POLYNOMIAL = 'Polynomial'
 
 # Functions
 class Function:
@@ -34,16 +41,18 @@ class Function:
     # proj8
     FIRST_WITH_GIVEN_KEY = 'first_with_given_key'
 
-# Import function from file
-def import_function_from_file(file_path, function_name):
+# Import function or class from file
+def import_function_or_class_from_file(file_path, identifier_name):
     spec = importlib.util.spec_from_file_location("custom_module", file_path)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     
-    if hasattr(module, function_name):
-        return getattr(module, function_name), 200
+    if hasattr(module, identifier_name):
+        imported_class = getattr(module, identifier_name)
+        print(f"Class '{identifier_name}' successfully imported: {imported_class}")
+        return imported_class, 200
     else:
-        return (f"The function '{function_name}' does not exist in the uploaded file."), 500
+        return (f"The function or class '{identifier_name}' does not exist in the uploaded file."), 500
     
 # Clean the source code of a given function by removing comments, empty lines, and trailing whitespaces.
 def clean_function_string(func):

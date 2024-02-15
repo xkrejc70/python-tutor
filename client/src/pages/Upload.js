@@ -70,6 +70,7 @@ function Upload() {
                         <select value={selectedProject} onChange={handleProjectChange}>
                             <option value="proj1">Projekt 1</option>
                             <option value="proj4">Projekt 4</option>
+                            <option value="proj6">Projekt 6</option>
                             <option value="proj8">Projekt 8</option>
                         </select>
                         <button onClick={onFileUpload}>Odeslat!</button>
