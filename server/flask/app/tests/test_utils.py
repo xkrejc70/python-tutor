@@ -27,6 +27,11 @@ class Project:
 class Function:
     CAMEL_TO_SNAKE_CASE = 'camel_to_snake_case'
     NOT_BOTH_TITLES = 'not_both_titles'
+    # proj4
+    MATCH_PERMUTATIONS_SUBSTRINGS = 'match_permutations_substrings'
+    UNIQ_SRT = 'uniq_srt'
+    UNIQ_ORIG_ORDER = 'uniq_orig_order'
+    # proj8
     FIRST_WITH_GIVEN_KEY = 'first_with_given_key'
 
 # Import function from file

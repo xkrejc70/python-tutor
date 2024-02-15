@@ -13,13 +13,15 @@ def upload_and_test(request):
         file_path = upload_result[0]["file_path"]
         project = upload_result[0]["project"]
         file_content = upload_result[0]["file_content"]
+        filename = upload_result[0]["filename"]
 
         try:
             # Test
             test_result = test(file_path, project)
             response_data = {
                 "test_result": test_result,
-                "file_content": file_content
+                "file_content": file_content,
+                "filename": filename
             }
             return jsonify(response_data), 200
       

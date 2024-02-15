@@ -11,9 +11,41 @@ proj1:
       out: ['doc. Josef Tyl', 'Rudolf Srp, Ph.D.', 'Pavel Vlk', 'Jan Hora']
     - in: ''
       out: ''
+proj4:
+  match_permutations_substrings:
+    - string: 'okna'
+      words: ['a', 'z', 'v', 'o', 'k', 'ok', 'ano', 'no', 'hlava', 'oko', 'noky', 'nok', 'on', 'ona', 'ony']
+      out: ['ona', 'a', 'ok', 'o', 'nok', 'no', 'ano', 'on', 'k']
+    - string: 'opak'
+      words: ['ok', 'pak', 'pako', 'ano', 'noha', 'oka', 'kap', 'kopa', 'kopat', 'ona', 'okap']
+      out: ['kopa', 'kap', 'pako', 'ok', 'pak', 'okap', 'oka']
+    - string: 'apple'
+      words: ['pap', 'leap', 'ale', 'pala', 'pal', 'plea', 'peal', 'app', 'apple', 'ple']
+      out: ['leap', 'plea', 'apple', 'app', 'pal', 'pap', 'ale', 'ple', 'peal']
+  uniq_srt:
+    - in: [3, 3, 5, 3, 4, 2, 4]
+      out: [2, 3, 4, 5]
+    - in: 'abrakadabra'
+      out: ['a', 'b', 'd', 'k', 'r']
+  uniq_orig_order:
+    - in: [3, 3, 5, 3, 4, 2, 4]
+      out: [3, 5, 4, 2]
+    - in: 'abrakadabra'
+      out: ['a', 'b', 'r', 'k', 'd']
 proj8:
   first_with_given_key:
     - in: [[1], [1, 3], [1, 2, 3], [1], [2, 3]]
       out: [[1], [1, 3], [1, 2, 3]]
+      key: len
     - in: ["first", "second", "third", "fourth", "one"]
       out: ["first", "second", "one"]
+      key: len
+    - in: [{"a": 1, "b": 2}, {"x": 1, "y": 2, "z": 3}, {"p": 1}, {"a": 1, "b": 2}, {"q": 1, "r": 2}]
+      out: [{"a": 1, "b": 2}, {"x": 1, "y": 2, "z": 3}, {"p": 1}]
+      key: len
+    - in: [[1, 2, 3], [4, 5], [1, 2, 3, 3], [5, 6]]
+      out: [[1, 2, 3], [4, 5], [5, 6]]
+      key: sum
+    - in: [[1, 2, 3], [4, 5], [1, 2, 3, 3], [5, 2]]
+      out: [[1, 2, 3], [4, 5]]
+      key: max

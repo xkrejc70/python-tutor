@@ -1,8 +1,8 @@
 from app import app
 from app.tests.test_utils import RestrictedEnvironment, Project, Function
 from app.tests.test_utils import import_function_from_file, clean_function_string
-from app.tests.openai_api import model
 import inspect
+import builtins
 import re
 import requests
 
@@ -11,6 +11,7 @@ def test_project8(file_path, test_data):
     passed = 0
     num_tests = 0
     comment = []
+    model_response = []
 
     # ============= Test first_with_given_key =============
     p8_first_with_given_key = import_function_from_file(file_path, Function.FIRST_WITH_GIVEN_KEY)
@@ -22,21 +23,22 @@ def test_project8(file_path, test_data):
         for test_case in tests:
             input_data = test_case.get('in')
             expected_output = test_case.get('out')
+            input_key_str = test_case.get('key')
+            input_key = getattr(builtins, input_key_str, lambda x: x)
 
             num_tests += 1
             try:
                 with RestrictedEnvironment():
-                    result = p8_first_with_given_key[0](input_data, key=len)
+                    result = p8_first_with_given_key[0](input_data, key=input_key)
                     all_items = [item for item in result]
                     if all_items == expected_output:
                         passed += 1
+                    else:
+                        comment.append(f"Test case failed: {input_data}. Expected {expected_output}, but got {all_items}.")
             except Exception as e:
                 comment.append("Error: " + str(e))
 
-    # ============= Model evaluation =============
-    function_string = inspect.getsource(p8_first_with_given_key[0])
-
-    model_response = []
+    # Model evaluation
     function_string = clean_function_string(p8_first_with_given_key[0])
 
     if len(function_string) > 1000:
@@ -48,6 +50,9 @@ def test_project8(file_path, test_data):
 
         response = requests.post(url, json=data)
         model_response.append(response.json()['classification'])
+
+    if num_tests == passed:
+        comment.append("Success: All tests passed without errors.")
 
     # ============= Final evaluation =============
     evaluation = {

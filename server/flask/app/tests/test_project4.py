@@ -1,8 +1,8 @@
 from app import app
 from app.tests.test_utils import RestrictedEnvironment, Project, Function
 from app.tests.test_utils import import_function_from_file, clean_function_string
-from app.tests.openai_api import model
 import inspect
+import builtins
 import re
 import requests
 
@@ -11,55 +11,118 @@ def test_project4(file_path, test_data):
     passed = 0
     num_tests = 0
     comment = []
+    model_response = []
 
     # ============= Test match_permutations_substrings =============
-    # TODO: rewrite to proj4
-    p8_first_with_given_key = import_function_from_file(file_path, Function.FIRST_WITH_GIVEN_KEY)
-    tests = test_data.get(Project.P8, {}).get(Function.FIRST_WITH_GIVEN_KEY, [])
+    p4_match_permutations_substrings = import_function_from_file(file_path, Function.MATCH_PERMUTATIONS_SUBSTRINGS)
+    tests = test_data.get(Project.P4, {}).get(Function.MATCH_PERMUTATIONS_SUBSTRINGS, [])
 
-    if p8_first_with_given_key[1] != 200:
-        comment.append(p8_first_with_given_key[0])
+    if p4_match_permutations_substrings[1] != 200:
+        comment.append(p4_match_permutations_substrings[0])
     else:
         for test_case in tests:
-            input_data = test_case.get('in')
+            string = test_case.get('string')
+            words = test_case.get('words')
             expected_output = test_case.get('out')
 
             num_tests += 1
             try:
                 with RestrictedEnvironment():
-                    result = p8_first_with_given_key[0](input_data, key=len)
+                    result = p4_match_permutations_substrings[0](string, words)
                     all_items = [item for item in result]
-                    if all_items == expected_output:
+                    if sorted(all_items) == sorted(expected_output):
                         passed += 1
+                    else:
+                        comment.append(f"Test case failed (match_permutations_substrings): {string, words}. Expected {expected_output}, but got {all_items}.")
             except Exception as e:
-                comment.append(str(e))
+                comment.append("Error: " + str(e))
 
-    # ============= Model evaluation =============
-    function_string = inspect.getsource(p8_first_with_given_key[0])
+    # Model evaluation
+    function_string = clean_function_string(p4_match_permutations_substrings[0])
 
-    model_response = "no hint"
-    function_string = clean_function_string(p8_first_with_given_key[0])
-
-    if len(function_string) > 1000:
-        model_response = "[ERROR]: Over limit"
+    if len(function_string) > 3000:
+        model_response.append("[ERROR]: Over limit")
     else:
-        url = 'http://localhost:5050/proj8'
+        url = 'http://localhost:5050/proj4'
         data = {'input_string': function_string}
 
-        # dev
-        data = """
-            def first_with_given_key(iterable, key = lambda x: x):
-                seen = set()
-                for x in iterable:
-                    if repr(key(x)) not in seen:
-                        seen.add(repr(key(x)))
-                        yield x
-                """
+        response = requests.post(url, json=data)
+        model_response.append('match_permutations_substrings: ' + response.json()['classification'])
+
+    # ============= Test uniq_srt =============
+    p4_uniq_srt = import_function_from_file(file_path, Function.UNIQ_SRT)
+    tests = test_data.get(Project.P4, {}).get(Function.UNIQ_SRT, [])
+
+    if p4_uniq_srt[1] != 200:
+        comment.append(p4_uniq_srt[0])
+    else:
+        for test_case in tests:
+            input = test_case.get('in')
+            expected_output = test_case.get('out')
+
+            num_tests += 1
+            try:
+                with RestrictedEnvironment():
+                    result = p4_uniq_srt[0](input)
+                    all_items = [item for item in result]
+                    if sorted(all_items) == sorted(expected_output):
+                        passed += 1
+                    else:
+                        comment.append(f"Test case failed (uniq_srt): {input}. Expected {expected_output}, but got {all_items}.")
+            except Exception as e:
+                comment.append("Error: " + str(e))
+
+    # Model evaluation
+    function_string = clean_function_string(p4_uniq_srt[0])
+
+    if len(function_string) > 3000:
+        model_response.append("[ERROR]: Over limit")
+    else:
+        url = 'http://localhost:5050/proj4'
+        data = {'input_string': function_string}
 
         response = requests.post(url, json=data)
-        model_response = response.json()
+        model_response.append('uniq_srt: ' + response.json()['classification'])
+
+    # ============= Test uniq_orig_order =============
+    p4_uniq_orig_order = import_function_from_file(file_path, Function.UNIQ_ORIG_ORDER)
+    tests = test_data.get(Project.P4, {}).get(Function.UNIQ_ORIG_ORDER, [])
+
+    if p4_uniq_orig_order[1] != 200:
+        comment.append(p4_uniq_orig_order[0])
+    else:
+        for test_case in tests:
+            input = test_case.get('in')
+            expected_output = test_case.get('out')
+
+            num_tests += 1
+            try:
+                with RestrictedEnvironment():
+                    result = p4_uniq_orig_order[0](input)
+                    all_items = [item for item in result]
+                    if sorted(all_items) == sorted(expected_output):
+                        passed += 1
+                    else:
+                        comment.append(f"Test case failed (uniq_orig_order): {input}. Expected {expected_output}, but got {all_items}.")
+            except Exception as e:
+                comment.append("Error: " + str(e))
+
+    # Model evaluation
+    function_string = clean_function_string(p4_uniq_orig_order[0])
+
+    if len(function_string) > 3000:
+        model_response.append("[ERROR]: Over limit")
+    else:
+        url = 'http://localhost:5050/proj4'
+        data = {'input_string': function_string}
+
+        response = requests.post(url, json=data)
+        model_response.append('uniq_orig_order: ' + response.json()['classification'])
 
     # ============= Final evaluation =============
+    if num_tests == passed:
+        comment.append("Success: All tests passed without errors.")
+
     evaluation = {
         "comment": list(set(comment)),
         "model_response": model_response,

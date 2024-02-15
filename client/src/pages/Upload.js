@@ -69,7 +69,7 @@ function Upload() {
                         <input type="file" onChange={onFileChange} />
                         <select value={selectedProject} onChange={handleProjectChange}>
                             <option value="proj1">Projekt 1</option>
-                            <option value="proj2">Projekt 2</option>
+                            <option value="proj4">Projekt 4</option>
                             <option value="proj8">Projekt 8</option>
                         </select>
                         <button onClick={onFileUpload}>Odeslat!</button>

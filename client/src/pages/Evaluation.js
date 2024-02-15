@@ -63,6 +63,7 @@ function Evaluation() {
     };
 
     const file_content = uploadData?.test?.file_content;
+    const filename = uploadData?.test?.filename;
     const numTests = uploadData?.test?.test_result?.num_tests;
     const passed = uploadData?.test?.test_result?.passed;
     const percentage = numTests > 0 ? ((passed / numTests) * 100).toFixed(2) : 0;
@@ -75,17 +76,11 @@ function Evaluation() {
         <div>
             <Sidebar onCollapsedChange={handleSidebarCollapsedChange} />
             <div className={"main-layout"} style={{ marginLeft: sidebarCollapsed ? "80px" : "250px" }}>
-                <h1>Vyhodnocení</h1>
+                <h1>Evaluation</h1>
 
                 <br />
 
-                <ExpandableContainer title={`Output (ToBeDeleted)`} defaultOpen={true} >
-                    {JSON.stringify(uploadData, null, 2)}
-                </ExpandableContainer>
-
-                <hr className="container-divider" />
-
-                <ExpandableContainer title={`Vyhodnocení testů: ${passed}/${numTests} = ${percentage}%`} >
+                <ExpandableContainer title={`${passed}/${numTests} tests passed (${percentage}%)`} >
                     {comments && comments.map((item, index) => (
                         <p key={index}>{item}</p>
                     ))}
@@ -93,7 +88,7 @@ function Evaluation() {
 
                 <hr className="container-divider" />
 
-                <ExpandableContainer title={`Doporučení: (${response_len})`}>
+                <ExpandableContainer title={`Recommendations: (${response_len})`}>
                     {model_response && model_response.map((item, index) => (
                         <p key={index}>{item}</p>
                     ))}
@@ -101,15 +96,23 @@ function Evaluation() {
 
                 <hr className="container-divider" />
 
-                <ExpandableContainer title="Tipy na samostudium (1)">
+                <ExpandableContainer title="Tips for self-study (1)">
                     <p>Odkaz na sekci k procvičení zde </p>
                     <p>Odkaz na tutorial jinam</p>
                 </ExpandableContainer>
 
                 <hr className="container-divider" />
 
-                <ExpandableContainer title="Nahraný soubor" defaultOpen={true} useSyntaxHighlighting={true}>
+                <ExpandableContainer title={`Uploaded file (${filename})`} defaultOpen={true} useSyntaxHighlighting={true}>
                     {file_content}
+                </ExpandableContainer>
+
+                <hr className="container-divider" />
+                <hr className="container-divider" />
+                <hr className="container-divider" />
+
+                <ExpandableContainer title={`Output (ToBeDeleted)`} defaultOpen={true} >
+                    {JSON.stringify(uploadData, null, 2)}
                 </ExpandableContainer>
             </div>
         </div>

@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 
 """
-
+"""
 @app.route('/proj8', methods=['POST'])
 def proj8():
     # Get the input string from the request
@@ -14,7 +14,22 @@ def proj8():
     # Extract predictions as needed
     result = {
         'input_string': input_string,
-        'classification': "Use specific set operation for more efficient and readable solution."
+        'classification': "[HARD-CODED] Use specific set operation for more efficient and readable solution."
+    }
+
+    return jsonify(result)
+
+
+@app.route('/proj4', methods=['POST'])
+def proj4():
+    # Get the input string from the request
+    data = request.json
+    input_string = data.get('input_string', '')
+
+    # Extract predictions as needed
+    result = {
+        'input_string': input_string,
+        'classification': "[HARD-CODED] Explore a technique for quickly initializing a dictionary with default values for specified keys."
     }
 
     return jsonify(result)
@@ -36,9 +51,9 @@ model_proj4 = SetFitModel.from_pretrained("hojzas/proj4-all-labs")
 
 # Feedback
 classification_mapping_proj4 = {
-    0: "Use specific set operation for more efficient and readable solution.",
+    0: "Consider using specific set operation for more efficient and readable solution.",
     1: "Perfect solution.",
-    2: "There is a easier and more readable implementation approach.",
+    2: "There is a simpler and more readable implementation approach.",
     3: "Consider using specific function to sort elements of an iterable.",
     4: "Perfect solution.",
     5: "Explore a technique for quickly initializing a dictionary with default values for specified keys.",
@@ -103,7 +118,7 @@ def proj8():
     return jsonify(result)
 
 """
-"""
+
 
 
 if __name__ == '__main__':

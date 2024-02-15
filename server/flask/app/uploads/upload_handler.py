@@ -73,7 +73,8 @@ def upload_handler(request):
             return {
                 "file_path": file_path,
                 "project": project,
-                "file_content": file_content
+                "file_content": file_content,
+                "filename": file.filename
             }, 200
         except Exception as e:
             app.logger.error(f"Error during file upload: {str(e)}")
