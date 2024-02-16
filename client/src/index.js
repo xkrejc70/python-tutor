@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 // font
 import "@fontsource/montserrat";
+import '@fontsource-variable/source-code-pro';
+
 // css
 import 'assets/global.css';
 

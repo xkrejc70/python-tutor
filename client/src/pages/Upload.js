@@ -62,18 +62,18 @@ function Upload() {
                 <h1>Odevzdání projektů</h1>
                 <br />
                 <div className="upload-container">
-                    <h3>Nahrejte řešení projektu</h3>
+                    <h3>Upload your project</h3>
                     <br />
                     {status && <p className={`status`}>{status}</p>}
                     <div className="upload-form">
                         <input type="file" onChange={onFileChange} />
                         <select value={selectedProject} onChange={handleProjectChange}>
-                            <option value="proj1">Projekt 1</option>
-                            <option value="proj4">Projekt 4</option>
-                            <option value="proj6">Projekt 6</option>
-                            <option value="proj8">Projekt 8</option>
+                            <option value="proj1">Project 1</option>
+                            <option value="proj4">Project 4</option>
+                            <option value="proj6">Project 6</option>
+                            <option value="proj8">Project 8</option>
                         </select>
-                        <button onClick={onFileUpload}>Odeslat!</button>
+                        <button onClick={onFileUpload}>Upload</button>
                     </div>
                 </div>
             </div>

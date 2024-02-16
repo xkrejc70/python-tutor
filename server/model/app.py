@@ -69,8 +69,6 @@ def proj4():
     # Make classification using the loaded model
     predictions = model_proj4([input_string])
 
-    print(predictions)
-
     numerical_prediction = predictions.item()
     mapped_result = map_classification_result(numerical_prediction, classification_mapping_proj4)
 
@@ -103,8 +101,6 @@ def proj8():
 
     # Make classification using the loaded model
     predictions = model_proj8([input_string])
-
-    print(predictions)
 
     numerical_prediction = predictions.item()
     mapped_result = map_classification_result(numerical_prediction, classification_mapping_proj8)
