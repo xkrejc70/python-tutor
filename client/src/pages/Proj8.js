@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import Sidebar from "components/Sidebar";
+import Quiz from "components/Quiz";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { coy } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import "assets/global.css";
 
 function Proj8() {
+
+
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
     const [uniqueCategoriesVariable, setUniqueCategoriesVariable] = useState('_____1_____');
     const [uniqueCategoriesHash, setUniqueCategoriesHash] = useState('_____2_____');
@@ -14,13 +17,30 @@ function Proj8() {
         setSidebarCollapsed(collapsed);
     };
 
+    const updateCode = (index) => {
+        switch (index) {
+            case 0:
+                setUniqueCategoriesVariable("set()");
+                break;
+            case 2:
+                setUniqueCategoriesHash("hash");
+                break;
+            case 3:
+                setUniqueCategoriesYield("yield category_name_with_long_description");
+                break;
+            default:
+                // Handle invalid category type
+                break;
+        }
+    };
+
     const TaskExplanation = () => {
         return (
             <div>
-                <h2 className="heading-h2">Task Explanation:</h2>
+                <h2 className="heading-h2">Task:</h2>
                 <p className='practice-task'>
                     You're tasked with developing a spam detection system for processing a continuous stream of emails.
-                    The system needs to identify unique categories of spam without storing individual email addresses due to the potentially infinite nature of the email queue.
+                    The system needs to identify unique categories of spam without storing individual email addresses due to the potentially infinite queue.
                 </p>
                 <SyntaxHighlighter language="python" style={coy} className="bordered-code">
                     {`def unique_spam_categories(email_queue):
@@ -56,6 +76,7 @@ function Proj8() {
 
                 <div>
                     <TaskExplanation />
+                    <Quiz updateCode={updateCode} />
                 </div>
             </div>
         </div>

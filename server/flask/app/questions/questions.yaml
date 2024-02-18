@@ -1,0 +1,59 @@
+proj8:
+  - question: 'What data structure should be used to store unique categories efficiently?'
+    options: ['List', 'Dictionary', 'Set', 'Tuple']
+    correctOption: 2
+    explanations: 
+      - 'Inefficient for storing unique items; does not offer optimized membership checks.'
+      - 'Not ideal for storing unique items; introduces unnecessary complexity and overhead.'
+      - 'Sets are ideal for storing unique items and offer efficient membership checks, making them suitable for identifying unique spam categories without redundant storage or slow lookup time.'
+      - 'Not designed for storing unique items; lacks efficient membership checks.'
+  - question: 'How can we ensure memory efficiency when categorizing spam in a potentially infinite email queue?'
+    options:
+      - 'By using a dictionary to map email addresses to their spam categories'
+      - 'By categorizing emails on-the-fly and storing only unique spam categories in a set'
+      - 'By storing each email address in a list and filtering duplicates later'
+      - 'By creating a tuple for each email containing its address and spam category'
+    correctOption: 1
+    explanations:
+      - ''
+      - 'Processing emails as they arrive and storing only unique spam categories in a set ensures memory efficiency and scalability, as it avoids storing redundant information and handles the potentially infinite email queue effectively.'
+      - ''
+      - ''
+  - question: 'To optimize the mechanism for storing unique spam categories, what would be a suitable approach?'
+    options:
+      - 'Using hash function to convert the long string into a compact hashed value'
+      - 'Applying a complex encryption algorithm to the category name and description'
+      - 'Storing categories in a plain list and iterating through it for each new email to find duplicates'
+      - 'Concatenating the category name with its description as a single string'
+    correctOption: 0
+    explanations:
+      - 'Hashing allows for constant-time average-case lookup in a set. Storing hashed values can improve memory efficiency. Hashes are typically smaller in size compared to the objects they represent.'
+      - 'Encryption is designed for security. It adds unnecessary computational overhead.'
+      - 'This approach is inefficient because it requires checking every existing category in a list for each new email, resulting in a time-consuming linear search operation.'
+      - 'This approach might be inefficient and would not provide a fixed-size compact representation. It could lead to unnecessary memory usage and slower comparisons.'
+  - question: 'How to efficiently return values for unique spam categories?'
+    options:
+      - 'By storing all categories in a list and returning the entire list'
+      - 'By using a dictionary to map categories to their respective counts and returning the dictionary'
+      - 'By creating a tuple for each category containing its name and description and returning them as a list'
+      - 'By categorizing categories on-the-fly and returning them one at a time using the yield keyword'
+    correctOption: 3
+    explanations:
+      -  'Inefficient; storing all categories upfront may lead to performance issues, especially with a large number of categories.'
+      -  'Unnecessarily complex; using counts in a dictionary introduces unnecessary overhead and may result in a larger data structure.'
+      -  'Adds unnecessary complexity; creating additional tuples without clear benefits complicates the structure without improving the goal of returning unique categories.'
+      - 'The yield keyword is more memory-efficient, processing one category at a time and minimizing storage needs by avoiding simultaneous memory storage of all categories.'
+proj9:
+  - question: ''
+    options:
+      - ''
+      - ''
+      - ''
+      - ''
+    correctOption: 3
+    explanations: 
+      - ''
+      - ''
+      - ''
+      - ''
+

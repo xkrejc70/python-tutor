@@ -15,6 +15,11 @@ hr {
     opacity: 0.15;
 }
 
+.menu-bottom {
+    position: absolute;
+    bottom: 0;
+}
+
 a,
 .fpTHfu,
 .ps-sidebar-container {
@@ -65,6 +70,8 @@ a:visited {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 .upload-form {
@@ -146,8 +153,12 @@ pre {
     font-family: 'Source Code Pro Variable', monospace !important;
 }
 
+h1 {
+    text-align: center;
+}
+
 .heading-h2 {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .heading-h3 {
@@ -157,4 +168,86 @@ pre {
 
 .practice-task {
     margin-bottom: 10px;
+}
+
+/* Quiz.css */
+.quiz-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.question {
+    padding-bottom: 15px;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.option {
+    cursor: pointer;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.option:hover {
+    background-color: #f0f0f0;
+}
+
+.selected {
+    background-color: #89C4F4;
+}
+
+.selected:hover {
+    background-color: #7fb5e2;
+}
+
+.result {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.correct {
+    padding-bottom: 5px;
+}
+
+.success {
+    background-color: #4caf50;
+    color: white;
+}
+
+.failure {
+    background-color: #ff4c4c;
+    color: white;
+}
+
+.next-button {
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+.mr-0 {
+    margin-right: 0;
+}
+
+.ml-auto {
+    margin-left: auto;
+}
+
+.d-block {
+    display: block;
 }

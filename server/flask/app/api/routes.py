@@ -2,6 +2,8 @@ from app import app
 from flask import jsonify, request
 from app.uploads.upload_handler import upload_handler
 from app.upload_and_test import upload_and_test
+from app.upload_and_test import upload_and_test
+from app.questions.questions import get_questions
 import requests
 
 # TODO: delete
@@ -40,6 +42,11 @@ def proj8():
 
     # Process the prediction as needed
     return jsonify({'model_response': result})
+
+# TODO: move to utils
+@app.route('/api/questions/<string:project>', methods=['GET'])
+def get_questions_route(project):
+    return get_questions(project)
 
 # TODO: delete
 @app.route("/api/test", methods=['GET', 'POST'])

@@ -4,7 +4,7 @@ import { Sidebar, SubMenu, Menu, MenuItem } from 'react-pro-sidebar';
 // icons
 import { RiTeamLine, RiCalendar2Line, RiUserUnfollowLine } from 'react-icons/ri';
 import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi';
-import { FaCode, FaUpload} from 'react-icons/fa';
+import { FaCode, FaUpload } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import 'assets/global.css';
 
@@ -21,6 +21,7 @@ function Sidebars({ onCollapsedChange }) {
     setToggled(value);
   };
 
+  // TODO: move styles to .css
   return (
     <div style={{ display: "flex" }}>
       <Sidebar
@@ -51,16 +52,25 @@ function Sidebars({ onCollapsedChange }) {
           </Menu>
 
           <Menu>
-          {/* Warning cuz of double <a> can use NavLink, but it breaks submenu */}
-              <MenuItem icon={<FaUpload />} component={<Link to="/upload" />}>
-                Upload project
-              </MenuItem>
+            {/* Warning cuz of double <a> can use NavLink, but it breaks submenu */}
+            <MenuItem icon={<FaUpload />} component={<Link to="/upload" />}>
+              Upload project
+            </MenuItem>
             <SubMenu defaultOpen label={"Practice"} icon={<RiTeamLine />}>
               <MenuItem icon={<FaCode />} component={<Link to="/#" />}>Regex</MenuItem>
               <MenuItem icon={<RiUserUnfollowLine />} component={<Link to="/#" />} >List</MenuItem>
               <MenuItem icon={<RiCalendar2Line />} component={<Link to="/proj8" />} >Iterable</MenuItem>
             </SubMenu>
           </Menu>
+
+          {/* Additional Menu at the bottom outside the Sidebar */}
+          <div className="menu-bottom">
+            <Menu>
+              <MenuItem icon={<FaUpload />} component={<Link to="/#" />}>
+                smth
+              </MenuItem>
+            </Menu>
+          </div>
         </main>
       </Sidebar>
     </div>
