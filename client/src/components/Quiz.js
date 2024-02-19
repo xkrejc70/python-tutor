@@ -6,6 +6,7 @@ function Quiz({ updateCode }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [showResult, setShowResult] = useState(false);
+  const [showContinue, setShowContinue] = useState(false);
 
   useEffect(() => {
     // Fetch questions from the API when the component mounts
@@ -18,8 +19,9 @@ function Quiz({ updateCode }) {
   const handleOptionSelect = (index) => {
     setSelectedOption(index);
     setShowResult(true);
-
+    
     if (index === correctOption) {
+      setShowContinue(true);
       updateCode(currentQuestion);
     }
   };
@@ -27,6 +29,7 @@ function Quiz({ updateCode }) {
   const handleNextQuestion = () => {
     setSelectedOption(null);
     setShowResult(false);
+    setShowContinue(false);
 
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
@@ -71,7 +74,7 @@ function Quiz({ updateCode }) {
           )}
         </div>
       )}
-      {showResult && selectedOption === correctOption && (
+      {showResult && showContinue && (
         currentQuestion < questions.length - 1 &&
         <button onClick={handleNextQuestion} className="next-button d-block mr-0 ml-auto">
           Continue

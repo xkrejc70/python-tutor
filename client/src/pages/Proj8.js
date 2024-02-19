@@ -10,6 +10,7 @@ function Proj8() {
     const [uniqueCategoriesVariable, setUniqueCategoriesVariable] = useState('_____1_____');
     const [uniqueCategoriesHash, setUniqueCategoriesHash] = useState('_____2_____');
     const [uniqueCategoriesYield, setUniqueCategoriesYield] = useState('_____3_____');
+    const [addToSet, setAddToSet] = useState('add_item(unique_categories, compact_category)');
     const [tryBlock, setTryBlock] = useState('');
     const [exceptBlock, setExceptBlock] = useState('');
     const [tab, setTab] = useState('');
@@ -22,6 +23,7 @@ function Proj8() {
         switch (index) {
             case 0:
                 setUniqueCategoriesVariable("set()");
+                setAddToSet('unique_categories.add(compact_category)');
                 break;
             case 2:
                 setUniqueCategoriesHash("hash");
@@ -48,7 +50,7 @@ function Proj8() {
             <div>
                 <h2 className="heading-h2">Task:</h2>
                 <p className='practice-task'>
-                    You're tasked with developing a spam detection system for processing a continuous stream of emails.
+                    Your goul is to develope a spam detection system for processing a continuous stream of emails.
                     The system needs to identify unique categories of spam without storing individual email addresses due to the potentially infinite queue.
                 </p>
                 <SyntaxHighlighter language="python" style={coy} className="bordered-code">
@@ -62,7 +64,7 @@ function Proj8() {
         ${tab}category_name_with_long_description = detect_spam(email)
         ${tab}compact_category = ${uniqueCategoriesHash}(category_name_with_description)${exceptBlock}
         if compact_category not in unique_categories:
-            add_item(unique_categories, compact_category)
+            ${addToSet}
             ${uniqueCategoriesYield}`}
                 </SyntaxHighlighter>
             </div>

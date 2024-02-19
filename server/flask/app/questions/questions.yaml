@@ -7,10 +7,10 @@ proj8:
       - 'Tuple'       
     correctOption: 2
     explanations: 
-      - 'Inefficient for storing unique items; does not offer optimized membership checks.'
-      - 'Not ideal for storing unique items; introduces unnecessary complexity and overhead.'
+      - 'List is inefficient for storing unique items. It does not offer optimized membership checks.'
+      - 'Dictionary is not ideal for storing unique items. It introduces unnecessary complexity and overhead.'
       - 'Sets are ideal for storing unique items and offer efficient membership checks, making them suitable for identifying unique spam categories without redundant storage or slow lookup time.'
-      - 'Not designed for storing unique items; lacks efficient membership checks.'
+      - 'Tuple is not designed for storing unique items. It lacks efficient membership checks.'
   - question: 'How can we ensure memory efficiency when categorizing spam in a potentially infinite email queue?'
     options:
       - 'By using a dictionary to map email addresses to their spam categories'
