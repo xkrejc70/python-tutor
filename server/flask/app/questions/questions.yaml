@@ -1,6 +1,10 @@
 proj8:
   - question: 'What data structure should be used to store unique categories efficiently?'
-    options: ['List', 'Dictionary', 'Set', 'Tuple']
+    options:
+      - 'List'
+      - 'Dictionary'
+      - 'Set'
+      - 'Tuple'       
     correctOption: 2
     explanations: 
       - 'Inefficient for storing unique items; does not offer optimized membership checks.'
@@ -31,6 +35,18 @@ proj8:
       - 'Encryption is designed for security. It adds unnecessary computational overhead.'
       - 'This approach is inefficient because it requires checking every existing category in a list for each new email, resulting in a time-consuming linear search operation.'
       - 'This approach might be inefficient and would not provide a fixed-size compact representation. It could lead to unnecessary memory usage and slower comparisons.'
+  - question: 'What is a suitable approach to handle potential errors when processing emails?'
+    options:
+      - 'Ignoring errors and continuing with the next email in the queue.'
+      - 'Halting the entire process if an error is encountered to avoid further complications.'
+      - 'Adding a try block to catch and handle exceptions that may occur during email processing.'
+      - 'Logging errors to a file without interrupting the category generation process.'
+    correctOption: 2
+    explanations:
+      - 'Ignoring errors may lead to incomplete category generation and overlook potential issues in the email processing logic.'
+      - 'Halting the process entirely upon encountering an error is not ideal for scalability and continuous category generation.'
+      - 'Adding a try block allows for catching and handling exceptions that may occur during email processing, promoting robust error handling without halting the entire generator.'
+      - 'Logging errors can be beneficial for debugging but should be accompanied by appropriate error handling to ensure the continuous operation of the category generator.'
   - question: 'How to efficiently return values for unique spam categories?'
     options:
       - 'By storing all categories in a list and returning the entire list'
@@ -43,7 +59,7 @@ proj8:
       -  'Unnecessarily complex; using counts in a dictionary introduces unnecessary overhead and may result in a larger data structure.'
       -  'Adds unnecessary complexity; creating additional tuples without clear benefits complicates the structure without improving the goal of returning unique categories.'
       - 'The yield keyword is more memory-efficient, processing one category at a time and minimizing storage needs by avoiding simultaneous memory storage of all categories.'
-proj9:
+template:
   - question: ''
     options:
       - ''

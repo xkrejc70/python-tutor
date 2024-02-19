@@ -74,7 +74,7 @@ function Quiz({ updateCode }) {
       {showResult && selectedOption === correctOption && (
         currentQuestion < questions.length - 1 &&
         <button onClick={handleNextQuestion} className="next-button d-block mr-0 ml-auto">
-          Next question
+          Continue
         </button>
       )}
     </div>
