@@ -1,6 +1,6 @@
 from app import app
 from app.tests.test_utils import RestrictedEnvironment, Project, Function, Classes
-from app.tests.test_utils import import_function_or_class_from_file, clean_function_string
+from app.tests.test_utils import import_function_or_class_from_file, load_tips_from_yaml
 
 # Test project 6
 def test_project6(file_path, test_data):
@@ -8,6 +8,7 @@ def test_project6(file_path, test_data):
     num_tests = 0
     comment = []
     model_response = []
+    tips = []
 
     def run_init_tests(test_type, parse_func):
         nonlocal num_tests
@@ -155,14 +156,18 @@ def test_project6(file_path, test_data):
     run_ops_tests(Classes.POLYNOMIAL_DERIVATE)
     run_ops_tests(Classes.POLYNOMIAL_AT_VALUE)
 
+    # ============= Final evaluation =============
     if num_tests == passed:
         comment.append("Success: All tests passed without errors.")
 
-    # ============= Final evaluation =============
+    # Tips
+    tips = load_tips_from_yaml('proj6')
+
     evaluation = {
         "comment": list(set(comment)),
         "model_response": model_response,
         "num_tests": num_tests,
+        "tips": tips,
         "passed": passed
     }
     

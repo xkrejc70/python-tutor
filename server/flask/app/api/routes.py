@@ -3,6 +3,8 @@ from flask import jsonify, request
 from app.uploads.upload_handler import upload_handler
 from app.upload_and_test import upload_and_test
 from app.upload_and_test import upload_and_test
+from app.admin.settings import load_settings, save_settings
+from app.admin.login import authenticate
 from app.questions.questions import get_questions
 import requests
 
@@ -63,3 +65,18 @@ def upload():
 @app.route("/s", methods=['GET'])
 def return_home():
     return jsonify({"host": "Hostname: " + socket.gethostname()})
+
+
+
+# todo: secure admin requests
+@app.route('/api/admin/projects', methods=['GET'])
+def get_items():
+    return load_settings()
+
+@app.route('/api/admin/save', methods=['POST'])
+def save_projects():
+    return save_settings(request)
+
+@app.route('/api/admin/login', methods=['POST'])
+def login():
+    return authenticate(request)

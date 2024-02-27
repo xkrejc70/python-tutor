@@ -1,17 +1,23 @@
 // Move styles to index.css
 import React, { useState } from 'react';
 import { Sidebar, SubMenu, Menu, MenuItem } from 'react-pro-sidebar';
-// icons
-import { RiTeamLine, RiCalendar2Line, RiUserUnfollowLine } from 'react-icons/ri';
-import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi';
-import { FaCode, FaUpload } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { useAuth } from 'AuthContext';
+// icons
+import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi';
+import { FaCode, FaUpload, FaChalkboardTeacher } from 'react-icons/fa';
+import { MdOutlineMailOutline } from "react-icons/md";
+import { RiAdminLine } from "react-icons/ri";
+import { TbLetterS } from "react-icons/tb";
+
 import 'assets/global.css';
 
 function Sidebars({ onCollapsedChange }) {
 
   const [collapsed, setCollapsed] = useState(false);
   const [toggled, setToggled] = useState(false);
+
+  const { isLoggedIn } = useAuth();
 
   const handleCollapsedChange = () => {
     setCollapsed(!collapsed);
@@ -53,22 +59,30 @@ function Sidebars({ onCollapsedChange }) {
 
           <Menu>
             {/* Warning cuz of double <a> can use NavLink, but it breaks submenu */}
-            <MenuItem icon={<FaUpload />} component={<Link to="/upload" />}>
-              Upload project
-            </MenuItem>
-            <SubMenu defaultOpen label={"Practice"} icon={<RiTeamLine />}>
+            <MenuItem icon={<FaUpload />} component={<Link to="/upload" />}>Upload project</MenuItem>
+            <SubMenu defaultOpen label={"Practice"} icon={<FaChalkboardTeacher />}>
               <MenuItem icon={<FaCode />} component={<Link to="/#" />}>Regex</MenuItem>
-              <MenuItem icon={<RiUserUnfollowLine />} component={<Link to="/Proj4" />} >Scrabble</MenuItem>
-              <MenuItem icon={<RiCalendar2Line />} component={<Link to="/proj8" />} >Email Queue</MenuItem>
+              <MenuItem icon={<TbLetterS />} component={<Link to="/Proj4" />} >Scrabble</MenuItem>
+              <MenuItem icon={<MdOutlineMailOutline />} component={<Link to="/proj8" />} >Email Queue</MenuItem>
             </SubMenu>
           </Menu>
 
-          {/* Additional Menu at the bottom outside the Sidebar */}
           <div className="menu-bottom">
             <Menu>
-              <MenuItem icon={<FaUpload />} component={<Link to="/#" />}>
-                smth
-              </MenuItem>
+              {isLoggedIn ? (
+                <>
+                  <MenuItem icon={<RiAdminLine />} component={<Link to="/admin" />}>
+                    Admin
+                  </MenuItem>
+                  <MenuItem icon={<RiAdminLine />} /*onClick={logout}*/>
+                    Logout
+                  </MenuItem>
+                </>
+              ) : (
+                <MenuItem icon={<RiAdminLine />} component={<Link to="/login" />}>
+                  Login
+                </MenuItem>
+              )}
             </Menu>
           </div>
         </main>

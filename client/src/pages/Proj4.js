@@ -9,7 +9,6 @@ import scrabbleImg from 'assets/images/scrabble.png'
 function Proj4() {
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
     const [codeLine, setCodeLine] = useState('_____1_____');
-    const [tab, setTab] = useState('');
 
     const onSidebarCollapsedChange = (collapsed) => {
         setSidebarCollapsed(collapsed);

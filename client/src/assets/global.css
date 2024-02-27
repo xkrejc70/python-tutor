@@ -296,3 +296,20 @@ h1 {
     height: 10%; /* Maintain the aspect ratio */
     max-height: 70px; /* Set a maximum height for the image */
 }
+
+/* Admin */
+
+.project-settings-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.settings-container {
+    width: 50%;
+}
+
+.settings-form {
+    text-align: center;
+}

@@ -68,6 +68,7 @@ function Evaluation() {
     const passed = uploadData?.test?.test_result?.passed;
     const percentage = numTests > 0 ? ((passed / numTests) * 100).toFixed(2) : 0;
     const comments = uploadData?.test?.test_result?.comment;
+    const tips_num = uploadData?.test?.test_result?.tips?.length ?? 0;
     
     const model_response = uploadData?.test?.test_result?.model_response;
     const response_len = model_response ? model_response.length : 0;
@@ -96,7 +97,7 @@ function Evaluation() {
 
                 <hr className="container-divider" />
 
-                <ExpandableContainer title="Tips for self-study (1)">
+                <ExpandableContainer title={`Tips for self-study (${tips_num})`}>
                     {uploadData.test && uploadData.test.test_result && uploadData.test.test_result.tips && (
                         <ul className="tips-list">
                             {uploadData.test.test_result.tips.map((tip, index) => (
