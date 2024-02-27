@@ -58,8 +58,8 @@ function Sidebars({ onCollapsedChange }) {
             </MenuItem>
             <SubMenu defaultOpen label={"Practice"} icon={<RiTeamLine />}>
               <MenuItem icon={<FaCode />} component={<Link to="/#" />}>Regex</MenuItem>
-              <MenuItem icon={<RiUserUnfollowLine />} component={<Link to="/#" />} >List</MenuItem>
-              <MenuItem icon={<RiCalendar2Line />} component={<Link to="/proj8" />} >Iterable</MenuItem>
+              <MenuItem icon={<RiUserUnfollowLine />} component={<Link to="/Proj4" />} >Scrabble</MenuItem>
+              <MenuItem icon={<RiCalendar2Line />} component={<Link to="/proj8" />} >Email Queue</MenuItem>
             </SubMenu>
           </Menu>
 

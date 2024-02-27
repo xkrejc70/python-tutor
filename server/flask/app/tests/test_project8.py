@@ -1,6 +1,6 @@
 from app import app
-from app.tests.test_utils import RestrictedEnvironment, Project, Function
-from app.tests.test_utils import import_function_or_class_from_file, clean_function_string
+from app.tests.test_utils import RestrictedEnvironment, Project, Function, Model
+from app.tests.test_utils import import_function_or_class_from_file, clean_function_string, load_tips_from_yaml
 import inspect
 import builtins
 import re
@@ -12,6 +12,7 @@ def test_project8(file_path, test_data):
     num_tests = 0
     comment = []
     model_response = []
+    tips = []
 
     # ============= Test first_with_given_key =============
     p8_first_with_given_key = import_function_or_class_from_file(file_path, Function.FIRST_WITH_GIVEN_KEY)
@@ -44,21 +45,25 @@ def test_project8(file_path, test_data):
     if len(function_string) > 1000:
         model_response.append("[ERROR]: Over limit")
     else:
-        url = 'http://localhost:5050/proj8'
+        url = Model.URL + '/proj8'
         data = {'input_string': function_string}
 
 
         response = requests.post(url, json=data)
         model_response.append(response.json()['classification'])
 
+    # ============= Final evaluation =============
     if num_tests == passed:
         comment.append("Success: All tests passed without errors.")
 
-    # ============= Final evaluation =============
+    # Tips
+    tips = load_tips_from_yaml('proj8')
+
     evaluation = {
         "comment": list(set(comment)),
         "model_response": model_response,
         "num_tests": num_tests,
+        "tips": tips,
         "passed": passed
     }
     

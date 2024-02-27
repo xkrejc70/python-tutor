@@ -97,8 +97,17 @@ function Evaluation() {
                 <hr className="container-divider" />
 
                 <ExpandableContainer title="Tips for self-study (1)">
-                    <p>Odkaz na sekci k procvičení zde </p>
-                    <p>Odkaz na tutorial jinam</p>
+                    {uploadData.test && uploadData.test.test_result && uploadData.test.test_result.tips && (
+                        <ul className="tips-list">
+                            {uploadData.test.test_result.tips.map((tip, index) => (
+                                <li key={index} className="tip-item">
+                                    <a href={tip.url} target="_blank" rel="noopener noreferrer" className="tip-link">
+                                        {tip.text}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
                 </ExpandableContainer>
 
                 <hr className="container-divider" />

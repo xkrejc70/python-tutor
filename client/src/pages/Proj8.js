@@ -4,6 +4,7 @@ import Quiz from "components/Quiz";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { coy } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import "assets/global.css";
+import emailImg from 'assets/images/email.png'
 
 function Proj8() {
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -48,9 +49,10 @@ function Proj8() {
     const TaskExplanation = () => {
         return (
             <div>
+                <img src={emailImg} alt={"emailImg"} className="task-image" />
                 <h2 className="heading-h2">Task:</h2>
                 <p className='practice-task'>
-                    Your goul is to develope a spam detection system for processing a continuous stream of emails.
+                    Your goal is to develope a spam detection system for processing a continuous stream of emails.
                     The system needs to identify unique categories of spam without storing individual email addresses due to the potentially infinite queue.
                 </p>
                 <SyntaxHighlighter language="python" style={coy} className="bordered code-style">
@@ -79,12 +81,12 @@ function Proj8() {
         <div>
             <Sidebar onCollapsedChange={onSidebarCollapsedChange} />
             <div className={"main-layout"} style={{ marginLeft: sidebarCollapsed ? "80px" : "250px" }}>
-                <h1>Practice</h1>
+                <h1>Exercise Project 8</h1>
                 <br />
 
                 <div>
                     <TaskExplanation />
-                    <Quiz updateCode={updateCode} />
+                    <Quiz updateCode={updateCode} quiz="proj8" />
                 </div>
             </div>
         </div>

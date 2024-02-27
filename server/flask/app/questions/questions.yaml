@@ -1,10 +1,23 @@
+scrabble:
+  - question: 'For optimal efficiency in a Scrabble helper function, which code line should be used?'
+    options:
+      - 'set(''.join(perm) for word in words for perm in perms if word == perm)'
+      - 'set(words).intersection(perms)'
+      - 'set({item:None for item in perms if item in words}.keys())'
+      - 'set(filter(lambda x: x in perms, words))'
+    correctOption: 1
+    explanations: 
+      - 'Code uses nested loops to find words that are equal to permutations, resulting in a time complexity of O(n * m). A more efficient solution exists with a time complexity of O(n + m).'
+      - 'Set intersection operation (&) is the most Pythonic and efficient way to find the common elements between two sets in this context.'
+      - 'The provided solution inefficiently uses dictionary comprehension and membership tests for each permutation, resulting in a time complexity of O(n^2)'
+      - 'This solution uses the filter function with a lambda function. It is less readable than set operations and less efficient for this specific problem.'
 proj8:
   - question: 'What data structure should be used to store unique categories efficiently?'
     options:
       - 'List'
       - 'Dictionary'
       - 'Set'
-      - 'Tuple'       
+      - 'Tuple'
     correctOption: 2
     explanations: 
       - 'List is inefficient for storing unique items. It does not offer optimized membership checks.'

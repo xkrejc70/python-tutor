@@ -2,6 +2,8 @@ import importlib.util
 import sys
 import inspect
 import re
+import yaml
+import os
 
 # Restricted execution environment by temporarily clearing and restoring sys.modules
 class RestrictedEnvironment:
@@ -49,6 +51,10 @@ class Function:
     # proj8
     FIRST_WITH_GIVEN_KEY = 'first_with_given_key'
 
+# Model
+class Model:
+    URL = 'http://localhost:5050'
+
 # Import function or class from file
 def import_function_or_class_from_file(file_path, identifier_name):
     spec = importlib.util.spec_from_file_location("custom_module", file_path)
@@ -79,3 +85,15 @@ def clean_function_string(func):
     function_string = re.sub(r'\n\s*\n', '\n', function_string)
 
     return function_string
+
+def load_tips_from_yaml(key):
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    file_p = os.path.join(script_dir, "tips/tips.yaml")
+    with open(file_p, 'r') as file:
+        tips_data = yaml.safe_load(file)
+    
+    # Check if the key exists in the loaded data
+    if key in tips_data:
+        return tips_data[key]
+    else:
+        return None

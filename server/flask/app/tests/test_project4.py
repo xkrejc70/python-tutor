@@ -1,6 +1,6 @@
 from app import app
 from app.tests.test_utils import RestrictedEnvironment, Project, Function
-from app.tests.test_utils import import_function_or_class_from_file, clean_function_string
+from app.tests.test_utils import import_function_or_class_from_file, clean_function_string, load_tips_from_yaml
 import requests
 
 # Test project 4
@@ -120,10 +120,15 @@ def test_project4(file_path, test_data):
     if num_tests == passed:
         comment.append("Success: All tests passed without errors.")
 
+    # Tips
+    tips = load_tips_from_yaml('proj4')
+
+    # ============= Final evaluation =============
     evaluation = {
         "comment": list(set(comment)),
         "model_response": model_response,
         "num_tests": num_tests,
+        "tips": tips,
         "passed": passed
     }
     

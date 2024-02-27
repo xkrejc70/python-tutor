@@ -6,6 +6,7 @@
 
 body {
     font-family: "Montserrat", sans-serif !important;
+    background-color: #f5f7f8;
 }
 
 /* Sidebar */
@@ -20,22 +21,22 @@ hr {
     bottom: 0;
 }
 
-p {
+p, li {
     font-family: "Montserrat", sans-serif !important;
 }
 
-a,
+.ps-menu-button,
 .fpTHfu,
 .ps-sidebar-container {
     background-color: #89C4F4 !important;
 }
 
-a:hover {
+.ps-menu-button:hover {
     font-size: 1.1rem;
 }
 
-a:link,
-a:visited {
+.ps-menu-button:link,
+.ps-menu-button:visited {
     color: #000000;
     text-decoration: none;
 }
@@ -147,6 +148,25 @@ pre {
     white-space: pre-wrap;
 }
 
+.tips-list {
+    list-style: none;
+    padding: 0;
+}
+
+.tip-item {
+    margin-bottom: 8px;
+}
+
+.tip-link {
+    text-decoration: none;
+    color: #000000;
+    text-decoration: underline;
+}
+
+.tip-link:hover {
+    text-decoration: underline;
+}
+
 
 /* Practice */
 
@@ -178,18 +198,19 @@ h1 {
 }
 
 .practice-task {
-    margin-bottom: 10px;
+    margin-bottom: 25px;
 }
 
 /* Quiz.css */
 .quiz-container {
     max-width: 1000px;
-    margin: 50px auto;
+    margin: 30px auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    background-color: #89c4f4
 }
 
 .question {
@@ -208,28 +229,30 @@ h1 {
     cursor: pointer;
     padding: 10px;
     margin: 5px;
-    border: 1px solid #ccc;
     border-radius: 4px;
     transition: background-color 0.3s;
+    background-color: #f5f7f8;
 }
 
 .option:hover {
-    background-color: #f0f0f0;
+    background-color: #d6d6d6;
 }
 
 .selected {
-    background-color: #89C4F4;
+    background-color: #d6d6d6;
 }
 
 .selected:hover {
-    background-color: #7fb5e2;
+    background-color: rgb(177, 177, 177);
 }
 
 .result {
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 10px;
-    border-radius: 8px;
+    border-radius: 4px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .correct {
@@ -237,23 +260,26 @@ h1 {
 }
 
 .success {
-    background-color: #4caf50;
+    background-color: #00a859;
     color: white;
 }
 
 .failure {
-    background-color: #ff4c4c;
+    background-color: #d9534f;
     color: white;
 }
 
 .next-button {
     margin-top: 10px;
     font-size: 1rem;
+    margin-right: 5px;
+    background-color: #f5f7f8;
 }
 
-.mr-0 {
-    margin-right: 0;
+.next-button:hover {
+    background-color: #d6d6d6;
 }
+
 
 .ml-auto {
     margin-left: auto;
@@ -261,4 +287,12 @@ h1 {
 
 .d-block {
     display: block;
+}
+
+.task-image {
+    display: block;
+    margin: 0 auto; /* Center the image */
+    max-width: 100%; /* Make the image responsive */
+    height: 10%; /* Maintain the aspect ratio */
+    max-height: 70px; /* Set a maximum height for the image */
 }

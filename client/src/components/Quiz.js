@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import 'assets/global.css';
 
-function Quiz({ updateCode }) {
+function Quiz({ updateCode, quiz }) {
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
@@ -10,7 +10,7 @@ function Quiz({ updateCode }) {
 
   useEffect(() => {
     // Fetch questions from the API when the component mounts
-    fetch('http://localhost:5005/api/questions/proj8')
+    fetch('http://localhost:5005/api/questions/' + quiz)
       .then(response => response.json())
       .then(data => setQuestions(data))
       .catch(error => console.error('Error fetching questions:', error));
@@ -76,7 +76,7 @@ function Quiz({ updateCode }) {
       )}
       {showResult && showContinue && (
         currentQuestion < questions.length - 1 &&
-        <button onClick={handleNextQuestion} className="next-button d-block mr-0 ml-auto">
+        <button onClick={handleNextQuestion} className="next-button d-block ml-auto">
           Continue
         </button>
       )}
