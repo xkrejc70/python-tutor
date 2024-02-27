@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import Sidebar from "components/Sidebar";
 import Quiz from "components/Quiz";
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { coy } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import TaskExplanation from "components/TaskExplanation";
 import "assets/global.css";
 import scrabbleImg from 'assets/images/scrabble.png'
 
@@ -26,18 +25,11 @@ function Proj4() {
         setCodeLine('set(words).intersection(perms)');
     };
 
-    const TaskExplanation = () => {
-        return (
-            <div>
-                <img src={scrabbleImg} alt={"scrabbleImg"} className="task-image" />
-                <h2 className="heading-h2">Task:</h2>
-                <p className='practice-task'>
-                You are developing a Scrabble helper to assist players in finding valid words that can be formed using any subset of the letters they have on their rack.
-                However, the challenge is that the Scrabble dictionary is extensive, containing tens of thousands of words.
-                The function needs to handle this vast dictionary efficiently to provide quick and relevant suggestions.
-                </p>
-                <SyntaxHighlighter language="python" style={coy} className="bordered code-style">
-                    {`def scrabble_helper(letters, words):
+    const heading = "Task:";
+    const description = `You are developing a Scrabble helper to assist players in finding valid words that can be formed using any subset of the letters they have on their rack.
+    However, the challenge is that the Scrabble dictionary is extensive, containing tens of thousands of words.
+    The function needs to handle this vast dictionary efficiently to provide quick and relevant suggestions.`;
+    const code = `def scrabble_helper(letters, words):
     """
     Finds valid words that can be formed using any subset of the provided letters.
 
@@ -49,11 +41,7 @@ function Proj4() {
     - set: A set of valid words that can be formed using any subset of the available letters.
     """
     perms = all_permutations_substrings(letters)
-    return ${codeLine}`}
-                </SyntaxHighlighter>
-            </div>
-        );
-    };
+    return ${codeLine}`;
 
     return (
         <div>
@@ -67,7 +55,12 @@ function Proj4() {
                 <br />
 
                 <div>
-                    <TaskExplanation />
+                    <TaskExplanation
+                        imgSrc={scrabbleImg}
+                        heading={heading}
+                        practiceTask={description}
+                        code={code}
+                    />
                     <Quiz updateCode={updateCode} quiz="scrabble" />
                 </div>
             </div>

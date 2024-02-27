@@ -1,6 +1,7 @@
 // Login.js
 import React, { useState } from 'react';
 import Sidebar from "components/Sidebar";
+import StatusMessage from "components/StatusMessage";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from 'AuthContext';
 import { handleLoginRequest } from './loginUtils';
@@ -48,7 +49,7 @@ function Login() {
                         />
                     </div>
                     <button onClick={handleLogin}>Login</button>
-                    {status && <p className={`status`}>{status}</p>}
+                    <StatusMessage status={status} />
                 </div>
             </div>
         </div>

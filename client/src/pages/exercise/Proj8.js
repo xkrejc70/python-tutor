@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import Sidebar from "components/Sidebar";
 import Quiz from "components/Quiz";
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { coy } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import TaskExplanation from "components/TaskExplanation";
 import "assets/global.css";
 import emailImg from 'assets/images/email.png'
 
@@ -46,17 +45,10 @@ function Proj8() {
         }
     };
 
-    const TaskExplanation = () => {
-        return (
-            <div>
-                <img src={emailImg} alt={"emailImg"} className="task-image" />
-                <h2 className="heading-h2">Task:</h2>
-                <p className='practice-task'>
-                    Your goal is to develope a spam detection system for processing a continuous stream of emails.
-                    The system needs to identify unique categories of spam without storing individual email addresses due to the potentially infinite queue.
-                </p>
-                <SyntaxHighlighter language="python" style={coy} className="bordered code-style">
-                    {`def unique_spam_categories(email_queue):
+    const heading = "Task:";
+    const description = `Your goal is to develope a spam detection system for processing a continuous stream of emails.
+    The system needs to identify unique categories of spam without storing individual email addresses due to the potentially infinite queue.`;
+    const code = `def unique_spam_categories(email_queue):
     """Generate unique spam categories from a potentially infinite email queue."""
     unique_categories = ${uniqueCategoriesVariable}
     while True:
@@ -67,15 +59,7 @@ function Proj8() {
         ${tab}compact_category = ${uniqueCategoriesHash}(category_name_with_description)${exceptBlock}
         if compact_category not in unique_categories:
             ${addToSet}
-            ${uniqueCategoriesYield}`}
-                </SyntaxHighlighter>
-            </div>
-        );
-    };
-
-    /*
-    try block around detecking
-    */
+            ${uniqueCategoriesYield}`;
 
     return (
         <div>
@@ -85,7 +69,12 @@ function Proj8() {
                 <br />
 
                 <div>
-                    <TaskExplanation />
+                    <TaskExplanation
+                        imgSrc={emailImg}
+                        heading={heading}
+                        practiceTask={description}
+                        code={code}
+                    />
                     <Quiz updateCode={updateCode} quiz="proj8" />
                 </div>
             </div>

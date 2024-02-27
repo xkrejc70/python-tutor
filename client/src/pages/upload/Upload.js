@@ -1,6 +1,7 @@
 // Upload.js
 import React, { useState, useEffect } from 'react';
 import Sidebar from "components/Sidebar";
+import StatusMessage from "components/StatusMessage";
 import { useNavigate } from 'react-router-dom';
 import { handleFileUpload, fetchProjectsFromServer } from './uploadUtils';
 import "assets/global.css";
@@ -44,7 +45,7 @@ function Upload() {
                 <div className="upload-container">
                     <h3 className='h3-center'>Upload your project</h3>
                     <br />
-                    {status && <p className={`status`}>{status}</p>}
+                    <StatusMessage status={status} />
                     <div className="upload-form">
                         <input type="file" onChange={onFileChange} />
                         <select value={selectedProject} onChange={handleProjectChange}>

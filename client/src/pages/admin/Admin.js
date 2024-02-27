@@ -1,6 +1,7 @@
 // Admin.js
 import React, { useState, useEffect } from 'react';
 import Sidebar from "components/Sidebar";
+import StatusMessage from "components/StatusMessage";
 import { fetchDataFromAPI, handleCheckboxChange, handleSaveData } from './adminUtils';
 import "assets/global.css";
 
@@ -50,7 +51,7 @@ function Admin() {
                         ))}
                     </ul>
                     <button onClick={handleSave}>Save</button>
-                    {status && <p className={`status`}>{status}</p>}
+                    <StatusMessage status={status} />
                 </div>
             </div>
         </div>
