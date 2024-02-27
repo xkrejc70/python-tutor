@@ -34,7 +34,7 @@ function Upload() {
                 headers: { 'content-type': 'multipart/form-data' }
             }
 
-            axios.post("/api/upload", formData, config)
+            axios.post("http://localhost:5005/api/upload", formData, config)
                 .then(response => {
                     if (response.status === 200) {
                         setStatus('File uploaded successfully!');
@@ -59,10 +59,10 @@ function Upload() {
         <div>
             <Sidebar onCollapsedChange={onSidebarCollapsedChange} />
             <div className={"main-layout"} style={{ marginLeft: sidebarCollapsed ? "80px" : "250px" }}>
-                <h1>Odevzdání projektů</h1>
+                <h1>Project Submission</h1>
                 <br />
                 <div className="upload-container">
-                    <h3>Upload your project</h3>
+                    <h3 className='h3-center'>Upload your project</h3>
                     <br />
                     {status && <p className={`status`}>{status}</p>}
                     <div className="upload-form">

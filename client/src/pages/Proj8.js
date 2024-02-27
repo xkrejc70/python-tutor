@@ -53,7 +53,7 @@ function Proj8() {
                     Your goul is to develope a spam detection system for processing a continuous stream of emails.
                     The system needs to identify unique categories of spam without storing individual email addresses due to the potentially infinite queue.
                 </p>
-                <SyntaxHighlighter language="python" style={coy} className="bordered-code">
+                <SyntaxHighlighter language="python" style={coy} className="bordered code-style">
                     {`def unique_spam_categories(email_queue):
     """Generate unique spam categories from a potentially infinite email queue."""
     unique_categories = ${uniqueCategoriesVariable}

@@ -1,18 +1,20 @@
-version: "3.4"
+version: "3"
 
 services:
+
   # server flask
   flask-app:
     build:
       context: ./server/flask
       network: host
     ports:
-      - "5000"
+      - "5005"
     image: flask-app-image
-    networks:
-      - app-network
+    container_name: flask-server-container
+    network_mode: host
+    restart: always
 
-  # model
+  # server model
   model:
     build:
       context: ./server/model
@@ -20,22 +22,11 @@ services:
     ports:
       - "5050"
     image: model-image
-    networks:
-      - app-network
+    container_name: model-server-container
+    network_mode: host
+    restart: always
 
-  # nginx load balancer
-  nginx:
-    image: nginx:latest
-    volumes:
-      - ./server/nginx/nginx.conf:/etc/nginx/nginx.conf
-    depends_on:
-      - flask-app
-    ports:
-      - "4000:4000"
-    networks:
-      - app-network
-
-  # client reactjs
+    # client reactjs
   react-app:
     build:
       context: ./client
@@ -45,9 +36,5 @@ services:
     ports:
      - "3000:3000"
     image: react-app-image
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge
+    container_name: react-client-container
+    network_mode: host

@@ -2,7 +2,6 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000",
   "dependencies": {
     "@fontsource-variable/source-code-pro": "^5.0.17",
     "@fontsource/montserrat": "^5.0.15",

@@ -33,9 +33,19 @@ proj4:
     - in: 'abrakadabra'
       out: ['a', 'b', 'r', 'k', 'd']
 proj6:
-  Polynomial:
+  Polynomial_init_tuple:
     - in: '0,0,1,1,-1,-1,2,2,-2,-2,15'
       out: '15x^10 - 2x^9 - 2x^8 + 2x^7 + 2x^6 - x^5 - x^4 + x^3 + x^2'
+  Polynomial_init_key:
+    - in: 'x7=1, x4=4, x8=3, x9=0, x0=0, x5=-2, x3= -1, x1=1'
+      out: '3x^8 + x^7 - 2x^5 + 4x^4 - x^3 + x'
+    - in: 'x2=0'
+      out: '0'
+    - in: 'x0=0'
+      out: '0'
+  Polynomial_init_list:
+    - in: [-5,1,0,-1,4,-2,0,1,3,0]
+      out: '3x^8 + x^7 - 2x^5 + 4x^4 - x^3 + x - 5'
 proj8:
   first_with_given_key:
     - in: [[1], [1, 3], [1, 2, 3], [1], [2, 3]]

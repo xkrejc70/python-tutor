@@ -10,7 +10,7 @@ function Quiz({ updateCode }) {
 
   useEffect(() => {
     // Fetch questions from the API when the component mounts
-    fetch('/api/questions/proj8')
+    fetch('http://localhost:5005/api/questions/proj8')
       .then(response => response.json())
       .then(data => setQuestions(data))
       .catch(error => console.error('Error fetching questions:', error));
@@ -40,7 +40,7 @@ function Quiz({ updateCode }) {
 
   if (questions.length === 0) {
     // Loading state while fetching questions
-    return <div>Loading...</div>;
+    return <div>Loading Quiz...</div>;
   }
 
   const { question, options, correctOption, explanations } = questions[currentQuestion];

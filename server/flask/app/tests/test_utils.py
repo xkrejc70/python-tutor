@@ -29,6 +29,14 @@ class Project:
 # Classes
 class Classes:
     POLYNOMIAL = 'Polynomial'
+    POLYNOMIAL_TUPLE = 'Polynomial_init_tuple'
+    POLYNOMIAL_KEY = 'Polynomial_init_key'
+    POLYNOMIAL_LIST = 'Polynomial_init_list'
+    POLYNOMIAL_EQ = 'Polynomial_eq'
+    POLYNOMIAL_ADD = 'Polynomial_add'
+    POLYNOMIAL_POW = 'Polynomial_pow'
+    POLYNOMIAL_DERIVATE = 'Polynomial_derivate'
+    POLYNOMIAL_AT_VALUE = 'Polynomial_at_value'
 
 # Functions
 class Function:
@@ -49,7 +57,6 @@ def import_function_or_class_from_file(file_path, identifier_name):
     
     if hasattr(module, identifier_name):
         imported_class = getattr(module, identifier_name)
-        print(f"Class '{identifier_name}' successfully imported: {imported_class}")
         return imported_class, 200
     else:
         return (f"The function or class '{identifier_name}' does not exist in the uploaded file."), 500

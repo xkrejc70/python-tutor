@@ -4,5 +4,4 @@ WORKDIR /app
 COPY . .
 RUN pip install -r requirements.txt
 
-#EXPOSE 6000
-CMD gunicorn --bind 0.0.0.0:6000 app:app
+CMD gunicorn --bind 0.0.0.0:5050 app:app

@@ -36,7 +36,7 @@ function ExpandableContainer({ title, children, defaultOpen = false, useSyntaxHi
             {isExpanded && (
                 <div className="container-content">
                 {useSyntaxHighlighting ? (
-                    <SyntaxHighlighter language="python" style={coy}>
+                    <SyntaxHighlighter language="python" style={coy} className="code-style">
                         {children}
                     </SyntaxHighlighter>
                 ) : (
