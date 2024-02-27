@@ -66,12 +66,12 @@ def upload():
 def return_home():
     return jsonify({"host": "Hostname: " + socket.gethostname()})
 
+@app.route('/api/projects', methods=['GET'])
+def get_items():
+    return load_settings()
 
 
 # todo: secure admin requests
-@app.route('/api/admin/projects', methods=['GET'])
-def get_items():
-    return load_settings()
 
 @app.route('/api/admin/save', methods=['POST'])
 def save_projects():

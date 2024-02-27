@@ -55,10 +55,6 @@ function Proj4() {
         );
     };
 
-    /*
-    try block around detecking
-    */
-
     return (
         <div>
             <Sidebar onCollapsedChange={onSidebarCollapsedChange} />

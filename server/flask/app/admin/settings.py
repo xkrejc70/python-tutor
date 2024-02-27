@@ -3,11 +3,12 @@ from flask import jsonify
 import json
 import os
 
-CONFIG_FILE = 'settings.json'
+CONFIG_FILE = 'admin_settings.json'
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 file_p = os.path.join(script_dir, CONFIG_FILE)
 
+# Read configuration data from the JSON file
 def read_config():
     try:
         with open(file_p, 'r') as file:
@@ -16,13 +17,16 @@ def read_config():
         config_data = []
     return config_data
 
+# Write configuration data to the JSON file
 def write_config(config_data):
     with open(file_p, 'w') as file:
         json.dump(config_data, file, indent=2)
 
+# Load and return current settings
 def load_settings():
     return jsonify(read_config())
 
+# Receive and save updated settings
 def save_settings(request):
     try:
         # Receive data from the request in the desired format

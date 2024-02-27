@@ -6,7 +6,7 @@ from app.tests.test_project4 import test_project4
 from app.tests.test_project6 import test_project6
 from app.tests.test_project8 import test_project8
 
-def not_found():
+def not_found(file_path, tests):
     return "test function not found"
 
 def run_tests_for_project(file_path, project, tests):

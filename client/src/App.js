@@ -2,13 +2,13 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PrivateRoute from 'PrivateRoute';
 // pages
-import Upload from "pages/Upload";
-import Admin from "pages/Admin";
-import Login from "pages/Login";
-import Proj8 from "pages/Proj8";
-import Proj4 from "pages/Proj4";
-import NoPage from "pages/NoPage";
-import Evaluation from "pages/Evaluation";
+import Upload from "pages/upload/Upload";
+import Admin from "pages/admin/Admin";
+import Login from "pages/login/Login";
+import Proj8 from "pages/exercise/Proj8";
+import Proj4 from "pages/exercise/Proj4";
+import NoPage from "pages/page404/NoPage";
+import Evaluation from "pages/evaluation/Evaluation";
 
 function App() {
 	return (

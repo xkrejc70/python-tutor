@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+// Upload.js
+import React, { useState, useEffect } from 'react';
 import Sidebar from "components/Sidebar";
 import { useNavigate } from 'react-router-dom';
+import { handleFileUpload, fetchProjectsFromServer } from './uploadUtils';
 import "assets/global.css";
 
 function Upload() {
@@ -9,7 +10,8 @@ function Upload() {
 
     const [selectedFile, setSelectedFile] = useState(null);
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-    const [selectedProject, setSelectedProject] = useState('proj1');
+    const [projects, setProjects] = useState([]);
+    const [selectedProject, setSelectedProject] = useState('');
     const [status, setStatus] = useState('');
 
     const onSidebarCollapsedChange = (collapsed) => {
@@ -25,35 +27,13 @@ function Upload() {
     };
 
     const onFileUpload = () => {
-        if (selectedFile && selectedProject) {
-            const formData = new FormData();
-            formData.append('file', selectedFile);
-            formData.append('project', selectedProject);
-
-            const config = {
-                headers: { 'content-type': 'multipart/form-data' }
-            }
-
-            axios.post("http://localhost:5005/api/upload", formData, config)
-                .then(response => {
-                    if (response.status === 200) {
-                        setStatus('File uploaded successfully!');
-                        navigate("/evaluation", { state: { test: response.data } });
-                    } else {
-                        setStatus(`Error: ${response.data}`);
-                    }
-                })
-                .catch(error => {
-                    if (error.response) {
-                        setStatus(`Error: ${error.response.data.error}`);
-                    } else {
-                        setStatus(`Error: ${error.response.data}`);
-                    }
-                });
-        } else {
-            setStatus(`Please select a file to upload.`);
-        }
+        handleFileUpload(selectedFile, selectedProject, setStatus, navigate);
     };
+
+    // Load projects from server settings
+    useEffect(() => {
+        fetchProjectsFromServer(setProjects, setSelectedProject);
+    }, []);
 
     return (
         <div>
@@ -68,10 +48,9 @@ function Upload() {
                     <div className="upload-form">
                         <input type="file" onChange={onFileChange} />
                         <select value={selectedProject} onChange={handleProjectChange}>
-                            <option value="proj1">Project 1</option>
-                            <option value="proj4">Project 4</option>
-                            <option value="proj6">Project 6</option>
-                            <option value="proj8">Project 8</option>
+                            {projects.map(project => (
+                                <option key={project.id} value={'proj' + project.id.toString()}>{project.name}</option>
+                            ))}
                         </select>
                         <button onClick={onFileUpload}>Upload</button>
                     </div>

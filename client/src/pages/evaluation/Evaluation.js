@@ -1,62 +1,14 @@
-import React, { useState } from 'react';
+// Evaluation.js
+import React from 'react';
 import Sidebar from "components/Sidebar";
 import { useLocation } from 'react-router-dom';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { coy } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import "assets/global.css";
+import { ExpandableContainer } from './evaluationUtils';
 
-/**
- * ExpandableContainer Component
- * @param {Object} props - React component properties.
- * @param {string} props.title - The title of the expandable container.
- * @param {ReactNode} props.children - The content to be displayed within the container.
- * @param {boolean} [props.defaultOpen=false] - Determines whether the container is expanded by default.
- * @param {boolean} [props.useSyntaxHighlighting=false] - Determines whether to apply syntax highlighting (for Python code) to the container.
- * @returns {JSX.Element} - React JSX Element representing the ExpandableContainer.
- */
-function ExpandableContainer({ title, children, defaultOpen = false, useSyntaxHighlighting = false }) {
-    const [isExpanded, setIsExpanded] = useState(defaultOpen);
-
-    const toggleExpansion = () => {
-        setIsExpanded((prev) => !prev);
-
-        const containerContent = document.querySelector(".ps-sidebar-container");
-        if (containerContent) {
-            console.log(window.innerHeight);
-            containerContent.style.height = `${window.innerHeight + 100- containerContent.offsetTop}px`;
-        }
-        
-    };
-
-    return (
-        <div className={`expandable-container ${isExpanded ? 'expanded' : 'collapsed'}`}>
-            <div className="container-title" onClick={toggleExpansion}>
-                {title}
-            </div>
-            {isExpanded && (
-                <div className="container-content">
-                {useSyntaxHighlighting ? (
-                    <SyntaxHighlighter language="python" style={coy} className="code-style">
-                        {children}
-                    </SyntaxHighlighter>
-                ) : (
-                    <pre>{children}</pre>
-                )}
-            </div>
-            )}
-        </div>
-    );
-}
-
-/**
- * Evaluation Component
- * @returns {JSX.Element} - React JSX Element representing the Evaluation component.
- */
 function Evaluation() {
     let location = useLocation();
-    // rename
     const uploadData = location.state;
-    const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+    const [sidebarCollapsed, setSidebarCollapsed] = React.useState(false);
 
     const handleSidebarCollapsedChange = (collapsed) => {
         setSidebarCollapsed(collapsed);
