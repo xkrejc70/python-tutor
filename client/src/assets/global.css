@@ -64,8 +64,12 @@ p, li {
 .status {
     margin-top: 10px;
     margin-bottom: 10px;
-    font-size: 14px;
-    color: #dc3545;
+    font-size: medium;
+    color: #d9534f;
+}
+
+.status-success {
+    color: #00a859;
 }
 
 .upload-container {
@@ -174,7 +178,7 @@ pre {
 .bordered {
     border: 1px solid #ccc;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 4px;
 }
 
 .code-style {
@@ -211,7 +215,6 @@ h1 {
     max-width: 1000px;
     margin: 30px auto;
     padding: 20px;
-    border: 1px solid #272222;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -362,8 +365,8 @@ label {
 
 .input-field:focus {
     outline: none;
-    border-color: #4caf50;
-    box-shadow: 0 0 8px rgba(76, 175, 80, 0.4);
+    border-color: #64b3f5;
+    box-shadow: 0 0 8px #2f8ad4;
 }
 
 .login-button {
