@@ -34,7 +34,7 @@ function Quiz({ updateCode, quiz }) {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
     } else {
-      console.log('Quiz completed!');
+      //Quiz completed
     }
   };
 

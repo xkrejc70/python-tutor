@@ -21,13 +21,10 @@ export const handleLoginRequest = (username, password, setStatus, login, navigat
         .catch(error => {
             if (error.response) {
                 setStatus(`Error: ${error.response.data.error}`);
-                console.error('Response error:', error.response.status, error.response.data);
             } else if (error.request) {
                 setStatus('Error: No response received from the server');
-                console.error('No response received:', error.request);
             } else {
                 setStatus(`Error: ${error.message}`);
-                console.error('Error:', error.message);
             }
         });
 };

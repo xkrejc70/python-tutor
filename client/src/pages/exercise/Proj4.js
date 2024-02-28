@@ -14,11 +14,11 @@ function Proj4() {
     };
 
     const handleNext = () => {
-        console.log("");
+        //TODO
     };
-
+    
     const handlePrevious = () => {
-        console.log("");
+        //TODO
     };
 
     const updateCode = (index) => {

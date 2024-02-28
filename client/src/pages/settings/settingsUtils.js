@@ -14,7 +14,6 @@ export const fetchDataFromAPI = (setData, setSelectedItems, setStatus) => {
             setSelectedItems(initiallyCheckedItems);
         })
         .catch(error => {
-            console.error('Error fetching data:', error);
             setStatus('Error fetching data');
         });
 };
@@ -52,8 +51,10 @@ export const handleSaveData = (selectedItems, setStatus) => {
         .catch(error => {
             if (error.response) {
                 setStatus(`Error: ${error.response.data.error}`);
+            } else if (error.request) {
+                setStatus('Error: No response received from the server');
             } else {
-                setStatus(`Error: ${error.response.data}`);
+                setStatus(`Error: ${error.message}`);
             }
         });
 };

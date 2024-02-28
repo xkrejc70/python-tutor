@@ -11,7 +11,6 @@ export const ExpandableContainer = ({ title, children, defaultOpen = false, useS
 
         const containerContent = document.querySelector(".ps-sidebar-container");
         if (containerContent) {
-            console.log(window.innerHeight);
             containerContent.style.height = `${window.innerHeight + 100- containerContent.offsetTop}px`;
         }
     };
