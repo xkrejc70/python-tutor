@@ -1,11 +1,10 @@
-// Admin.js
 import React, { useState, useEffect } from 'react';
 import Sidebar from "components/Sidebar";
 import StatusMessage from "components/StatusMessage";
-import { fetchDataFromAPI, handleCheckboxChange, handleSaveData } from './adminUtils';
+import { fetchDataFromAPI, handleCheckboxChange, handleSaveData } from './settingsUtils';
 import "assets/global.css";
 
-function Admin() {
+function Settings() {
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
     const [items, setItems] = useState([]);
     const [selectedItems, setSelectedItems] = useState([]);
@@ -30,17 +29,18 @@ function Admin() {
     return (
         <div>
             <Sidebar onCollapsedChange={onSidebarCollapsedChange} />
-            <div className={"main-layout"} style={{ marginLeft: sidebarCollapsed ? "80px" : "250px" }}>
-                <h1>Project Submission</h1>
+            <div className="main-layout" style={{ marginLeft: sidebarCollapsed ? "80px" : "250px" }}>
+                <h1>Settings</h1>
                 <br />
                 <div className="upload-container">
-                    <h3 className='h3-center'>Upload your project</h3>
+                    <h3 className="h3-center">Select which projects can be evaluated</h3>
                     <br />
-                    <ul>
+                    <ul className="checkbox-menu">
                         {items.map(item => (
                             <li key={item.id}>
-                                <label>
+                                <label className="checkbox-label">
                                     <input
+                                        className="checkbox-input"
                                         type="checkbox"
                                         checked={item.checked}
                                         onChange={() => handleCheckboxChangeWrapper(item)}
@@ -50,12 +50,14 @@ function Admin() {
                             </li>
                         ))}
                     </ul>
-                    <button onClick={handleSave}>Save</button>
-                    <StatusMessage status={status} />
+                    <div className='save-button'>
+                        <button onClick={handleSave}>Save changes</button>
+                        <StatusMessage status={status} className="status-message" />
+                    </div>
                 </div>
             </div>
         </div>
     );
 }
 
-export default Admin;
+export default Settings;

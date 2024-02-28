@@ -1,4 +1,3 @@
-// Login.js
 import React, { useState } from 'react';
 import Sidebar from "components/Sidebar";
 import StatusMessage from "components/StatusMessage";
@@ -28,31 +27,33 @@ function Login() {
         <div>
             <Sidebar onCollapsedChange={onSidebarCollapsedChange} />
             <div className={"main-layout"} style={{ marginLeft: sidebarCollapsed ? "80px" : "250px" }}>
-                <h1>Project Submission</h1>
+                <h1>Login</h1>
                 <br />
                 <div className="upload-container">
-                    <h2>Login</h2>
-                    <div>
-                        <label>Username:</label>
-                        <input
-                            type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                        />
+
+                    <label>Username:</label>
+                    <input
+                        type="text"
+                        class="input-field"
+                        id="username"
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+
+                    <label>Password:</label>
+                    <input
+                        type="password"
+                        class="input-field"
+                        id="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+
+                    <div className='save-button'>
+                        <button className='login-button' onClick={handleLogin}>Login</button>
+                        <StatusMessage status={status} />
                     </div>
-                    <div>
-                        <label>Password:</label>
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </div>
-                    <button onClick={handleLogin}>Login</button>
-                    <StatusMessage status={status} />
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

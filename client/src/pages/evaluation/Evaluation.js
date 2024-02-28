@@ -1,4 +1,3 @@
-// Evaluation.js
 import React from 'react';
 import Sidebar from "components/Sidebar";
 import { useLocation } from 'react-router-dom';

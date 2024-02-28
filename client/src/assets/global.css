@@ -103,6 +103,7 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-size: medium;
 }
 
 button:hover {
@@ -197,6 +198,10 @@ h1 {
     text-align: center;
 }
 
+.h2-center {
+    text-align: center;
+}
+
 .practice-task {
     margin-bottom: 25px;
 }
@@ -206,7 +211,7 @@ h1 {
     max-width: 1000px;
     margin: 30px auto;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #272222;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -297,7 +302,7 @@ h1 {
     max-height: 70px; /* Set a maximum height for the image */
 }
 
-/* Admin */
+/* Settings */
 
 .project-settings-container {
     display: flex;
@@ -312,4 +317,57 @@ h1 {
 
 .settings-form {
     text-align: center;
+}
+
+.checkbox-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.checkbox-menu li {
+    margin-bottom: 10px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.checkbox-input {
+    margin-right: 8px;
+    accent-color: #000;
+    width: 20px;
+    height: 20px;
+}
+
+.save-button {
+    text-align: center;
+}
+
+/* Login */
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: #4caf50;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.4);
+}
+
+.login-button {
+    margin-top: 10px;
+    width: 100%;
+    font-size: medium;
 }

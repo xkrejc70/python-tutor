@@ -1,4 +1,3 @@
-// loginUtils.js
 import axios from 'axios';
 
 export const handleLoginRequest = (username, password, setStatus, login, navigate) => {
@@ -14,7 +13,7 @@ export const handleLoginRequest = (username, password, setStatus, login, navigat
             if (response.status === 200) {
                 setStatus('Logged in successfully!');
                 login();
-                navigate("/admin");
+                navigate("/settings");
             } else {
                 setStatus(`Error: ${response.data}`);
             }

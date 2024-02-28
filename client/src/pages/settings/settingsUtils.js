@@ -1,4 +1,3 @@
-// adminUtils.js
 import axios from 'axios';
 
 export const fetchDataFromAPI = (setData, setSelectedItems, setStatus) => {

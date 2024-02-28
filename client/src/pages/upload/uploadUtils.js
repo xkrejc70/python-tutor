@@ -1,4 +1,3 @@
-// uploadUtils.js
 import axios from 'axios';
 
 export const handleFileUpload = (selectedFile, selectedProject, setStatus, navigate) => {

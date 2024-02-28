@@ -1,27 +1,31 @@
-// Move styles to index.css
 import React, { useState } from 'react';
 import { Sidebar, SubMenu, Menu, MenuItem } from 'react-pro-sidebar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from 'AuthContext';
 // icons
-import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi';
+import { FiChevronsLeft, FiChevronsRight, FiLogIn, FiLogOut } from 'react-icons/fi';
 import { FaCode, FaUpload, FaChalkboardTeacher } from 'react-icons/fa';
+import { IoSettingsSharp } from "react-icons/io5";
 import { MdOutlineMailOutline } from "react-icons/md";
-import { RiAdminLine } from "react-icons/ri";
 import { TbLetterS } from "react-icons/tb";
 
 import 'assets/global.css';
 
-function Sidebars({ onCollapsedChange }) {
-
+function LeftSidebar({ onCollapsedChange }) {
+  const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
   const [toggled, setToggled] = useState(false);
+  
+  const { isLoggedIn, logout } = useAuth();
 
-  const { isLoggedIn } = useAuth();
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+};
 
   const handleCollapsedChange = () => {
     setCollapsed(!collapsed);
-    onCollapsedChange(!collapsed); // Notify the parent component about the state change
+    onCollapsedChange(!collapsed);
   };
   const handleToggleSidebar = (value) => {
     setToggled(value);
@@ -58,11 +62,10 @@ function Sidebars({ onCollapsedChange }) {
           </Menu>
 
           <Menu>
-            {/* Warning cuz of double <a> can use NavLink, but it breaks submenu */}
             <MenuItem icon={<FaUpload />} component={<Link to="/upload" />}>Upload project</MenuItem>
             <SubMenu defaultOpen label={"Practice"} icon={<FaChalkboardTeacher />}>
               <MenuItem icon={<FaCode />} component={<Link to="/#" />}>Regex</MenuItem>
-              <MenuItem icon={<TbLetterS />} component={<Link to="/Proj4" />} >Scrabble</MenuItem>
+              <MenuItem icon={<TbLetterS />} component={<Link to="/proj4" />} >Scrabble</MenuItem>
               <MenuItem icon={<MdOutlineMailOutline />} component={<Link to="/proj8" />} >Email Queue</MenuItem>
             </SubMenu>
           </Menu>
@@ -71,17 +74,11 @@ function Sidebars({ onCollapsedChange }) {
             <Menu>
               {isLoggedIn ? (
                 <>
-                  <MenuItem icon={<RiAdminLine />} component={<Link to="/admin" />}>
-                    Admin
-                  </MenuItem>
-                  <MenuItem icon={<RiAdminLine />} /*onClick={logout}*/>
-                    Logout
-                  </MenuItem>
+                  <MenuItem icon={<IoSettingsSharp />} component={<Link to="/settings" />}>Settings</MenuItem>
+                  <MenuItem icon={<FiLogOut />} onClick={handleLogout}>Logout</MenuItem>
                 </>
               ) : (
-                <MenuItem icon={<RiAdminLine />} component={<Link to="/login" />}>
-                  Login
-                </MenuItem>
+                <MenuItem icon={<FiLogIn />} component={<Link to="/login" />}>Login</MenuItem>
               )}
             </Menu>
           </div>
@@ -90,4 +87,4 @@ function Sidebars({ onCollapsedChange }) {
     </div>
   );
 }
-export default Sidebars;
+export default LeftSidebar;

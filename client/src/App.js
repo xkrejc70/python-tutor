@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PrivateRoute from 'PrivateRoute';
 // pages
 import Upload from "pages/upload/Upload";
-import Admin from "pages/admin/Admin";
+import Settings from "pages/settings/Settings";
 import Login from "pages/login/Login";
 import Proj8 from "pages/exercise/Proj8";
 import Proj4 from "pages/exercise/Proj4";
@@ -15,9 +15,9 @@ function App() {
 		<BrowserRouter>
 			<Routes>
 				<Route index element={<Upload />}></Route>
-				<Route path="/admin" element={
+				<Route path="/settings" element={
 					<PrivateRoute>
-						<Admin />
+						<Settings />
 					</PrivateRoute>} />
 				<Route path="/login" element={<Login />}></Route>
 				<Route path="/upload" element={<Upload />}></Route>
