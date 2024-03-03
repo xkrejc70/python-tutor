@@ -1,4 +1,5 @@
 import axios from 'axios';
+import api from 'ServerConfig'
 
 export const handleLoginRequest = (username, password, setStatus, login, navigate) => {
     // Prepare the data to be sent to the server
@@ -8,7 +9,7 @@ export const handleLoginRequest = (username, password, setStatus, login, navigat
     };
 
     // Send login request to the server
-    axios.post('http://localhost:5005/api/admin/login', data)
+    axios.post(api.LOGIN, data)
         .then(response => {
             if (response.status === 200) {
                 setStatus('Logged in successfully!');

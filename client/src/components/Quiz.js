@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import 'assets/global.css';
+import api from 'ServerConfig'
 
 function Quiz({ updateCode, quiz }) {
   const [questions, setQuestions] = useState([]);
@@ -10,7 +11,7 @@ function Quiz({ updateCode, quiz }) {
 
   useEffect(() => {
     // Fetch questions from the API when the component mounts
-    fetch('http://localhost:5005/api/questions/' + quiz)
+    fetch(api.GET_QUESTIONS + "/" + quiz)
       .then(response => response.json())
       .then(data => setQuestions(data))
       .catch(error => console.error('Error fetching questions:', error));

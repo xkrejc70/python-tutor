@@ -1,7 +1,8 @@
 import axios from 'axios';
+import api from 'ServerConfig'
 
 export const fetchDataFromAPI = (setData, setSelectedItems, setStatus) => {
-    fetch('http://localhost:5005/api/projects')
+    fetch(api.GET_PROJECTS)
         .then(response => response.json())
         .then(data => {
             const updatedItems = data.map(item => ({
@@ -40,7 +41,7 @@ export const handleSaveData = (selectedItems, setStatus) => {
         name: item.name,
     }));
 
-    axios.post('http://localhost:5005/api/admin/save', dataToSend)
+    axios.post(api.SAVE_SETTINGS, dataToSend)
         .then(response => {
             if (response.status === 200) {
                 setStatus('Settings saved');

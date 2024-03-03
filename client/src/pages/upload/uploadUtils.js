@@ -1,4 +1,5 @@
 import axios from 'axios';
+import api from 'ServerConfig'
 
 export const handleFileUpload = (selectedFile, selectedProject, setStatus, navigate) => {
     if (selectedFile && selectedProject) {
@@ -10,7 +11,7 @@ export const handleFileUpload = (selectedFile, selectedProject, setStatus, navig
             headers: { 'content-type': 'multipart/form-data' }
         }
 
-        axios.post("http://localhost:5005/api/upload", formData, config)
+        axios.post(api.UPLOAD_PROJECT, formData, config)
             .then(response => {
                 if (response.status === 200) {
                     setStatus('File uploaded successfully!');
@@ -33,7 +34,7 @@ export const handleFileUpload = (selectedFile, selectedProject, setStatus, navig
 
 export const fetchProjectsFromServer = (setProjects, setSelectedProject) => {
     // Fetch projects from Flask API
-    axios.get("http://localhost:5005/api/projects")
+    axios.get(api.GET_PROJECTS)
         .then(response => {
             const checkedProjects = response.data.filter(project => project.checked === true);
             setProjects(checkedProjects);

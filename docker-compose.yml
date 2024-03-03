@@ -34,7 +34,7 @@ services:
     depends_on:
      - flask-app
     ports:
-     - "3000:3000"
+     - "8501:3000"
     image: react-app-image
     container_name: react-client-container
     network_mode: host
