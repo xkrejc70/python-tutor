@@ -1,8 +1,8 @@
 proj8:
   - url: /proj8
     text: Exercise with a quiz on a similar topic
-  - url: https://www.w3schools.com/python/python_sets.asp
-    text: Example where you can practice smth
 proj4:
   - url: /proj4
     text: Exercise with a quiz on a similar topic
+  - url: https://docs.python.org/3/howto/sorting.html
+    text: Sorting Techniques (Python 3 documentation)
