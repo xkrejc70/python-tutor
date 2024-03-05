@@ -1,8 +1,20 @@
-proj8:
-  - url: /proj8
-    text: Exercise with a quiz on a similar topic
 proj4:
-  - url: /proj4
-    text: Exercise with a quiz on a similar topic
-  - url: https://docs.python.org/3/howto/sorting.html
-    text: Sorting Techniques (Python 3 documentation)
+  practice:
+    - url: /proj4
+      text: Scrabble (Exercise with a quiz on a similar topic)
+  external:
+    - url: https://docs.python.org/3/howto/sorting.html
+      text: Sorting Techniques (Python 3 documentation)
+    - url: https://realpython.com/python-sets/
+      text: Set Operations in Python
+proj6:
+  external:
+    - url: https://www.pythonlikeyoumeanit.com/Module4_OOP/Special_Methods.html
+      text: Special Methods in Python 
+proj8:
+  practice:
+    - url: /proj8
+      text: Email Queue (Exercise with a quiz on a similar topic)
+  external:
+    - url: https://realpython.com/introduction-to-python-generators/
+      text: How to Use Generators and yield in Python

@@ -12,7 +12,7 @@ def test_project8(file_path, test_data):
     num_tests = 0
     comment = []
     model_response = []
-    tips = []
+    project = 'proj8'
 
     # ============= Test first_with_given_key =============
     p8_first_with_given_key = import_function_or_class_from_file(file_path, Function.FIRST_WITH_GIVEN_KEY)
@@ -45,7 +45,7 @@ def test_project8(file_path, test_data):
     if len(function_string) > 1000:
         model_response.append("[ERROR]: Over limit")
     else:
-        url = Model.URL + '/proj8'
+        url = Model.URL + '/' + project
         data = {'input_string': function_string}
 
 
@@ -57,13 +57,16 @@ def test_project8(file_path, test_data):
         comment.append("Success: All tests passed without errors.")
 
     # Tips
-    tips = load_tips_from_yaml('proj8')
+    practice_tips = load_tips_from_yaml(project, "practice")
+    external_tips = load_tips_from_yaml(project, "external")
 
+    # ============= Final evaluation =============
     evaluation = {
         "comment": list(set(comment)),
         "model_response": model_response,
         "num_tests": num_tests,
-        "tips": tips,
+        "practice_tips": practice_tips,
+        "external_tips": external_tips,
         "passed": passed
     }
     

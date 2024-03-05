@@ -1,5 +1,5 @@
 scrabble:
-  - question: 'For optimal efficiency in a Scrabble helper function, which code line should be used?'
+  - question: 'For optimal efficiency, which code line should replace 1st blank line?'
     options:
       - 'set(''.join(perm) for word in words for perm in perms if word == perm)'
       - 'set(words).intersection(perms)'
@@ -11,7 +11,7 @@ scrabble:
       - 'Set intersection operation (&) is the most Pythonic and efficient way to find the common elements between two sets in this context.'
       - 'The provided solution inefficiently uses dictionary comprehension and membership tests for each permutation, resulting in a time complexity of O(n^2)'
       - 'This solution uses the filter function with a lambda function. It is less readable than set operations and less efficient for this specific problem.'
-  - question: 'For optimal efficiency in sorting valid words by their total point value in a Scrabble helper function, which code line should be used?'
+  - question: 'For optimal efficiency in sorting valid words by their total point value, which code line should replace 2nd blank line?'
     options:
       - 'max(list)'
       - 'dict.fromkeys()'
@@ -21,7 +21,7 @@ scrabble:
     explanations:
       - "`max` returns the maximum element, but it doesn't handle sorting of the entire list, making it less suitable for this specific problem."
       - "`dict.fromkeys` is also not recommended for sorting, as it focuses on uniqueness and lacks the specific functionality needed for efficient Scrabble word sorting."
-      - "Using the `sort` method directly on the list is less efficient for this specific problem compared to the built-in function."
+      - "Using the `sort` method directly on the list is less efficient compared to the built-in function."
       - 'Built-in function `sorted` should run measurably faster as it is written in C.'
 proj8:
   - question: 'What data structure should be used to store unique categories efficiently?'

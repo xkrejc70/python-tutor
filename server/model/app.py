@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 
 """
-"""
+
 @app.route('/proj8', methods=['POST'])
 def proj8():
     # Get the input string from the request
@@ -114,7 +114,7 @@ def proj8():
     return jsonify(result)
 
 """
-
+"""
 
 
 if __name__ == '__main__':

@@ -21,7 +21,14 @@ hr {
     bottom: 0;
 }
 
-p, li {
+.icon-wrapper {
+    display: inline-block;
+    padding: 15px;
+    cursor: pointer;
+}
+
+p,
+li {
     font-family: "Montserrat", sans-serif !important;
 }
 
@@ -120,6 +127,11 @@ button:hover {
     transition: margin-left 0.3s ease-in-out;
 }
 
+.tips-title {
+    padding-bottom: 7px;
+    padding-top: 7px;
+}
+
 .expandable-container {
     border: 1px solid #ccc;
     margin-bottom: 10px;
@@ -156,6 +168,7 @@ pre {
 .tips-list {
     list-style: none;
     padding: 0;
+    padding-left: 20px;
 }
 
 .tip-item {
@@ -299,10 +312,14 @@ h1 {
 
 .task-image {
     display: block;
-    margin: 0 auto; /* Center the image */
-    max-width: 100%; /* Make the image responsive */
-    height: 10%; /* Maintain the aspect ratio */
-    max-height: 70px; /* Set a maximum height for the image */
+    margin: 0 auto;
+    /* Center the image */
+    max-width: 100%;
+    /* Make the image responsive */
+    height: 10%;
+    /* Maintain the aspect ratio */
+    max-height: 70px;
+    /* Set a maximum height for the image */
 }
 
 /* Settings */

@@ -9,6 +9,7 @@ def test_project4(file_path, test_data):
     num_tests = 0
     comment = []
     model_response = []
+    project = "proj4"
 
     # ============= Test match_permutations_substrings =============
     p4_match_permutations_substrings = import_function_or_class_from_file(file_path, Function.MATCH_PERMUTATIONS_SUBSTRINGS)
@@ -40,7 +41,7 @@ def test_project4(file_path, test_data):
     if len(function_string) > 3000:
         model_response.append("[ERROR]: Over limit")
     else:
-        url = 'http://localhost:5050/proj4'
+        url = 'http://localhost:5050/' + project
         data = {'input_string': function_string}
 
         response = requests.post(url, json=data)
@@ -75,7 +76,7 @@ def test_project4(file_path, test_data):
     if len(function_string) > 3000:
         model_response.append("[ERROR]: Over limit")
     else:
-        url = 'http://localhost:5050/proj4'
+        url = 'http://localhost:5050/' + project
         data = {'input_string': function_string}
 
         response = requests.post(url, json=data)
@@ -110,7 +111,7 @@ def test_project4(file_path, test_data):
     if len(function_string) > 3000:
         model_response.append("[ERROR]: Over limit")
     else:
-        url = 'http://localhost:5050/proj4'
+        url = 'http://localhost:5050/' + project
         data = {'input_string': function_string}
 
         response = requests.post(url, json=data)
@@ -121,14 +122,16 @@ def test_project4(file_path, test_data):
         comment.append("Success: All tests passed without errors.")
 
     # Tips
-    tips = load_tips_from_yaml('proj4')
+    practice_tips = load_tips_from_yaml(project, "practice")
+    external_tips = load_tips_from_yaml(project, "external")
 
     # ============= Final evaluation =============
     evaluation = {
         "comment": list(set(comment)),
         "model_response": model_response,
         "num_tests": num_tests,
-        "tips": tips,
+        "practice_tips": practice_tips,
+        "external_tips": external_tips,
         "passed": passed
     }
     

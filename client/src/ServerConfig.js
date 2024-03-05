@@ -1,4 +1,6 @@
-const API_BASE_URL = 'http://localhost:5005';
+const LOCALHOST = 'http://localhost:8084';
+const PRODUCTION_API_BASE_URL = 'http://147.229.8.129:8084';
+const API_BASE_URL = PRODUCTION_API_BASE_URL;
 const API_VERSION = '';
 
 //TODO: add api version

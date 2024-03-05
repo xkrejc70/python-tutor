@@ -35,11 +35,9 @@ function Proj4() {
     const code = `def scrabble_helper(letters, words):
     """
     Efficiently identifies and sorts valid Scrabble words based on their total point value.
-
     Parameters:
     - letters (str): A string representing the available letters.
     - words (list): A list of words to check for validity.
-
     Returns:
     - set: A sorted list of valid words based on their total point value in Scrabble.
     """

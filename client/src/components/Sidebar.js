@@ -15,17 +15,20 @@ function LeftSidebar({ onCollapsedChange }) {
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
   const [toggled, setToggled] = useState(false);
-  
+
   const { isLoggedIn, logout } = useAuth();
 
   const handleLogout = () => {
     logout();
     navigate("/login");
-};
+  };
 
   const handleCollapsedChange = () => {
     setCollapsed(!collapsed);
     onCollapsedChange(!collapsed);
+  };
+  const handleHomeClick = () => {
+    navigate("/upload");
   };
   const handleToggleSidebar = (value) => {
     setToggled(value);
@@ -51,11 +54,13 @@ function LeftSidebar({ onCollapsedChange }) {
               ></MenuItem>
             ) : (
               <MenuItem
-                suffix={<FiChevronsLeft />}
-                onClick={handleCollapsedChange}
+                suffix={
+                  <div className="icon-wrapper" onClick={handleCollapsedChange}>
+                    <FiChevronsLeft />
+                  </div>}
                 className="menu-item"
               >
-                <div className="title">PYTHON TUTOR</div>
+                <div className="title" onClick={handleHomeClick} >PYTHON TUTOR</div>
               </MenuItem>
             )}
             <hr />

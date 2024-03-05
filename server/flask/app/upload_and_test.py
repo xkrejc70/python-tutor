@@ -21,7 +21,8 @@ def upload_and_test(request):
             response_data = {
                 "test_result": test_result,
                 "file_content": file_content,
-                "filename": filename
+                "filename": filename,
+                "project": project
             }
             return jsonify(response_data), 200
       

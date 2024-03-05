@@ -6,4 +6,4 @@ RUN pip install -r requirements.txt
 # ENV FLASK_ENV production
 
 # EXPOSE 5000
-CMD gunicorn --bind 0.0.0.0:5005 run:app
+CMD gunicorn --bind 0.0.0.0:8084 run:app

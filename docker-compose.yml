@@ -8,7 +8,7 @@ services:
       context: ./server/flask
       network: host
     ports:
-      - "5005"
+      - "8084"
     image: flask-app-image
     container_name: flask-server-container
     network_mode: host

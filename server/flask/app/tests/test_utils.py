@@ -84,16 +84,19 @@ def clean_function_string(func):
     # Remove empty lines
     function_string = re.sub(r'\n\s*\n', '\n', function_string)
 
+    # Remove the first line (function definition)
+    function_string = '\n'.join(function_string.split('\n')[1:])
+
     return function_string
 
-def load_tips_from_yaml(key):
+def load_tips_from_yaml(project, category):
     script_dir = os.path.dirname(os.path.abspath(__file__))
     file_p = os.path.join(script_dir, "tips/tips.yaml")
     with open(file_p, 'r') as file:
         tips_data = yaml.safe_load(file)
     
-    # Check if the key exists in the loaded data
-    if key in tips_data:
-        return tips_data[key]
-    else:
-        return None
+    # Check if the project and category exist in the loaded data
+    if project in tips_data and category in tips_data[project]:
+        return tips_data[project][category]
+    
+    return None

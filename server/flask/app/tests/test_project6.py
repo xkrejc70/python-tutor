@@ -8,7 +8,7 @@ def test_project6(file_path, test_data):
     num_tests = 0
     comment = []
     model_response = []
-    tips = []
+    project = 'proj6'
 
     def run_init_tests(test_type, parse_func):
         nonlocal num_tests
@@ -161,13 +161,16 @@ def test_project6(file_path, test_data):
         comment.append("Success: All tests passed without errors.")
 
     # Tips
-    tips = load_tips_from_yaml('proj6')
+    practice_tips = load_tips_from_yaml(project, "practice")
+    external_tips = load_tips_from_yaml(project, "external")
 
+    # ============= Final evaluation =============
     evaluation = {
         "comment": list(set(comment)),
         "model_response": model_response,
         "num_tests": num_tests,
-        "tips": tips,
+        "practice_tips": practice_tips,
+        "external_tips": external_tips,
         "passed": passed
     }
     
