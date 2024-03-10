@@ -1,1 +1,50 @@
-[{"checked": false, "id": 1, "info": "", "name": "Project 1"}, {"checked": false, "id": 2, "info": "", "name": "Project 2"}, {"checked": false, "id": 3, "info": "", "name": "Project 3"}, {"checked": true, "id": 4, "info": "", "name": "Project 4"}, {"checked": false, "id": 5, "info": "", "name": "Project 5"}, {"checked": true, "id": 6, "info": "", "name": "Project 6"}, {"checked": false, "id": 7, "info": "", "name": "Project 7"}, {"checked": true, "id": 8, "info": "", "name": "Project 8"}]
+[
+  {
+    "checked": false,
+    "id": 1,
+    "info": "",
+    "name": "Project 1"
+  },
+  {
+    "checked": false,
+    "id": 2,
+    "info": "",
+    "name": "Project 2"
+  },
+  {
+    "checked": false,
+    "id": 3,
+    "info": "",
+    "name": "Project 3"
+  },
+  {
+    "checked": true,
+    "id": 4,
+    "info": "Set operations",
+    "name": "Project 4"
+  },
+  {
+    "checked": false,
+    "id": 5,
+    "info": "",
+    "name": "Project 5"
+  },
+  {
+    "checked": true,
+    "id": 6,
+    "info": "",
+    "name": "Project 6"
+  },
+  {
+    "checked": false,
+    "id": 7,
+    "info": "",
+    "name": "Project 7"
+  },
+  {
+    "checked": true,
+    "id": 8,
+    "info": "first_with_given_key",
+    "name": "Project 8"
+  }
+]

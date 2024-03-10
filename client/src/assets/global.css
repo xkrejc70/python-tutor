@@ -61,6 +61,9 @@ li {
     letter-spacing: 1px;
 }
 
+.menu-item-space {
+    padding-left: 30px;
+}
 
 /* pages */
 .main-layout {
@@ -324,6 +327,97 @@ h1 {
 
 /* Settings */
 
+.settings-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.delete-text {
+    color: red;
+    cursor: pointer;
+}
+
+.tests-text:hover::before {
+    content: "No tests found! ";
+}
+
+.tests-text {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.modify-test {
+    cursor: pointer;
+}
+
+@media (max-width: 400px) {
+    .tests-text {
+        display: none !important;
+    }
+}
+
+.tests-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tests-table th,
+.tests-table td {
+    border-bottom: 1px solid #ddd; /* Add a border-bottom style for both header and data cells */
+    padding: 8px; /* Adjust padding as needed */
+}
+
+.tests-table th {
+    text-align: left;
+}
+
+.align-l {
+    text-align: left;
+}
+
+.align-r {
+    text-align: right !important;
+}
+
+.checkbox-td {
+    max-width: 15px !important;
+}
+
+.modify-test,
+.delete-text {
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.modify-test:hover,
+.delete-text:hover {
+    color: #007bff; /* Change the color on hover as desired */
+}
+
+.tests-select {
+    margin-left: 10px;
+}
+
+.align-r {
+    text-align: right;
+    min-width: 70px;
+}
+
+.align-l {
+    text-align: left;
+}
+
+.item-opt {
+    display: 'flex';
+    align-items: 'center'
+}
+
 .project-settings-container {
     display: flex;
     align-items: center;
@@ -332,7 +426,7 @@ h1 {
 }
 
 .settings-container {
-    width: 50%;
+    width: 100%;
 }
 
 .settings-form {
@@ -345,7 +439,7 @@ h1 {
 }
 
 .checkbox-menu li {
-    margin-bottom: 10px;
+    margin-bottom: 2px;
 }
 
 .checkbox-label {

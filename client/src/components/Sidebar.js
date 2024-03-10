@@ -75,18 +75,18 @@ function LeftSidebar({ onCollapsedChange }) {
             </SubMenu>
           </Menu>
 
-          <div className="menu-bottom">
             <Menu>
+          <div className="menu-bottom">
               {isLoggedIn ? (
                 <>
-                  <MenuItem icon={<IoSettingsSharp />} component={<Link to="/settings" />}>Settings</MenuItem>
-                  <MenuItem icon={<FiLogOut />} onClick={handleLogout}>Logout</MenuItem>
+                  <MenuItem icon={<IoSettingsSharp />} component={<Link to="/settings" />}> &nbsp;&nbsp; Settings</MenuItem>
+                  <MenuItem icon={<FiLogOut />} onClick={handleLogout}> &nbsp;&nbsp; Logout</MenuItem>
                 </>
               ) : (
-                <MenuItem icon={<FiLogIn />} component={<Link to="/login" />}>Login</MenuItem>
+                <MenuItem icon={<FiLogIn />} component={<Link to="/login" />}>&nbsp;&nbsp; Login</MenuItem>
               )}
-            </Menu>
           </div>
+            </Menu>
         </main>
       </Sidebar>
     </div>

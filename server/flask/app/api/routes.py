@@ -1,9 +1,7 @@
 from app import app
 from flask import jsonify, request
-from app.uploads.upload_handler import upload_handler
 from app.upload_and_test import upload_and_test
-from app.upload_and_test import upload_and_test
-from app.admin.settings import load_settings, save_settings
+from app.admin.settings import load_settings, save_settings, add_project, delete_project, get_tests
 from app.admin.login import authenticate
 from app.questions.questions import get_questions
 import requests
@@ -71,12 +69,25 @@ def get_items():
     return load_settings()
 
 
+
 # todo: secure admin requests
 
+@app.route('/api/admin/test/get', methods=['GET'])
+def admin_test_get():
+    return get_tests()
+
 @app.route('/api/admin/save', methods=['POST'])
-def save_projects():
+def admin_save():
     return save_settings(request)
 
 @app.route('/api/admin/login', methods=['POST'])
-def login():
+def admin_login():
     return authenticate(request)
+
+@app.route('/api/admin/project/add', methods=['POST'])
+def admin_project_add():
+    return add_project(request)
+
+@app.route('/api/admin/project/delete', methods=['POST'])
+def admin_project_delete():
+    return delete_project(request)

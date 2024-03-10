@@ -19,6 +19,17 @@ export const fetchDataFromAPI = (setData, setSelectedItems, setStatus) => {
         });
 };
 
+export const getTests = (setTests, setStatus) => {
+    fetch(api.GET_TESTS)
+      .then(response => response.json())
+      .then(data => {
+        setTests(data);
+      })
+      .catch(error => {
+        setStatus('Error fetching data');
+      });
+  };
+
 export const handleCheckboxChange = (item, items, setItems, setSelectedItems) => {
     const updatedItems = items.map(i => {
         if (i.id === item.id) {
@@ -59,3 +70,64 @@ export const handleSaveData = (selectedItems, setStatus) => {
             }
         });
 };
+
+export const handleAddProjectRequest = (projectName, projectInfo, setStatusAddProject, setItems, setSelectedItems, setStatus, setProjectName, setProjectInfo) => {
+    if (projectName === "") {
+        setStatusAddProject('Project name is required');
+        return;
+    }
+
+    // Prepare the data to be sent to the server
+    const data = {
+        projectName: projectName,
+        projectInfo: projectInfo,
+    };
+
+    axios.post(api.ADD_PROJECT, data)
+        .then(response => {
+            if (response.status === 200) {
+                setStatus('New project added');
+                fetchDataFromAPI(setItems, setSelectedItems, setStatus);
+                setProjectName('');
+                setProjectInfo('');
+            } else {
+                setStatusAddProject(`Error: ${response.data}`);
+            }
+        })
+        .catch(error => {
+            if (error.response) {
+                setStatusAddProject(`Error: ${error.response.data.error}`);
+            } else if (error.request) {
+                setStatusAddProject('Error: No response received from the server');
+            } else {
+                setStatusAddProject(`Error: ${error.message}`);
+            }
+        });
+};
+
+export const handleDeleteProjectRequest = (item, setItems, setSelectedItems, setStatus) => {
+    // Prepare the data to be sent to the server
+    const data = {
+        id: item.id,
+    };
+
+    // Send login request to the server
+    axios.post(api.DELETE_PROJECT, data)
+        .then(response => {
+            if (response.status === 200) {
+                setStatus('Project deleted');
+                fetchDataFromAPI(setItems, setSelectedItems, setStatus);
+            } else {
+                setStatus(`Error: ${response.data}`);
+            }
+        })
+        .catch(error => {
+            if (error.response) {
+                setStatus(`Error: ${error.response.data.error}`);
+            } else if (error.request) {
+                setStatus('Error: No response received from the server');
+            } else {
+                setStatus(`Error: ${error.message}`);
+            }
+        });
+}

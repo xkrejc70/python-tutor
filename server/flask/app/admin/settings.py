@@ -1,12 +1,15 @@
 from app import app
 from flask import jsonify
 import json
+import yaml
 import os
 
 CONFIG_FILE = 'admin_settings.json'
+TESTS = './../tests/test_data.yaml'
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 file_p = os.path.join(script_dir, CONFIG_FILE)
+tests_p = os.path.join(script_dir, TESTS)
 
 # Read configuration data from the JSON file
 def read_config():
@@ -24,7 +27,20 @@ def write_config(config_data):
 
 # Load and return current settings
 def load_settings():
-    return jsonify(read_config())
+    config_data = read_config()
+
+    # Read tests data from tests.yaml using PyYAML
+    with open(tests_p, 'r') as tests_file:
+        tests_data = yaml.safe_load(tests_file)
+
+    # Add 'tests_exist' field to each project in config_data
+    for project in config_data:
+        project_id = project['id']
+        tests_key = f'proj{project_id}'
+        tests_exist = tests_key in tests_data
+        project['tests_exist'] = tests_exist
+
+    return jsonify(config_data)
 
 # Receive and save updated settings
 def save_settings(request):
@@ -59,3 +75,69 @@ def save_settings(request):
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+def add_project(request):
+    try:
+        data = request.json
+        projectName = data.get('projectName')
+        projectInfo = data.get('projectInfo')
+
+        # Read existing settings from the JSON file
+        with open(file_p, 'r') as json_file:
+            existing_settings = json.load(json_file)
+
+        # Find the maximum id in the existing settings
+        max_id = max(item['id'] for item in existing_settings) if existing_settings else 0
+
+        # Create a new project with the provided name and the next id
+        new_project = {
+            "id": max_id + 1,
+            "checked": False,
+            "info": projectInfo,
+            "name": projectName
+        }
+
+        # Add the new project to the existing settings
+        existing_settings.append(new_project)
+
+        # Save the updated settings to the JSON file
+        with open(file_p, 'w') as json_file:
+            json.dump(existing_settings, json_file, indent=2)
+
+        return jsonify({"message": "New project added successfully"})
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
+def delete_project(request):
+    try:
+        # Get the project ID from the request
+        project_id_to_delete = request.json.get('id')
+
+        # Read existing settings from the JSON file
+        with open(file_p, 'r') as json_file:
+            existing_settings = json.load(json_file)
+
+        # Check if the project with the given ID exists
+        project_to_delete = next((item for item in existing_settings if item['id'] == project_id_to_delete), None)
+
+        if not project_to_delete:
+            return jsonify({"error": "Project not found, check config file (admin_settings.json)"}), 404
+
+        # Remove the project from the existing settings
+        existing_settings.remove(project_to_delete)
+
+        # Save the updated settings to the JSON file
+        with open(file_p, 'w') as json_file:
+            json.dump(existing_settings, json_file, indent=2)
+
+        return jsonify({"message": "Project deleted successfully"})
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+def get_tests():
+    with open(tests_p, 'r') as tests_file:
+        tests_data = yaml.safe_load(tests_file)
+    return jsonify(tests_data)

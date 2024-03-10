@@ -21,6 +21,8 @@ def run_tests_for_project(file_path, project, tests):
         'proj8': test_project8
     }
 
+    # TODO: default value
+
     # Get test project function
     test_function = test_functions.get(project, not_found)
     return test_function(file_path, tests)
