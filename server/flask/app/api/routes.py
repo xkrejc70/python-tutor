@@ -1,7 +1,7 @@
 from app import app
 from flask import jsonify, request
 from app.upload_and_test import upload_and_test
-from app.admin.settings import load_settings, save_settings, add_project, delete_project, get_tests
+from app.admin.settings import load_settings, save_settings, add_project, delete_project, get_tests, update_tests
 from app.admin.login import authenticate
 from app.questions.questions import get_questions
 import requests
@@ -75,6 +75,10 @@ def get_items():
 @app.route('/api/admin/test/get', methods=['GET'])
 def admin_test_get():
     return get_tests()
+
+@app.route('/api/admin/test/update', methods=['POST'])
+def admin_test_update():
+    return update_tests(request)
 
 @app.route('/api/admin/save', methods=['POST'])
 def admin_save():

@@ -40,12 +40,17 @@ function Settings() {
         handleSaveData(selectedItems, setStatus);
     };
 
-    const handleDelete = (item) => {
+    const handleDeleteProject = (item) => {
         handleDeleteProjectRequest(item, setItems, setSelectedItems, setStatus);
+        // Update tests state after deleting project
+        if (Array.isArray(tests)) {
+            const updatedTests = tests.filter(test => test.projectId !== item.id);
+            setTests(updatedTests);
+        }
     }
 
     const handleAddProject = () => {
-        handleAddProjectRequest(projectName, projectInfo, setStatusAddProject, setItems, setSelectedItems, setStatus, setProjectName, setProjectInfo);
+        handleAddProjectRequest(projectName, projectInfo, setStatusAddProject, setItems, setSelectedItems, setStatus, setProjectName, setProjectInfo, setTests, setStatusTests);
     };
 
     const handleTestsChange = (updatedTests) => {
@@ -85,11 +90,21 @@ function Settings() {
                                     <td>{item.name}</td>
                                     <td>{item.info}</td>
                                     <td className='align-r'>
-                                        <span className="modify-test" >{!item.tests_exist &&
-                                            <span className="tests-text" ><RiErrorWarningFill size={23} /></span>
-                                        }</span>
-                                        <TbMinusVertical size={23} />
-                                        <span className="delete-text" onClick={() => handleDelete(item)}><AiFillDelete size={23} /></span>
+                                        {item.editable ? (
+                                            <span>
+                                                <span className="modify-test">
+                                                    {!item.tests_exist && (
+                                                        <span className="tests-text">No tests <RiErrorWarningFill size={23} /></span>
+                                                    )}
+                                                </span>
+                                                <TbMinusVertical size={23} />
+                                                <span className="delete-text" onClick={() => handleDeleteProject(item)}>
+                                                    <AiFillDelete size={23} />
+                                                </span>
+                                            </span>
+                                        ) : (
+                                            <span>Cannot be modified</span>
+                                        )}
                                     </td>
                                 </tr>
                             ))}
@@ -132,7 +147,7 @@ function Settings() {
                 </div>
 
                 <div className="settings-container">
-                    <h3 className="h3-center">View and Edit Tests</h3>
+                    <h3 className="h3-center">Tests</h3>
                     <br />
                     <TestEditor tests={tests} projs={items} onTestsChange={handleTestsChange} />
                 </div>

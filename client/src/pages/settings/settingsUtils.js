@@ -71,7 +71,7 @@ export const handleSaveData = (selectedItems, setStatus) => {
         });
 };
 
-export const handleAddProjectRequest = (projectName, projectInfo, setStatusAddProject, setItems, setSelectedItems, setStatus, setProjectName, setProjectInfo) => {
+export const handleAddProjectRequest = (projectName, projectInfo, setStatusAddProject, setItems, setSelectedItems, setStatus, setProjectName, setProjectInfo, setTests, setStatusTests) => {
     if (projectName === "") {
         setStatusAddProject('Project name is required');
         return;
@@ -88,6 +88,7 @@ export const handleAddProjectRequest = (projectName, projectInfo, setStatusAddPr
             if (response.status === 200) {
                 setStatus('New project added');
                 fetchDataFromAPI(setItems, setSelectedItems, setStatus);
+                getTests(setTests, setStatusTests);
                 setProjectName('');
                 setProjectInfo('');
             } else {

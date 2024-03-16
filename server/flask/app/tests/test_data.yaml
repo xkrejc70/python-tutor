@@ -1,65 +1,252 @@
 proj1:
   camel_to_snake_case:
-    - in: camelCaseNameAllowed
-      out: camel_case_name_allowed
-    - in: anotherCamelCase
-      out: another_camel_case
-    - in: longVATNumber
-      out: long_vat_number
+  - in: camelCaseNameAllowed
+    out: camel_case_name_allowed
+  - in: anotherCamelCase
+    out: another_camel_case
+  - in: longVATNumber
+    out: long_vat_number
   not_both_titles:
-    - in: 'doc. Josef Tyl, Rudolf Srp, Ph.D., Pavel Vlk, doc. RNDr. Petr Berka, Ph.D., Jan Hora'
-      out: ['doc. Josef Tyl', 'Rudolf Srp, Ph.D.', 'Pavel Vlk', 'Jan Hora']
-    - in: ''
-      out: ''
+  - in: doc. Josef Tyl, Rudolf Srp, Ph.D., Pavel Vlk, doc. RNDr. Petr Berka, Ph.D.,
+      Jan Hora
+    out:
+    - doc. Josef Tyl
+    - Rudolf Srp, Ph.D.
+    - Pavel Vlk
+    - Jan Hora
+  - in: ''
+    out: ''
 proj4:
   match_permutations_substrings:
-    - string: 'okna'
-      words: ['a', 'z', 'v', 'o', 'k', 'ok', 'ano', 'no', 'hlava', 'oko', 'noky', 'nok', 'on', 'ona', 'ony']
-      out: ['ona', 'a', 'ok', 'o', 'nok', 'no', 'ano', 'on', 'k']
-    - string: 'opak'
-      words: ['ok', 'pak', 'pako', 'ano', 'noha', 'oka', 'kap', 'kopa', 'kopat', 'ona', 'okap']
-      out: ['kopa', 'kap', 'pako', 'ok', 'pak', 'okap', 'oka']
-    - string: 'apple'
-      words: ['pap', 'leap', 'ale', 'pala', 'pal', 'plea', 'peal', 'app', 'apple', 'ple']
-      out: ['leap', 'plea', 'apple', 'app', 'pal', 'pap', 'ale', 'ple', 'peal']
-  uniq_srt:
-    - in: [3, 3, 5, 3, 4, 2, 4]
-      out: [2, 3, 4, 5]
-    - in: 'abrakadabra'
-      out: ['a', 'b', 'd', 'k', 'r']
+  - out:
+    - ona
+    - a
+    - ok
+    - o
+    - nok
+    - 'no'
+    - ano
+    - 'on'
+    - k
+    string: okna
+    words:
+    - a
+    - z
+    - v
+    - o
+    - k
+    - ok
+    - ano
+    - 'no'
+    - hlava
+    - oko
+    - noky
+    - nok
+    - 'on'
+    - ona
+    - ony
+  - out:
+    - kopa
+    - kap
+    - pako
+    - ok
+    - pak
+    - okap
+    - oka
+    string: opak
+    words:
+    - ok
+    - pak
+    - pako
+    - ano
+    - noha
+    - oka
+    - kap
+    - kopa
+    - kopat
+    - ona
+    - okap
+  - out:
+    - leap
+    - plea
+    - apple
+    - app
+    - pal
+    - pap
+    - ale
+    - ple
+    - peal
+    string: apple
+    words:
+    - pap
+    - leap
+    - ale
+    - pala
+    - pal
+    - plea
+    - peal
+    - app
+    - apple
+    - ple
   uniq_orig_order:
-    - in: [3, 3, 5, 3, 4, 2, 4]
-      out: [3, 5, 4, 2]
-    - in: 'abrakadabra'
-      out: ['a', 'b', 'r', 'k', 'd']
+  - in:
+    - 3
+    - 3
+    - 5
+    - 3
+    - 4
+    - 2
+    - 4
+    out:
+    - 3
+    - 5
+    - 4
+    - 2
+  - in: abrakadabra
+    out:
+    - a
+    - b
+    - r
+    - k
+    - d
+  uniq_srt:
+  - in:
+    - 3
+    - 3
+    - 5
+    - 3
+    - 4
+    - 2
+    - 4
+    out:
+    - 2
+    - 3
+    - 4
+    - 5
+  - in: abrakadabra
+    out:
+    - a
+    - b
+    - d
+    - k
+    - r
 proj6:
-  Polynomial_init_tuple:
-    - in: '0,0,1,1,-1,-1,2,2,-2,-2,15'
-      out: '15x^10 - 2x^9 - 2x^8 + 2x^7 + 2x^6 - x^5 - x^4 + x^3 + x^2'
   Polynomial_init_key:
-    - in: 'x7=1, x4=4, x8=3, x9=0, x0=0, x5=-2, x3= -1, x1=1'
-      out: '3x^8 + x^7 - 2x^5 + 4x^4 - x^3 + x'
-    - in: 'x2=0'
-      out: '0'
-    - in: 'x0=0'
-      out: '0'
+  - in: x7=1, x4=4, x8=3, x9=0, x0=0, x5=-2, x3= -1, x1=1
+    out: 3x^8 + x^7 - 2x^5 + 4x^4 - x^3 + x
+  - in: x2=0
+    out: '0'
+  - in: x0=0
+    out: '0'
   Polynomial_init_list:
-    - in: [-5,1,0,-1,4,-2,0,1,3,0]
-      out: '3x^8 + x^7 - 2x^5 + 4x^4 - x^3 + x - 5'
+  - in:
+    - -5
+    - 1
+    - 0
+    - -1
+    - 4
+    - -2
+    - 0
+    - 1
+    - 3
+    - 0
+    out: 3x^8 + x^7 - 2x^5 + 4x^4 - x^3 + x - 5
+  Polynomial_init_tuple:
+  - in: 0,0,1,1,-1,-1,2,2,-2,-2,15
+    out: 15x^10 - 2x^9 - 2x^8 + 2x^7 + 2x^6 - x^5 - x^4 + x^3 + x^2
 proj8:
   first_with_given_key:
-    - in: [[1], [1, 3], [1, 2, 3], [1], [2, 3]]
-      out: [[1], [1, 3], [1, 2, 3]]
-      key: len
-    - in: ['first', 'second', 'third', 'fourth', 'one']
-      out: ['first', 'second', 'one']
-      key: len
-    - in: [{'a': 1, 'b': 2}, {'x': 1, 'y': 2, 'z': 3}, {'p': 1}, {'a': 1, 'b': 2}, {'q': 1, 'r': 2}]
-      out: [{'a': 1, 'b': 2}, {'x': 1, 'y': 2, 'z': 3}, {'p': 1}]
-      key: len
-    - in: [[1, 2, 3], [4, 5], [1, 2, 3, 3], [5, 6]]
-      out: [[1, 2, 3], [4, 5], [5, 6]]
-      key: sum
-    - in: [[1, 2, 3], [4, 5], [1, 2, 3, 3], [5, 2]]
-      out: [[1, 2, 3], [4, 5]]
-      key: max
+  - in:
+    - - 1
+    - - 1
+      - 3
+    - - 1
+      - 2
+      - 3
+    - - 1
+    - - 2
+      - 3
+    key: len
+    out:
+    - - 1
+    - - 1
+      - 3
+    - - 1
+      - 2
+      - 3
+  - in:
+    - first
+    - second
+    - third
+    - fourth
+    - one
+    key: len
+    out:
+    - first
+    - second
+    - one
+  - in:
+    - a: 1
+      b: 2
+    - x: 1
+      y: 2
+      z: 3
+    - p: 1
+    - a: 1
+      b: 2
+    - q: 1
+      r: 2
+    key: len
+    out:
+    - a: 1
+      b: 2
+    - x: 1
+      y: 2
+      z: 3
+    - p: 1
+  - in:
+    - - 1
+      - 2
+      - 3
+    - - 4
+      - 5
+    - - 1
+      - 2
+      - 3
+      - 3
+    - - 5
+      - 6
+    key: sum
+    out:
+    - - 1
+      - 2
+      - 3
+    - - 4
+      - 5
+    - - 5
+      - 6
+  - in:
+    - - 1
+      - 2
+      - 3
+    - - 4
+      - 5
+    - - 1
+      - 2
+      - 3
+      - 3
+    - - 5
+      - 2
+    key: max
+    out:
+    - - 1
+      - 2
+      - 3
+    - - 4
+      - 5
+proj9:
+  camel_to_snake_case:
+  - in: longVATNumber
+    inputType: string
+    out: long_vat_number
+    outputType: string

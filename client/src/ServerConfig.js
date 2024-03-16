@@ -12,6 +12,7 @@ export default {
   GET_QUESTIONS: `${API_BASE_URL}/api/questions`,
   GET_TESTS: `${API_BASE_URL}/api/admin/test/get`,
   // Post
+  UPDATE_TESTS: `${API_BASE_URL}/api/admin/test/update`,
   UPLOAD_PROJECT: `${API_BASE_URL}/api/upload`,
   LOGIN: `${API_BASE_URL}/api/admin/login`,
   ADD_PROJECT: `${API_BASE_URL}/api/admin/project/add`,

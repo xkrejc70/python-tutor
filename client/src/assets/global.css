@@ -339,12 +339,8 @@ h1 {
 }
 
 .delete-text {
-    color: red;
+    color: #e64646;
     cursor: pointer;
-}
-
-.tests-text:hover::before {
-    content: "No tests found! ";
 }
 
 .tests-text {
@@ -397,11 +393,25 @@ h1 {
 
 .modify-test:hover,
 .delete-text:hover {
-    color: #007bff; /* Change the color on hover as desired */
+    color: #bd3833; /* Change the color on hover as desired */
 }
 
 .tests-select {
     margin-left: 10px;
+    margin-right: 10px;
+}
+
+.tests-button {
+    margin-bottom: 2px;
+    margin-left: 10px;
+}
+
+.tests-button-delete {
+    background-color: #ff5c5c;;
+}
+
+.tests-button-delete:hover {
+    background-color: rgb(230, 71, 66);
 }
 
 .align-r {
@@ -467,7 +477,7 @@ label {
 }
 
 .input-field {
-    width: 100%;
+    width: 89%;
     padding: 8px;
     margin-bottom: 16px;
     border: 1px solid #ccc;
