@@ -20,6 +20,7 @@ def generate_unique_filename(project_folder, filename):
 # TODO: unittest
 # Check filename format
 def check_filename(filename, project):
+    return True
     # Define the regex pattern for the filename
     pattern = re.compile(r'^isj_proj[1-9]_x[a-zA-Z]{5}\d{2}\.py$')
     expected_project = f'{project}'

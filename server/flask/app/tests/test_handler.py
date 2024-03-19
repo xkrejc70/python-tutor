@@ -1,15 +1,14 @@
 from app import app
 import yaml
+import json
 import os
 from app.tests.proj1.test_project1 import test_project1
 from app.tests.test_project4 import test_project4
 from app.tests.test_project6 import test_project6
 from app.tests.test_project8 import test_project8
+from app.tests.test_project import test_project
 
-def not_found(file_path, tests):
-    return "test function not found"
-
-def run_tests_for_project(file_path, project, tests):
+def run_tests_for_project(file_path, project, test_data, test_data_special):
     test_functions = {
         'proj1': test_project1,
         # 'proj2': test_project2,
@@ -21,20 +20,32 @@ def run_tests_for_project(file_path, project, tests):
         'proj8': test_project8
     }
 
-    # TODO: default value
+    if project in test_functions:
+        function_tests = test_data
+    else:
+        function_tests = test_data_special
 
     # Get test project function
-    test_function = test_functions.get(project, not_found)
-    return test_function(file_path, tests)
+    test_function = test_functions.get(project, test_project)
+    return test_function(file_path, function_tests, project)
 
 def test(file_path, project):
+    project_tests = []
 
     script_dir = os.path.dirname(os.path.abspath(__file__))
     file_p = os.path.join(script_dir, 'test_data.yaml')
+    file_p_special = os.path.join(script_dir, 'test_data.json')
+
     with open(file_p, 'r') as file:
         test_data = yaml.safe_load(file)
 
-    result = run_tests_for_project(file_path, project, test_data)
+    with open(file_p_special, 'r') as file:
+        test_data_special = json.load(file)
+
+    if project in test_data_special:
+        project_tests = test_data_special[project]
+
+    result = run_tests_for_project(file_path, project, test_data, project_tests)
 
     return result
 

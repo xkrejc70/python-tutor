@@ -19,6 +19,7 @@ hr {
 .menu-bottom {
     position: absolute;
     bottom: 0;
+    margin-left: 5px;
 }
 
 .icon-wrapper {
@@ -35,7 +36,10 @@ li {
 .ps-menu-button,
 .fpTHfu,
 .ps-sidebar-container {
+    height: 100% !important;
     background-color: #89C4F4 !important;
+    padding-bottom: 5px;
+    padding-top: 5px;
 }
 
 .ps-menu-button:hover {
@@ -188,6 +192,23 @@ pre {
     text-decoration: underline;
 }
 
+.feedback-title {
+    display: flex;
+    align-items: center;
+}
+
+.test-passed {
+    /*color: #00a859;*/
+}
+
+.test-failed {
+    color: #d9534f;
+}
+
+.feedback-icon {
+    vertical-align: bottom;
+    margin-right: 10px;
+}
 
 /* Practice */
 
@@ -391,6 +412,10 @@ h1 {
     margin-right: 5px;
 }
 
+.modify-test-lock {
+    margin-right: 5px;
+}
+
 .modify-test:hover,
 .delete-text:hover {
     color: #bd3833; /* Change the color on hover as desired */
@@ -477,11 +502,25 @@ label {
 }
 
 .input-field {
-    width: 89%;
+    width: 100%;
     padding: 8px;
     margin-bottom: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+.input-field-tests {
+    width: 87%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.input-field-tests:focus {
+    outline: none;
+    border-color: #64b3f5;
+    box-shadow: 0 0 8px #2f8ad4;
 }
 
 .input-field:focus {

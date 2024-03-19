@@ -1,11 +1,10 @@
 from app import app
 from flask import jsonify
 import json
-import yaml
 import os
 
 CONFIG_FILE = 'admin_settings.json'
-TESTS = './../tests/test_data.yaml'
+TESTS = './../tests/test_data.json'
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 file_p = os.path.join(script_dir, CONFIG_FILE)
@@ -29,9 +28,9 @@ def write_config(config_data):
 def load_settings():
     config_data = read_config()
 
-    # Read tests data from tests.yaml using PyYAML
+    # Read tests data from tests.json
     with open(tests_p, 'r') as tests_file:
-        tests_data = yaml.safe_load(tests_file)
+        tests_data = json.load(tests_file)
 
     # Add 'tests_exist' field to each project in config_data
     for project in config_data:
@@ -108,12 +107,12 @@ def add_project(request):
 
         # Load tests
         with open(tests_p, 'r') as file:
-            data = yaml.safe_load(file)
+            data = json.load(file)
 
         # Add new project to tests
         data["proj" + str(id)] = {}
         with open(tests_p, 'w') as file:
-            yaml.dump(data, file)
+            json.dump(data, file)
 
         return jsonify({"message": "New project added successfully"})
 
@@ -144,14 +143,14 @@ def delete_project(request):
 
         # Load tests
         with open(tests_p, 'r') as file:
-            data = yaml.safe_load(file)
+            data = json.load(file)
 
         # Remove tests associated with the deleted project
         del data["proj" + str(project_id_to_delete)]
 
-        # Save the updated tests to the YAML file
+        # Save the updated tests to the JSON file
         with open(tests_p, 'w') as file:
-            yaml.dump(data, file)
+            json.dump(data, file)
 
         return jsonify({"message": "Project deleted successfully"})
 
@@ -161,15 +160,15 @@ def delete_project(request):
 
 def get_tests():
     with open(tests_p, 'r') as tests_file:
-        tests_data = yaml.safe_load(tests_file)
+        tests_data = json.load(tests_file)
     return jsonify(tests_data)
 
 def update_tests(request):
     # Get the tests data from the request
     tests = request.json['tests']
 
-    # Write the tests data to a YAML file
-    with open(tests_p, 'w') as yaml_file:
-        yaml.dump(tests, yaml_file)
+    # Write the tests data to a JSON file
+    with open(tests_p, 'w') as json_file:
+        json.dump(tests, json_file)
 
     return jsonify({"message": "Updated successfully"})

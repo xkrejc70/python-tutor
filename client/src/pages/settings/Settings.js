@@ -4,8 +4,10 @@ import StatusMessage from "components/StatusMessage";
 import TestEditor from "components/TestEditor";
 import { fetchDataFromAPI, handleCheckboxChange, handleSaveData, handleAddProjectRequest, handleDeleteProjectRequest, getTests } from './settingsUtils';
 import { RiErrorWarningFill } from "react-icons/ri";
-import { AiFillDelete } from "react-icons/ai";
+import { AiFillDelete, AiFillLock } from "react-icons/ai";
 import { TbMinusVertical } from "react-icons/tb";
+import { FcOk } from "react-icons/fc";
+
 import "assets/global.css";
 
 function Settings() {
@@ -62,7 +64,7 @@ function Settings() {
         <div>
             <Sidebar onCollapsedChange={onSidebarCollapsedChange} />
             <div className="main-layout" style={{ marginLeft: sidebarCollapsed ? "80px" : "250px" }}>
-                <h1>Python Tutor settings</h1>
+                <h1>Settings</h1>
                 <br />
 
                 <div className="settings-container">
@@ -92,18 +94,24 @@ function Settings() {
                                     <td className='align-r'>
                                         {item.editable ? (
                                             <span>
-                                                <span className="modify-test">
-                                                    {!item.tests_exist && (
-                                                        <span className="tests-text">No tests <RiErrorWarningFill size={23} /></span>
+                                                <span>
+                                                    {!item.tests_exist ? (
+                                                        <span>No tests <RiErrorWarningFill size={23} /></span>
+                                                    ) : (
+                                                        <span>Tests ok <FcOk size={23} /></span>
                                                     )}
                                                 </span>
                                                 <TbMinusVertical size={23} />
-                                                <span className="delete-text" onClick={() => handleDeleteProject(item)}>
+                                                <span className="modify-test delete-text" onClick={() => handleDeleteProject(item)}>
                                                     <AiFillDelete size={23} />
                                                 </span>
                                             </span>
                                         ) : (
-                                            <span>Cannot be modified</span>
+                                            <span className='modify-test-lock'>
+                                            {!item.tests_exist && (
+                                                <span><AiFillLock size={23} /></span>
+                                            )}
+                                        </span>
                                         )}
                                     </td>
                                 </tr>
@@ -146,11 +154,19 @@ function Settings() {
                     </div>
                 </div>
 
+                <h1>Tests</h1>
+
                 <div className="settings-container">
-                    <h3 className="h3-center">Tests</h3>
+                    <h3 className="h3-center">View and Edit Tests</h3>
                     <br />
                     <TestEditor tests={tests} projs={items} onTestsChange={handleTestsChange} />
                 </div>
+
+                <h1>Classification Model</h1>
+                <p>todo</p>
+
+                <h1>Tips</h1>
+                <p>todo</p>
 
             </div>
         </div>

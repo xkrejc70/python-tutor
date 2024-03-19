@@ -39,7 +39,7 @@ const TestEditor = ({ tests, projs, onTestsChange }) => {
         const name = getNameById(numericId);
         idToNameMap[id] = name;
 
-        isEditable[id]= isProjectEditable(numericId);
+        isEditable[id] = isProjectEditable(numericId);
     });
 
     // Update input and output values when a test is selected
@@ -70,11 +70,11 @@ const TestEditor = ({ tests, projs, onTestsChange }) => {
             updatedTests[selectedProject][selectedFunction] = [];
         }
 
-        const test = { 
-            in: inputValue, 
-            out: outputValue, 
-            inputType, 
-            outputType 
+        const test = {
+            in: inputValue,
+            out: outputValue,
+            inputType,
+            outputType
         };
 
         if (selectedTestIndex !== null) {
@@ -122,35 +122,35 @@ const TestEditor = ({ tests, projs, onTestsChange }) => {
     // Handle creating a new function
     const handleCreateNewFunction = () => {
         let newFunctionName = prompt('Enter the name for the new function:', 'function_name');
-    
+
         if (newFunctionName) {
             // Regular expression to match valid Python function names
             const validFunctionNameRegex = /^[a-zA-Z_]\w*$/;
-    
+
             if (!validFunctionNameRegex.test(newFunctionName)) {
                 alert('Invalid function name! Function names must start with a letter or underscore and can only contain letters, digits, or underscores.');
                 return;
             }
-    
+
             const updatedTests = { ...tests };
-    
+
             if (!updatedTests[selectedProject]) {
                 updatedTests[selectedProject] = {};
             }
-    
+
             // Check if the function name already exists
             if (updatedTests[selectedProject][newFunctionName]) {
                 alert(`Function "${newFunctionName}" already exists! Please enter a different name.`);
                 return;
             }
-    
+
             updatedTests[selectedProject][newFunctionName] = [];
             updateTestsAndSave(updatedTests, onTestsChange);
-    
+
             setSelectedFunction(newFunctionName);
         }
     };
-    
+
 
     // Update selected function when tests or selected project change
     useEffect(() => {
@@ -178,14 +178,17 @@ const TestEditor = ({ tests, projs, onTestsChange }) => {
                         Select Project:
                         <select className="tests-select" value={selectedProject} onChange={(e) => handleProjectChange(e.target.value)}>
                             <option value="">Select Project</option>
-                            {projects.map((projectId) => (
-                                isEditable[projectId] && (
-                                <option key={projectId} value={projectId}>
-                                    {idToNameMap[projectId]}
-                                </option>
-                                )
-                            ))}
+                            {projects
+                                .filter(projectId => isEditable[projectId]) // Filter only editable projects
+                                .sort((a, b) => idToNameMap[a].localeCompare(idToNameMap[b])) // Sort by project name
+                                .map(projectId => (
+                                    <option key={projectId} value={projectId}>
+                                        {idToNameMap[projectId]}
+                                    </option>
+                                ))
+                            }
                         </select>
+
                     </label>
                 </div>
 
@@ -245,20 +248,28 @@ const TestEditor = ({ tests, projs, onTestsChange }) => {
                     <br />
 
                     <label>Input:</label>
-                    <input className="input-field" type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+                    <input className="input-field-tests" type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
                     <select className="tests-select" value={inputType} onChange={(e) => setInputType(e.target.value)}>
                         <option value="string">String</option>
                         <option value="integer">Integer</option>
                         <option value="float">Float</option>
+                        <option value="list">List</option>
+                        <option value="dictionary">Dictionary</option>
+                        <option value="tuple">Tuple</option>
+                        <option value="boolean">Boolean</option>
                         {/* Add other data types as needed */}
                     </select>
 
                     <label>Output:</label>
-                    <input className="input-field" type="text" value={outputValue} onChange={(e) => setOutputValue(e.target.value)} />
+                    <input className="input-field-tests" type="text" value={outputValue} onChange={(e) => setOutputValue(e.target.value)} />
                     <select className="tests-select" value={outputType} onChange={(e) => setOutputType(e.target.value)}>
                         <option value="string">String</option>
                         <option value="integer">Integer</option>
                         <option value="float">Float</option>
+                        <option value="list">List</option>
+                        <option value="dictionary">Dictionary</option>
+                        <option value="tuple">Tuple</option>
+                        <option value="boolean">Boolean</option>
                         {/* Add other data types as needed */}
                     </select>
                     <div className='save-button'>

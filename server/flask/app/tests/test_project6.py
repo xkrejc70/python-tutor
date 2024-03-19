@@ -3,12 +3,11 @@ from app.tests.test_utils import RestrictedEnvironment, Project, Function, Class
 from app.tests.test_utils import import_function_or_class_from_file, load_tips_from_yaml
 
 # Test project 6
-def test_project6(file_path, test_data):
+def test_project6(file_path, test_data, project):
     passed = 0
     num_tests = 0
     comment = []
     model_response = []
-    project = 'proj6'
 
     def run_init_tests(test_type, parse_func):
         nonlocal num_tests
@@ -157,7 +156,7 @@ def test_project6(file_path, test_data):
     run_ops_tests(Classes.POLYNOMIAL_AT_VALUE)
 
     # ============= Final evaluation =============
-    if num_tests == passed:
+    if num_tests == passed and passed != 0:
         comment.append("Success: All tests passed without errors.")
 
     # Tips

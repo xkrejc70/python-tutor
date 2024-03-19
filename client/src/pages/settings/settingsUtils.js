@@ -47,6 +47,7 @@ export const handleCheckboxChange = (item, items, setItems, setSelectedItems) =>
 export const handleSaveData = (selectedItems, setStatus) => {
     const dataToSend = selectedItems.map(item => ({
         checked: item.checked,
+        editable: item.editable,
         id: item.id,
         info: item.info,
         name: item.name,

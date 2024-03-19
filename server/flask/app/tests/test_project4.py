@@ -4,12 +4,11 @@ from app.tests.test_utils import import_function_or_class_from_file, clean_funct
 import requests
 
 # Test project 4
-def test_project4(file_path, test_data):
+def test_project4(file_path, test_data, project):
     passed = 0
     num_tests = 0
     comment = []
     model_response = []
-    project = "proj4"
 
     # ============= Test match_permutations_substrings =============
     p4_match_permutations_substrings = import_function_or_class_from_file(file_path, Function.MATCH_PERMUTATIONS_SUBSTRINGS)
@@ -35,17 +34,17 @@ def test_project4(file_path, test_data):
             except Exception as e:
                 comment.append("Error: " + str(e))
 
-    # Model evaluation
-    function_string = clean_function_string(p4_match_permutations_substrings[0])
+        # Model evaluation
+        function_string = clean_function_string(p4_match_permutations_substrings[0])
 
-    if len(function_string) > 3000:
-        model_response.append("[ERROR]: Over limit")
-    else:
-        url = 'http://localhost:5050/' + project
-        data = {'input_string': function_string}
+        if len(function_string) > 3000:
+            model_response.append("[ERROR]: Over limit")
+        else:
+            url = 'http://localhost:5050/' + project
+            data = {'input_string': function_string}
 
-        response = requests.post(url, json=data)
-        model_response.append('match_permutations_substrings: ' + response.json()['classification'])
+            response = requests.post(url, json=data)
+            model_response.append('match_permutations_substrings: ' + response.json()['classification'])
 
     # ============= Test uniq_srt =============
     p4_uniq_srt = import_function_or_class_from_file(file_path, Function.UNIQ_SRT)
@@ -70,17 +69,17 @@ def test_project4(file_path, test_data):
             except Exception as e:
                 comment.append("Error: " + str(e))
 
-    # Model evaluation
-    function_string = clean_function_string(p4_uniq_srt[0])
+        # Model evaluation
+        function_string = clean_function_string(p4_uniq_srt[0])
 
-    if len(function_string) > 3000:
-        model_response.append("[ERROR]: Over limit")
-    else:
-        url = 'http://localhost:5050/' + project
-        data = {'input_string': function_string}
+        if len(function_string) > 3000:
+            model_response.append("[ERROR]: Over limit")
+        else:
+            url = 'http://localhost:5050/' + project
+            data = {'input_string': function_string}
 
-        response = requests.post(url, json=data)
-        model_response.append('uniq_srt: ' + response.json()['classification'])
+            response = requests.post(url, json=data)
+            model_response.append('uniq_srt: ' + response.json()['classification'])
 
     # ============= Test uniq_orig_order =============
     p4_uniq_orig_order = import_function_or_class_from_file(file_path, Function.UNIQ_ORIG_ORDER)
@@ -105,20 +104,20 @@ def test_project4(file_path, test_data):
             except Exception as e:
                 comment.append("Error: " + str(e))
 
-    # Model evaluation
-    function_string = clean_function_string(p4_uniq_orig_order[0])
+        # Model evaluation
+        function_string = clean_function_string(p4_uniq_orig_order[0])
 
-    if len(function_string) > 3000:
-        model_response.append("[ERROR]: Over limit")
-    else:
-        url = 'http://localhost:5050/' + project
-        data = {'input_string': function_string}
+        if len(function_string) > 3000:
+            model_response.append("[ERROR]: Over limit")
+        else:
+            url = 'http://localhost:5050/' + project
+            data = {'input_string': function_string}
 
-        response = requests.post(url, json=data)
-        model_response.append('uniq_orig_order: ' + response.json()['classification'])
+            response = requests.post(url, json=data)
+            model_response.append('uniq_orig_order: ' + response.json()['classification'])
 
     # ============= Final evaluation =============
-    if num_tests == passed:
+    if num_tests == passed and passed != 0:
         comment.append("Success: All tests passed without errors.")
 
     # Tips

@@ -7,12 +7,11 @@ import re
 import requests
 
 # Test project 8
-def test_project8(file_path, test_data):
+def test_project8(file_path, test_data, project):
     passed = 0
     num_tests = 0
     comment = []
     model_response = []
-    project = 'proj8'
 
     # ============= Test first_with_given_key =============
     p8_first_with_given_key = import_function_or_class_from_file(file_path, Function.FIRST_WITH_GIVEN_KEY)
@@ -39,21 +38,21 @@ def test_project8(file_path, test_data):
             except Exception as e:
                 comment.append("Error: " + str(e))
 
-    # Model evaluation
-    function_string = clean_function_string(p8_first_with_given_key[0])
+        # Model evaluation
+        function_string = clean_function_string(p8_first_with_given_key[0])
 
-    if len(function_string) > 1000:
-        model_response.append("[ERROR]: Over limit")
-    else:
-        url = Model.URL + '/' + project
-        data = {'input_string': function_string}
+        if len(function_string) > 1000:
+            model_response.append("[ERROR]: Over limit")
+        else:
+            url = Model.URL + '/' + project
+            data = {'input_string': function_string}
 
 
-        response = requests.post(url, json=data)
-        model_response.append(response.json()['classification'])
+            response = requests.post(url, json=data)
+            model_response.append(response.json()['classification'])
 
     # ============= Final evaluation =============
-    if num_tests == passed:
+    if num_tests == passed and passed != 0:
         comment.append("Success: All tests passed without errors.")
 
     # Tips
