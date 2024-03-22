@@ -113,6 +113,8 @@ def test_project4(file_path, test_data, project):
             url = 'http://localhost:5050/' + project
             data = {'input_string': function_string}
 
+            app.logger.debug('Calling model for ' + project)
+
             response = requests.post(url, json=data)
             model_response.append('uniq_orig_order: ' + response.json()['classification'])
 

@@ -1,31 +1,7 @@
 from app import app
 import json
-from app.tests.test_utils import RestrictedEnvironment, Project, Function
-from app.tests.test_utils import import_function_or_class_from_file, clean_function_string, load_tips_from_yaml
-
-
-def convert_data(data, data_type):
-    if data_type == "string":
-        return data
-    elif data_type == "list":
-        return eval(data)
-    elif data_type == "integer":
-        return int(data)
-    elif data_type == "float":
-        return float(data)
-    elif data_type == "tuple":
-        # Assuming data is provided as a string representation of a tuple, e.g., "(1, 2, 3)"
-        return tuple(map(int, data.strip('()').split(',')))
-    elif data_type == "dictionary":
-        # Assuming data is provided as a JSON string representing a dictionary
-        return data
-    elif data_type == "boolean":
-        if data.lower() in ['true', 'false']:
-            return data.lower() == 'true'
-        else:
-            raise ValueError("Invalid boolean value")
-    else:
-        raise ValueError("Unsupported data type")
+from app.tests.test_utils import RestrictedEnvironment
+from app.tests.test_utils import import_function_or_class_from_file, load_tips_from_yaml, convert_data
 
 def test_project(file_path, test_data, project):
     passed = 0
@@ -55,10 +31,6 @@ def test_project(file_path, test_data, project):
 
                 with RestrictedEnvironment():
                     result = imported_function(input_data)
-
-                    app.logger.debug(input_data)
-                    app.logger.debug(result)
-                    app.logger.debug(expected_output)
 
                     expected_output = convert_data(expected_output, output_type)
 

@@ -26,6 +26,7 @@ def write_config(config_data):
 
 # Load and return current settings
 def load_settings():
+    app.logger.debug("Loading settings...")
     config_data = read_config()
 
     # Read tests data from tests.json
@@ -39,11 +40,13 @@ def load_settings():
         tests_exist = tests_key in tests_data and bool(tests_data.get(tests_key))
         project['tests_exist'] = tests_exist
 
+    app.logger.debug("Settings loaded successfully.")
     return jsonify(config_data)
 
 # Receive and save updated settings
 def save_settings(request):
     try:
+        app.logger.debug("Saving settings...")
         # Receive data from the request in the desired format
         received_data = request.json
 
@@ -70,13 +73,16 @@ def save_settings(request):
         with open(file_p, 'w') as json_file:
             json.dump(updated_settings, json_file)
 
+        app.logger.debug("Settings saved successfully.")
         return jsonify({"message": "Settings saved"})
 
     except Exception as e:
+        app.logger.error(f"Error saving settings: {e}")
         return jsonify({"error": str(e)}), 500
 
 def add_project(request):
     try:
+        app.logger.debug("Adding new project...")
         data = request.json
         projectName = data.get('projectName')
         projectInfo = data.get('projectInfo')
@@ -114,13 +120,16 @@ def add_project(request):
         with open(tests_p, 'w') as file:
             json.dump(data, file)
 
+        app.logger.debug("New project added successfully.")
         return jsonify({"message": "New project added successfully"})
 
     except Exception as e:
+        app.logger.error(f"Error adding new project: {e}")
         return jsonify({"error": str(e)}), 500
     
 def delete_project(request):
     try:
+        app.logger.debug("Deleting project...")
         # Get the project ID from the request
         project_id_to_delete = request.json.get('id')
 
@@ -132,6 +141,7 @@ def delete_project(request):
         project_to_delete = next((item for item in existing_settings if item['id'] == project_id_to_delete), None)
 
         if not project_to_delete:
+            app.logger.error("Project not found.")
             return jsonify({"error": "Project not found, check config file (admin_settings.json)"}), 404
 
         # Remove the project from the existing settings
@@ -152,11 +162,12 @@ def delete_project(request):
         with open(tests_p, 'w') as file:
             json.dump(data, file)
 
+        app.logger.debug("Project deleted successfully.")
         return jsonify({"message": "Project deleted successfully"})
 
     except Exception as e:
+        app.logger.error(f"Error deleting project: {e}")
         return jsonify({"error": str(e)}), 500
-
 
 def get_tests():
     with open(tests_p, 'r') as tests_file:
@@ -171,4 +182,5 @@ def update_tests(request):
     with open(tests_p, 'w') as json_file:
         json.dump(tests, json_file)
 
+    app.logger.debug("Tests updated successfully.")
     return jsonify({"message": "Updated successfully"})

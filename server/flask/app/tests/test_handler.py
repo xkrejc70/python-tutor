@@ -21,6 +21,8 @@ def run_tests_for_project(file_path, project, test_data, test_data_special):
     else:
         function_tests = test_data_special
 
+    app.logger.debug('Running tests for ' + file_path + ' on project with id ' + project)
+
     # Get test project function
     test_function = test_functions.get(project, test_project)
     return test_function(file_path, function_tests, project)
@@ -44,5 +46,3 @@ def test(file_path, project):
     result = run_tests_for_project(file_path, project, test_data, project_tests)
 
     return result
-
-    # TODO: jsonify({"state": "error"})

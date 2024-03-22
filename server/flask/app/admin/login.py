@@ -25,6 +25,8 @@ def authenticate(request):
 
     # Check against the loaded credentials
     if username == credentials.get('username') and password == credentials.get('password'):
+        app.logger.debug('Login successful')
         return jsonify({"message": "Login successful"})
     else:
+        app.logger.debug('Invalid username or password')
         return jsonify({"error": "Invalid username or password"}), 401

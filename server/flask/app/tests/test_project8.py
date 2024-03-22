@@ -47,6 +47,7 @@ def test_project8(file_path, test_data, project):
             url = Model.URL + '/' + project
             data = {'input_string': function_string}
 
+            app.logger.debug('Calling model for ' + project)
 
             response = requests.post(url, json=data)
             model_response.append(response.json()['classification'])

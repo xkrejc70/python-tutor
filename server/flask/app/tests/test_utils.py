@@ -100,3 +100,26 @@ def load_tips_from_yaml(project, category):
         return tips_data[project][category]
     
     return None
+
+def convert_data(data, data_type):
+    if data_type == "string":
+        return data
+    elif data_type == "list":
+        return eval(data)
+    elif data_type == "integer":
+        return int(data)
+    elif data_type == "float":
+        return float(data)
+    elif data_type == "tuple":
+        # Assuming data is provided as a string representation of a tuple, e.g., "(1, 2, 3)"
+        return tuple(map(int, data.strip('()').split(',')))
+    elif data_type == "dictionary":
+        # Assuming data is provided as a JSON string representing a dictionary
+        return data
+    elif data_type == "boolean":
+        if data.lower() in ['true', 'false']:
+            return data.lower() == 'true'
+        else:
+            raise ValueError("Invalid boolean value")
+    else:
+        raise ValueError("Unsupported data type")
