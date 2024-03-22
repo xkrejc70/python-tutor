@@ -1,3 +1,4 @@
+from app import app
 import importlib.util
 import sys
 import inspect
@@ -65,6 +66,7 @@ def import_function_or_class_from_file(file_path, identifier_name):
         imported_class = getattr(module, identifier_name)
         return imported_class, 200
     else:
+        app.logger.debug('The function or class ' +identifier_name + ' does not exist in the uploaded file.')
         return (f"The function or class '{identifier_name}' does not exist in the uploaded file."), 500
     
 # Clean the source code of a given function by removing comments, empty lines, and trailing whitespaces.

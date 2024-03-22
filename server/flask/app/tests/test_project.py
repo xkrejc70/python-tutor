@@ -37,6 +37,7 @@ def test_project(file_path, test_data, project):
                     if expected_output == result:
                         passed += 1
                     else:
+                        app.logger.debug(f"Test case failed: {input_data}. Expected {expected_output}, but got {result}.")
                         comment.append(f"Test case failed: {input_data}. Expected {expected_output}, but got {result}.")
             except Exception as e:
                 comment.append(str(e))
@@ -44,6 +45,7 @@ def test_project(file_path, test_data, project):
     # ============= Final evaluation =============
     if num_tests == passed and passed != 0:
         comment.append("All tests passed without errors.")
+        app.logger.debug(f"All tests passed without errors.")
 
     # Tips
     practice_tips = load_tips_from_yaml(project, "practice")
