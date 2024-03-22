@@ -27,7 +27,7 @@ function Upload() {
     };
 
     const onFileUpload = () => {
-        handleFileUpload(selectedFile, selectedProject, setStatus, navigate);
+        handleFileUpload(selectedFile, selectedProject, setStatus, navigate, projects);
     };
 
     // Load projects from server settings

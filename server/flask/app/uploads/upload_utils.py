@@ -35,3 +35,13 @@ def check_filename(filename, project):
 # TODO: unittest
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
+
+def to_camel_case(s):
+    # Remove any non-alphanumeric characters and replace spaces with underscores
+    s = re.sub(r'[^a-zA-Z0-9\s]', '', s)
+    s = re.sub(r'\s+', '_', s)
+
+    # Split the string into words, capitalize the first letter of each word except the first one
+    words = s.split('_')
+    camel_case = ''.join(words[0].lower() + ''.join(word.capitalize() for word in words[1:]))
+    return camel_case

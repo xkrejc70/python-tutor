@@ -118,7 +118,7 @@ def test_project4(file_path, test_data, project):
 
     # ============= Final evaluation =============
     if num_tests == passed and passed != 0:
-        comment.append("Success: All tests passed without errors.")
+        comment.append("All tests passed without errors.")
 
     # Tips
     practice_tips = load_tips_from_yaml(project, "practice")

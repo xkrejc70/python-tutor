@@ -23,6 +23,8 @@ services:
       - "5050"
     image: model-image
     container_name: model-server-container
+    volumes:
+      - ./uploads:/app/uploads
     network_mode: host
     restart: always
 
@@ -38,3 +40,6 @@ services:
     image: react-app-image
     container_name: react-client-container
     network_mode: host
+
+volumes:
+  uploads:

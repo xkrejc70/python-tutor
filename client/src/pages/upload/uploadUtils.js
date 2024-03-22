@@ -1,32 +1,40 @@
 import axios from 'axios';
 import api from 'ServerConfig'
 
-export const handleFileUpload = (selectedFile, selectedProject, setStatus, navigate) => {
+export const handleFileUpload = (selectedFile, selectedProject, setStatus, navigate, projects) => {
     if (selectedFile && selectedProject) {
-        const formData = new FormData();
-        formData.append('file', selectedFile);
-        formData.append('project', selectedProject);
+        // Find the project object based on the selected project ID
+        const selectedProjectObj = projects.find(project => 'proj' + project.id.toString() === selectedProject);
 
-        const config = {
-            headers: { 'content-type': 'multipart/form-data' }
+        if (selectedProjectObj) {
+            const projectName = selectedProjectObj.name;
+
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+            formData.append('project', selectedProject);
+            formData.append('projectName', projectName);
+
+            const config = {
+                headers: { 'content-type': 'multipart/form-data' }
+            }
+
+            axios.post(api.UPLOAD_PROJECT, formData, config)
+                .then(response => {
+                    if (response.status === 200) {
+                        setStatus('File uploaded successfully!');
+                        navigate("/evaluation", { state: { test: response.data } });
+                    } else {
+                        setStatus(`Error: ${response.data}`);
+                    }
+                })
+                .catch(error => {
+                    if (error.response) {
+                        setStatus(`Error: ${error.response.data.error}`);
+                    } else {
+                        setStatus(`Error: ${error.response.data}`);
+                    }
+                });
         }
-
-        axios.post(api.UPLOAD_PROJECT, formData, config)
-            .then(response => {
-                if (response.status === 200) {
-                    setStatus('File uploaded successfully!');
-                    navigate("/evaluation", { state: { test: response.data } });
-                } else {
-                    setStatus(`Error: ${response.data}`);
-                }
-            })
-            .catch(error => {
-                if (error.response) {
-                    setStatus(`Error: ${error.response.data.error}`);
-                } else {
-                    setStatus(`Error: ${error.response.data}`);
-                }
-            });
     } else {
         setStatus(`Please select a file to upload.`);
     }

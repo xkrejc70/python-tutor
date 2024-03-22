@@ -5,7 +5,7 @@ from werkzeug.utils import secure_filename
 import os
 
 from app.uploads.uploads_config import UploadsConfig
-from app.uploads.upload_utils import generate_unique_filename, check_filename, allowed_file
+from app.uploads.upload_utils import generate_unique_filename, check_filename, allowed_file, to_camel_case
 
 # Config
 app.config.from_object(UploadsConfig)
@@ -22,7 +22,12 @@ def upload_handler(request):
         if 'project' not in request.form:
             app.logger.debug('No project part')
             return jsonify({"error": "Project is required."}), 400
-        project = request.form['project']        
+        project = request.form['project']      
+
+        if 'projectName' not in request.form:
+            app.logger.debug('No projectName part')
+            return jsonify({"error": "project Name is required."}), 400
+        projectName = to_camel_case(request.form['projectName'])
 
         if file.filename == '':
             app.logger.debug('No selected file')
@@ -44,7 +49,7 @@ def upload_handler(request):
             filename = secure_filename(file.filename)
             current_year = datetime.now().year
             
-            project_folder = os.path.join(app.config['UPLOAD_FOLDER'], str(current_year), project)
+            project_folder = os.path.join(app.config['UPLOAD_FOLDER'], str(current_year), projectName)
             os.makedirs(project_folder, exist_ok=True)
 
 

@@ -2,7 +2,6 @@ from app import app
 import yaml
 import json
 import os
-from app.tests.proj1.test_project1 import test_project1
 from app.tests.test_project4 import test_project4
 from app.tests.test_project6 import test_project6
 from app.tests.test_project8 import test_project8
@@ -10,9 +9,6 @@ from app.tests.test_project import test_project
 
 def run_tests_for_project(file_path, project, test_data, test_data_special):
     test_functions = {
-        'proj1': test_project1,
-        # 'proj2': test_project2,
-        # 'proj3': test_project3,
         'proj4': test_project4,
         # 'proj5': test_project5,
         'proj6': test_project6,
