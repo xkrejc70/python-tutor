@@ -16,6 +16,10 @@ hr {
     opacity: 0.15;
 }
 
+.sidebar-div {
+    display: flex;
+}
+
 .menu-bottom {
     position: absolute;
     bottom: 0;
@@ -351,6 +355,7 @@ h1 {
 .settings-container {
     max-width: 1000px;
     margin: 50px auto;
+    margin-top: 15px;
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
@@ -388,6 +393,11 @@ h1 {
 .tests-table td {
     border-bottom: 1px solid #ddd; /* Add a border-bottom style for both header and data cells */
     padding: 8px; /* Adjust padding as needed */
+}
+
+.text-tips {
+    font-size: 18px;
+    text-align: center;
 }
 
 .tests-table th {
@@ -494,6 +504,25 @@ h1 {
     text-align: center;
 }
 
+.test-editor {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.auto-margin-left {
+    margin-left: auto;
+}
+
+
 /* Login */
 
 label {
@@ -533,4 +562,10 @@ label {
     margin-top: 10px;
     width: 100%;
     font-size: medium;
+}
+
+/* About */
+
+.text-about {
+    font-size: 18px;
 }

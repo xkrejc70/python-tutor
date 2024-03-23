@@ -16,7 +16,6 @@ def upload_handler(request):
         app.logger.debug("Received upload request.")
         
         if request.method == 'POST':
-            app.logger.debug("Received POST request.")
 
             # Check if the post request has all needed parts
             if 'file' not in request.files:

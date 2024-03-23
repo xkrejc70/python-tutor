@@ -1,5 +1,6 @@
-# uploads
+# folders
 /uploads
+/logs
 
 # dependencies
 client/node_modules

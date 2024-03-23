@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PrivateRoute from 'PrivateRoute';
 // pages
 import Upload from "pages/upload/Upload";
+import About from "pages/about/About";
 import Settings from "pages/settings/Settings";
 import Login from "pages/login/Login";
 import Proj8 from "pages/exercise/Proj8";
@@ -21,6 +22,7 @@ function App() {
 					</PrivateRoute>} />
 				<Route path="/login" element={<Login />}></Route>
 				<Route path="/upload" element={<Upload />}></Route>
+				<Route path="/about" element={<About />}></Route>
 				<Route path="/evaluation" element={<Evaluation />}></Route>
 				<Route path="/proj8" element={<Proj8 />}></Route>
 				<Route path="/proj4" element={<Proj4 />}></Route>

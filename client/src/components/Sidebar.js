@@ -4,8 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from 'AuthContext';
 // icons
 import { FiChevronsLeft, FiChevronsRight, FiLogIn, FiLogOut } from 'react-icons/fi';
-import { FaCode, FaUpload, FaChalkboardTeacher } from 'react-icons/fa';
-import { IoSettingsSharp } from "react-icons/io5";
+import { FaUpload, FaChalkboardTeacher } from 'react-icons/fa';
+import { IoSettingsSharp, IoInformationCircleOutline } from "react-icons/io5";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { TbLetterS } from "react-icons/tb";
 
@@ -34,9 +34,8 @@ function LeftSidebar({ onCollapsedChange }) {
     setToggled(value);
   };
 
-  // TODO: move styles to .css
   return (
-    <div style={{ display: "flex" }}>
+    <div className='sidebar-div'>
       <Sidebar
         className={`app ${toggled ? "toggled" : ""}`}
         style={{ height: "100%", position: "fixed", display: "inline-block" }}
@@ -67,26 +66,28 @@ function LeftSidebar({ onCollapsedChange }) {
           </Menu>
 
           <Menu>
-            <MenuItem icon={<FaUpload />} component={<Link to="/upload" />}>Upload project</MenuItem>
-            <SubMenu defaultOpen label={"Practice"} icon={<FaChalkboardTeacher />}>
-              <MenuItem icon={<FaCode />} component={<Link to="/#" />}>Regex</MenuItem>
-              <MenuItem icon={<TbLetterS />} component={<Link to="/proj4" />} >Scrabble</MenuItem>
-              <MenuItem icon={<MdOutlineMailOutline />} component={<Link to="/proj8" />} >Email Queue</MenuItem>
+            <MenuItem icon={<FaUpload size={20} />} component={<Link to="/upload" />}>Upload project</MenuItem>
+            <SubMenu defaultOpen label={"Practice"} icon={<FaChalkboardTeacher size={22} />}>
+              <MenuItem icon={<TbLetterS size={20} />} component={<Link to="/proj4" />} >Scrabble</MenuItem>
+              <MenuItem icon={<MdOutlineMailOutline size={20} />} component={<Link to="/proj8" />} >Email Queue</MenuItem>
             </SubMenu>
           </Menu>
+          <Menu>
+            <MenuItem icon={<IoInformationCircleOutline size={22} />} component={<Link to="/about" />}>About</MenuItem>
+          </Menu>
 
-            <Menu>
-          <div className="menu-bottom">
+          <Menu>
+            <div className="menu-bottom">
               {isLoggedIn ? (
                 <>
-                  <MenuItem icon={<IoSettingsSharp />} component={<Link to="/settings" />}> &nbsp;&nbsp; Settings</MenuItem>
-                  <MenuItem icon={<FiLogOut />} onClick={handleLogout}> &nbsp;&nbsp; Logout</MenuItem>
+                  <MenuItem icon={<IoSettingsSharp size={20} />} component={<Link to="/settings" />}> &nbsp;&nbsp; Settings</MenuItem>
+                  <MenuItem icon={<FiLogOut size={20} />} onClick={handleLogout}> &nbsp;&nbsp; Logout</MenuItem>
                 </>
               ) : (
-                <MenuItem icon={<FiLogIn />} component={<Link to="/login" />}>&nbsp;&nbsp; Login</MenuItem>
+                <MenuItem icon={<FiLogIn size={20} />} component={<Link to="/login" />}>&nbsp;&nbsp; Login</MenuItem>
               )}
-          </div>
-            </Menu>
+            </div>
+          </Menu>
         </main>
       </Sidebar>
     </div>
