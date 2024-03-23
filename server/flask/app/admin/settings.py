@@ -3,12 +3,14 @@ from flask import jsonify
 import json
 import os
 
-CONFIG_FILE = 'admin_settings.json'
-TESTS = './../tests/test_data.json'
+CONFIG_FILE = 'project_settings.json'
+TESTS = 'test_data.json'
+MODELS = 'project_models.json'
+CONFIG = 'config'
 
-script_dir = os.path.dirname(os.path.abspath(__file__))
-file_p = os.path.join(script_dir, CONFIG_FILE)
-tests_p = os.path.join(script_dir, TESTS)
+file_p = os.path.join(CONFIG, CONFIG_FILE)
+tests_p = os.path.join(CONFIG, TESTS)
+models_p = os.path.join(CONFIG, MODELS)
 
 # Read configuration data from the JSON file
 def read_config():
@@ -114,10 +116,23 @@ def add_project(request):
         # Load tests
         with open(tests_p, 'r') as file:
             data = json.load(file)
-
         # Add new project to tests
         data["proj" + str(id)] = {}
         with open(tests_p, 'w') as file:
+            json.dump(data, file)
+
+        # Load models
+        with open(models_p, 'r') as file:
+            data = json.load(file)
+
+        # Create a new project entry with empty translations and model_url
+        new_model_entry = {
+            "model_url": "",
+            "translations": {}
+        }
+        # Add new project to models
+        data["proj" + str(id)] = new_model_entry
+        with open(models_p, 'w') as file:
             json.dump(data, file)
 
         app.logger.debug("New project added successfully.")
@@ -151,18 +166,21 @@ def delete_project(request):
         with open(file_p, 'w') as json_file:
             json.dump(existing_settings, json_file, indent=2)
 
-        # Load tests
+        # Remove tests associated with the deleted project
         with open(tests_p, 'r') as file:
             data = json.load(file)
-
-        # Remove tests associated with the deleted project
         del data["proj" + str(project_id_to_delete)]
-
-        # Save the updated tests to the JSON file
         with open(tests_p, 'w') as file:
             json.dump(data, file)
 
-        app.logger.debug("Project deleted successfully.")
+        # Remove models associated with the deleted project
+        with open(models_p, 'r') as file:
+            data = json.load(file)
+        del data["proj" + str(project_id_to_delete)]
+        with open(models_p, 'w') as file:
+            json.dump(data, file)
+
+        app.logger.debug("Project deleted successfully with all tests and models.")
         return jsonify({"message": "Project deleted successfully"})
 
     except Exception as e:
@@ -175,12 +193,28 @@ def get_tests():
     return jsonify(tests_data)
 
 def update_tests(request):
-    # Get the tests data from the request
+    # Get the test data from the request
     tests = request.json['tests']
 
-    # Write the tests data to a JSON file
+    # Write the test data to a JSON file
     with open(tests_p, 'w') as json_file:
         json.dump(tests, json_file)
 
     app.logger.debug("Tests updated successfully.")
-    return jsonify({"message": "Updated successfully"})
+    return jsonify({"message": "Tests updated successfully"})
+
+def get_model_config(request):
+    with open(models_p, 'r') as models_file:
+        models_data = json.load(models_file)
+    return jsonify(models_data)
+
+def update_models(request):
+    # Get the models data from the request
+    models = request.json['models']
+
+    # Write the models data to a JSON file
+    with open(models_p, 'w') as json_file:
+        json.dump(models, json_file)
+
+    app.logger.debug("Models updated successfully.")
+    return jsonify({"message": "Models updated successfully"})

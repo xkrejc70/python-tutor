@@ -1,97 +1,58 @@
 from app import app
-from flask import jsonify, request
+from flask import request
 from app.upload_and_test import upload_and_test
-from app.admin.settings import load_settings, save_settings, add_project, delete_project, get_tests, update_tests
+from app.admin.settings import load_settings, save_settings, add_project, delete_project, get_tests, update_tests, get_model_config, update_models
 from app.admin.login import authenticate
 from app.questions.questions import get_questions
-import requests
 
-# TODO: delete
-import socket
+# Define API version
+API_VERSION = 'v1'
+API_BASE_URL = f'/api/{API_VERSION}'
 
-@app.route('/proj4')
-def proj4():
 
-    url = 'http://localhost:5050/proj4'
-    data = {'input_string': """
-        perms = all_permutations_substrings(string)
-        return set(words) & set(perms) 
-    """}
+############ API ENDPOINTS ############
 
-    response = requests.post(url, json=data)
-    result = response.json()
-
-    # Process the prediction as needed
-    return jsonify({'model_response': result})
-
-@app.route('/proj8')
-def proj8():
-
-    url = 'http://localhost:5050/proj8'
-    data = {'input_string': """
-    def first_with_given_key(iterable, key = lambda x: x):
-                seen = set()
-                for x in iterable:
-                    if repr(key(x)) not in seen:
-                        seen.add(repr(key(x)))
-                        yield x
-    """}
-
-    response = requests.post(url, json=data)
-    result = response.json()
-
-    # Process the prediction as needed
-    return jsonify({'model_response': result})
-
-# TODO: move to utils
-@app.route('/api/questions/<string:project>', methods=['GET'])
+@app.route(f'{API_BASE_URL}/questions/<string:project>', methods=['GET'])
 def get_questions_route(project):
     return get_questions(project)
 
-# TODO: delete
-@app.route("/api/test", methods=['GET', 'POST'])
-def api_upload():
-    return ("host")
-
-# Upload and test
-@app.route("/api/upload", methods=['GET', 'POST'])
+@app.route(f'{API_BASE_URL}/upload', methods=['GET', 'POST'])
 def upload():
     return upload_and_test(request)
 
-# TODO: delete
-# Show server
-@app.route("/s", methods=['GET'])
-def return_home():
-    return jsonify({"host": "Hostname: " + socket.gethostname()})
-
-@app.route('/api/projects', methods=['GET'])
+@app.route(f'{API_BASE_URL}/projects', methods=['GET'])
 def get_items():
     return load_settings()
 
-
-
 # todo: secure admin requests
-
-@app.route('/api/admin/test/get', methods=['GET'])
+@app.route(f'{API_BASE_URL}/admin/test/get', methods=['GET'])
 def admin_test_get():
     return get_tests()
 
-@app.route('/api/admin/test/update', methods=['POST'])
+@app.route(f'{API_BASE_URL}/admin/test/update', methods=['POST'])
 def admin_test_update():
     return update_tests(request)
 
-@app.route('/api/admin/save', methods=['POST'])
+@app.route(f'{API_BASE_URL}/admin/save', methods=['POST'])
 def admin_save():
     return save_settings(request)
 
-@app.route('/api/admin/login', methods=['POST'])
+@app.route(f'{API_BASE_URL}/admin/login', methods=['POST'])
 def admin_login():
     return authenticate(request)
 
-@app.route('/api/admin/project/add', methods=['POST'])
+@app.route(f'{API_BASE_URL}/admin/project/add', methods=['POST'])
 def admin_project_add():
     return add_project(request)
 
-@app.route('/api/admin/project/delete', methods=['POST'])
+@app.route(f'{API_BASE_URL}/admin/project/delete', methods=['POST'])
 def admin_project_delete():
     return delete_project(request)
+
+@app.route(f'{API_BASE_URL}/admin/model/get', methods=['GET'])
+def admin_model_get():
+    return get_model_config(request)
+
+@app.route(f'{API_BASE_URL}/admin/model/update', methods=['POST'])
+def admin_model_update():
+    return update_models(request)

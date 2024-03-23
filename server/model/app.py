@@ -1,76 +1,41 @@
 from flask import Flask, jsonify, request
+import logging_config
+#from setfit import SetFitModel
+import os
+import json
+
+# TODO: add logs
 
 app = Flask(__name__)
-
-
-"""
-
-@app.route('/proj8', methods=['POST'])
-def proj8():
-    # Get the input string from the request
-    data = request.json
-    input_string = data.get('input_string', '')
-
-    # Extract predictions as needed
-    result = {
-        'input_string': input_string,
-        'classification': "[HARD-CODED] Use specific set operation for more efficient and readable solution."
-    }
-
-    return jsonify(result)
-
-
-@app.route('/proj4', methods=['POST'])
-def proj4():
-    # Get the input string from the request
-    data = request.json
-    input_string = data.get('input_string', '')
-
-    # Extract predictions as needed
-    result = {
-        'input_string': input_string,
-        'classification': "[HARD-CODED] Explore a technique for quickly initializing a dictionary with default values for specified keys."
-    }
-
-    return jsonify(result)
-
-
-"""
-
-from setfit import SetFitModel
 
 def map_classification_result(prediction, classification_mapping):
     mapped_result = classification_mapping.get(prediction, "Unknown Class")
     return mapped_result
 
+# Load project configurations from config file
+file_p = os.path.join("config", "project_models.json")
+with open(file_p, 'r') as f:
+    project_config = json.load(f)
 
-# ============= PROJECT 4 =============
+@app.route('/model/<string:project>', methods=['POST'])
+def get_response(project):
 
-# Load the pre-trained models saved locally
-model_proj4 = SetFitModel.from_pretrained("hojzas/proj4-all-labs")
+    # Extract project specific configuration
+    translations = project_config.get(project, {})
 
-# Feedback
-classification_mapping_proj4 = {
-    0: "Consider using specific set operation for more efficient and readable solution.",
-    1: "Perfect solution.",
-    2: "There is a simpler and more readable implementation approach.",
-    3: "Consider using specific function to sort elements of an iterable.",
-    4: "Perfect solution.",
-    5: "Explore a technique for quickly initializing a dictionary with default values for specified keys.",
-    6: "Perfect solution.",
-}
+    # Load model 
+    #model_url = proj8_config.get("model_url", "")
+    #model_proj8 = SetFitModel.from_pretrained(model_url)
+    classification_mapping = translations.get("translations", {})
 
-@app.route('/proj4', methods=['POST'])
-def proj4():
     # Get the input string from the request
     data = request.json
     input_string = data.get('input_string', '')
 
     # Make classification using the loaded model
-    predictions = model_proj4([input_string])
-
-    numerical_prediction = predictions.item()
-    mapped_result = map_classification_result(numerical_prediction, classification_mapping_proj4)
+    #numerical_prediction = model([input_string])
+    numerical_prediction = '1'
+    mapped_result = map_classification_result(numerical_prediction, classification_mapping)    
 
     # Extract predictions as needed
     result = {
@@ -80,42 +45,7 @@ def proj4():
 
     return jsonify(result)
 
-
-# ============= PROJECT 8 =============
-
-# Load the pre-trained models saved locally
-model_proj8 = SetFitModel.from_pretrained("hojzas/proj8-lab2")
-
-# Feedback
-classification_mapping_proj8 = {
-    0: "Consider using a set instead of a list to improve efficiency, sets provide faster membership checks.",
-    1: "Perfect solution.",
-    2: "For unique key tracking, a set is more natural and efficient than storing key-value pairs in dictionary.",
-}
-
-@app.route('/proj8', methods=['POST'])
-def proj8():
-    # Get the input string from the request
-    data = request.json
-    input_string = data.get('input_string', '')
-
-    # Make classification using the loaded model
-    predictions = model_proj8([input_string])
-
-    numerical_prediction = predictions.item()
-    mapped_result = map_classification_result(numerical_prediction, classification_mapping_proj8)
-
-    # Extract predictions as needed
-    result = {
-        'input_string': input_string,
-        'classification': mapped_result
-    }
-
-    return jsonify(result)
-
-"""
-"""
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5050)
+    app.run(debug=True, host='0.0.0.0', port=5050)

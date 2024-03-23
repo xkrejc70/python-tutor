@@ -1,5 +1,5 @@
 from app import app
-from app.tests.test_utils import RestrictedEnvironment, Project, Function
+from app.tests.test_utils import RestrictedEnvironment, Project, Function, Model
 from app.tests.test_utils import import_function_or_class_from_file, clean_function_string, load_tips_from_yaml
 import requests
 
@@ -40,7 +40,7 @@ def test_project4(file_path, test_data, project):
         if len(function_string) > 3000:
             model_response.append("[ERROR]: Over limit")
         else:
-            url = 'http://localhost:5050/' + project
+            url = Model.URL + '/model/' + project
             data = {'input_string': function_string}
 
             response = requests.post(url, json=data)
@@ -75,7 +75,7 @@ def test_project4(file_path, test_data, project):
         if len(function_string) > 3000:
             model_response.append("[ERROR]: Over limit")
         else:
-            url = 'http://localhost:5050/' + project
+            url = Model.URL + '/model/' + project
             data = {'input_string': function_string}
 
             response = requests.post(url, json=data)
@@ -110,7 +110,7 @@ def test_project4(file_path, test_data, project):
         if len(function_string) > 3000:
             model_response.append("[ERROR]: Over limit")
         else:
-            url = 'http://localhost:5050/' + project
+            url = Model.URL + '/model/' + project
             data = {'input_string': function_string}
 
             app.logger.debug('Calling model for ' + project)

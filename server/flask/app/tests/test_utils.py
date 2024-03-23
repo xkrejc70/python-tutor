@@ -6,6 +6,9 @@ import re
 import yaml
 import os
 
+MODELS = 'tips.yaml'
+CONFIG = 'config'
+
 # Restricted execution environment by temporarily clearing and restoring sys.modules
 class RestrictedEnvironment:
     def __enter__(self):
@@ -92,8 +95,7 @@ def clean_function_string(func):
     return function_string
 
 def load_tips_from_yaml(project, category):
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    file_p = os.path.join(script_dir, "tips/tips.yaml")
+    file_p = os.path.join(CONFIG, MODELS)
     with open(file_p, 'r') as file:
         tips_data = yaml.safe_load(file)
     

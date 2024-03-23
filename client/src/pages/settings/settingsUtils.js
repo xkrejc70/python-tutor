@@ -15,20 +15,31 @@ export const fetchDataFromAPI = (setData, setSelectedItems, setStatus) => {
             setSelectedItems(initiallyCheckedItems);
         })
         .catch(error => {
-            setStatus('Error fetching data');
+            setStatus('Error fetching project data');
         });
 };
 
 export const getTests = (setTests, setStatus) => {
     fetch(api.GET_TESTS)
-      .then(response => response.json())
-      .then(data => {
-        setTests(data);
-      })
-      .catch(error => {
-        setStatus('Error fetching data');
-      });
-  };
+        .then(response => response.json())
+        .then(data => {
+            setTests(data);
+        })
+        .catch(error => {
+            setStatus('Error fetching test data');
+        });
+};
+
+export const getModels = (setModels, setStatus) => {
+    fetch(api.GET_MODELS)
+        .then(response => response.json())
+        .then(data => {
+            setModels(data);
+        })
+        .catch(error => {
+            setStatus('Error fetching model data');
+        });
+};
 
 export const handleCheckboxChange = (item, items, setItems, setSelectedItems) => {
     const updatedItems = items.map(i => {
@@ -72,7 +83,7 @@ export const handleSaveData = (selectedItems, setStatus) => {
         });
 };
 
-export const handleAddProjectRequest = (projectName, projectInfo, setStatusAddProject, setItems, setSelectedItems, setStatus, setProjectName, setProjectInfo, setTests, setStatusTests) => {
+export const handleAddProjectRequest = (projectName, projectInfo, setStatusAddProject, setItems, setSelectedItems, setStatus, setProjectName, setProjectInfo, setTests, setModels) => {
     if (projectName === "") {
         setStatusAddProject('Project name is required');
         return;
@@ -89,7 +100,8 @@ export const handleAddProjectRequest = (projectName, projectInfo, setStatusAddPr
             if (response.status === 200) {
                 setStatus('New project added');
                 fetchDataFromAPI(setItems, setSelectedItems, setStatus);
-                getTests(setTests, setStatusTests);
+                getTests(setTests);
+                getModels(setModels);
                 setProjectName('');
                 setProjectInfo('');
             } else {

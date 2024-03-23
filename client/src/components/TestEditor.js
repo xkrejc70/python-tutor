@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { updateTestsAndSave } from './testEditorUtils';
 import { AiFillDelete } from "react-icons/ai";
 import { TbMinusVertical } from "react-icons/tb";
@@ -7,7 +7,6 @@ import 'assets/global.css';
 
 const TestEditor = ({ tests, projs, onTestsChange }) => {
     const [selectedProject, setSelectedProject] = useState('');
-    const [selectedProjectName, setSelectedProjectName] = useState('');
     const [selectedFunction, setSelectedFunction] = useState('');
     const [selectedTestIndex, setSelectedTestIndex] = useState(null);
     const [inputValue, setInputValue] = useState('');
@@ -27,7 +26,7 @@ const TestEditor = ({ tests, projs, onTestsChange }) => {
 
     // Populate project and function dropdown options
     const projects = Object.keys(tests);
-    const functions = selectedProject ? Object.keys(tests[selectedProject]) : [];
+    const functions = useMemo(() => selectedProject ? Object.keys(tests[selectedProject]) : [], [selectedProject, tests]);
 
     // Create an object to store the mapping of projX to names
     const idToNameMap = {};
@@ -100,7 +99,6 @@ const TestEditor = ({ tests, projs, onTestsChange }) => {
     // Handle project selection
     const handleProjectChange = (selectedProject) => {
         setSelectedProject(selectedProject, idToNameMap[selectedProject]);
-        setSelectedProjectName(idToNameMap[selectedProject]);
         setSelectedFunction('');
         setInputValue('');
         setOutputValue('');
@@ -173,13 +171,12 @@ const TestEditor = ({ tests, projs, onTestsChange }) => {
     return (
         <div>
             <div>
-                <div style={{ display: 'inline-block', marginRight: '20px' }}>
+                <div className='test-editor'>
                     <label>
                         Select Project:
                         <select className="tests-select" value={selectedProject} onChange={(e) => handleProjectChange(e.target.value)}>
                             <option value="">Select Project</option>
                             {projects
-                                .filter(projectId => isEditable[projectId]) // Filter only editable projects
                                 .sort((a, b) => idToNameMap[a].localeCompare(idToNameMap[b])) // Sort by project name
                                 .map(projectId => (
                                     <option key={projectId} value={projectId}>
@@ -193,8 +190,8 @@ const TestEditor = ({ tests, projs, onTestsChange }) => {
                 </div>
 
                 {selectedProject && (
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <div style={{ display: 'inline-block' }}>
+                    <div className="flex-container">
+                        <div className="inline-block">
                             <label>
                                 Select Function:
                                 <select className="tests-select" value={selectedFunction} onChange={(e) => handleFunctionChange(e.target.value)}>
@@ -207,12 +204,13 @@ const TestEditor = ({ tests, projs, onTestsChange }) => {
                                 </select>
                             </label>
                         </div>
-                        <div style={{ marginLeft: 'auto' }}>
+                        <div className="auto-margin-left">
                             {selectedFunction && <button className='tests-button tests-button-delete' onClick={handleDeleteFunction}>Delete Function</button>}
                             <button className='tests-button' onClick={handleCreateNewFunction}>Add New Function</button>
                         </div>
                     </div>
                 )}
+
             </div>
 
 

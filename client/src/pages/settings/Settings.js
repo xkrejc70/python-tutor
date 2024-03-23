@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from "components/Sidebar";
 import StatusMessage from "components/StatusMessage";
 import TestEditor from "components/TestEditor";
-import { fetchDataFromAPI, handleCheckboxChange, handleSaveData, handleAddProjectRequest, handleDeleteProjectRequest, getTests } from './settingsUtils';
+import ModelEditor from "components/ModelEditor";
+import { fetchDataFromAPI, handleCheckboxChange, handleSaveData, handleAddProjectRequest, handleDeleteProjectRequest, getTests, getModels } from './settingsUtils';
 import { RiErrorWarningFill } from "react-icons/ri";
 import { AiFillDelete, AiFillLock } from "react-icons/ai";
 import { TbMinusVertical } from "react-icons/tb";
@@ -14,16 +15,12 @@ function Settings() {
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
     const [items, setItems] = useState([]);
     const [tests, setTests] = useState([]);
+    const [models, setModels] = useState([]);
     const [selectedItems, setSelectedItems] = useState([]);
     const [status, setStatus] = useState('');
-    const [statusTests, setStatusTests] = useState('');
     const [statusAddProject, setStatusAddProject] = useState('');
     const [projectName, setProjectName] = useState('');
     const [projectInfo, setProjectInfo] = useState('');
-
-    const scrollToAddProject = () => {
-        window.scrollTo(0, document.body.scrollHeight);
-    };
 
     const onSidebarCollapsedChange = (collapsed) => {
         setSidebarCollapsed(collapsed);
@@ -31,7 +28,8 @@ function Settings() {
 
     useEffect(() => {
         fetchDataFromAPI(setItems, setSelectedItems, setStatus);
-        getTests(setTests, setStatusTests);
+        getTests(setTests);
+        getModels(setModels);
     }, []);
 
     const handleCheckboxChangeWrapper = (item) => {
@@ -49,15 +47,24 @@ function Settings() {
             const updatedTests = tests.filter(test => test.projectId !== item.id);
             setTests(updatedTests);
         }
+
+        const updatedModels = { ...models };
+        delete updatedModels[`proj${item.id}`];
+        setModels(updatedModels);
     }
 
     const handleAddProject = () => {
-        handleAddProjectRequest(projectName, projectInfo, setStatusAddProject, setItems, setSelectedItems, setStatus, setProjectName, setProjectInfo, setTests, setStatusTests);
+        handleAddProjectRequest(projectName, projectInfo, setStatusAddProject, setItems, setSelectedItems, setStatus, setProjectName, setProjectInfo, setTests, setModels);
     };
 
     const handleTestsChange = (updatedTests) => {
         // Update the tests state when changes occur in the TestEditor
         setTests(updatedTests);
+    };
+
+    const handleModelsChange = (updatedModels) => {
+        // Update models
+        setModels(updatedModels);
     };
 
     return (
@@ -162,11 +169,16 @@ function Settings() {
                     <TestEditor tests={tests} projs={items} onTestsChange={handleTestsChange} />
                 </div>
 
-                <h1>Classification Model</h1>
-                <p>todo</p>
+                <h1>Model</h1>
+
+                <div className="settings-container">
+                    <h3 className="h3-center">Edit Model and Classification-based Feedback</h3>
+                    <br />
+                    <ModelEditor models={models} projs={items} onModelsChange={handleModelsChange} />
+                </div>
 
                 <h1>Tips</h1>
-                <p>todo</p>
+                <p className='text-tips'>To edit project tips go to config/tips.yaml.</p>
 
             </div>
         </div>

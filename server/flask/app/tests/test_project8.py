@@ -44,7 +44,7 @@ def test_project8(file_path, test_data, project):
         if len(function_string) > 1000:
             model_response.append("[ERROR]: Over limit")
         else:
-            url = Model.URL + '/' + project
+            url = Model.URL + '/model/' + project
             data = {'input_string': function_string}
 
             app.logger.debug('Calling model for ' + project)

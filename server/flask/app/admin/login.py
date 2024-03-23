@@ -4,9 +4,7 @@ import json
 import os
 
 CONFIG_FILE = 'admin_config.json'
-
-script_dir = os.path.dirname(os.path.abspath(__file__))
-file_p = os.path.join(script_dir, CONFIG_FILE)
+file_p = os.path.join("config", CONFIG_FILE)
 
 # Load credentials
 def load_credentials():
