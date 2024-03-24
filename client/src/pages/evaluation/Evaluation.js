@@ -133,6 +133,12 @@ function Evaluation() {
                 } useSyntaxHighlighting={true}>
                     {file_content}
                 </ExpandableContainer>
+
+
+
+                { /*<ExpandableContainer title={`Output (ToBeDeleted)`} defaultOpen={true} >
+                    {JSON.stringify(uploadData, null, 2)}
+            </ExpandableContainer>*/ }
             </div>
         </div>
     );

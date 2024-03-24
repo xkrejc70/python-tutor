@@ -52,9 +52,9 @@ const ModelEditor = ({ models, projs, onModelsChange }) => {
 
     const handleModelUrlChange = () => {
         let defaultModelName = models[selectedProject]?.model_url || '';
-        let modelName = prompt('Enter the name of the model in Hugging Face format (e.g., hojzas/proj4-all-labs):', defaultModelName);
+        let model_url = prompt('Enter the name of the model in Hugging Face platform (user/model):', defaultModelName);
     
-        if (modelName) {
+        if (model_url) {
             // Ensure there is a selected project
             if (selectedProject) {
                 // Create a copy of the models object
@@ -62,11 +62,11 @@ const ModelEditor = ({ models, projs, onModelsChange }) => {
     
                 // Check if the selected project exists
                 if (!updatedModels[selectedProject]) {
-                    updatedModels[selectedProject] = { modelName: '', translations: {} };
+                    updatedModels[selectedProject] = { model_url: '', translations: {} };
                 }
     
-                // Update the modelName in the selected project
-                updatedModels[selectedProject].modelName = modelName;
+                // Update the model_url in the selected project
+                updatedModels[selectedProject].model_url = model_url;
     
                 // Perform any additional actions (e.g., saving to storage)
                 updateModelsandSave(updatedModels, onModelsChange);

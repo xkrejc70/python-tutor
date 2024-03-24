@@ -119,7 +119,7 @@ export const handleAddProjectRequest = (projectName, projectInfo, setStatusAddPr
         });
 };
 
-export const handleDeleteProjectRequest = (item, setItems, setSelectedItems, setStatus) => {
+export const handleDeleteProjectRequest = (item, setItems, setSelectedItems, setStatus, setTests, setModels) => {
     // Prepare the data to be sent to the server
     const data = {
         id: item.id,
@@ -131,6 +131,8 @@ export const handleDeleteProjectRequest = (item, setItems, setSelectedItems, set
             if (response.status === 200) {
                 setStatus('Project deleted');
                 fetchDataFromAPI(setItems, setSelectedItems, setStatus);
+                getTests(setTests);
+                getModels(setModels);
             } else {
                 setStatus(`Error: ${response.data}`);
             }

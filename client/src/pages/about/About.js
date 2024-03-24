@@ -20,7 +20,7 @@ function About() {
                 <br />
                 <p className='text-about'>In case of any issues or feedback, contact <a href="mailto:pytutor.isj@gmail.com">pytutor.isj@gmail.com</a>.</p>
                 <br />
-                <p className='text-about'><FaExclamation size={20}/><b>Disclaimer: </b>The platform serves as a supplementary tool, test cases may not align with official course grading criteria.</p>
+                <p className='text-about'><FaExclamation size={20}/><b>Disclaimer: </b>The platform serves as a supplementary tool, test results may not align with official course grading criteria.</p>
             </div>
         </div>
     );

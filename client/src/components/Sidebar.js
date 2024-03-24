@@ -73,7 +73,7 @@ function LeftSidebar({ onCollapsedChange }) {
             </SubMenu>
           </Menu>
           <Menu>
-            <MenuItem icon={<IoInformationCircleOutline size={22} />} component={<Link to="/about" />}>About</MenuItem>
+            <MenuItem icon={<IoInformationCircleOutline size={23} />} component={<Link to="/about" />}>About</MenuItem>
           </Menu>
 
           <Menu>

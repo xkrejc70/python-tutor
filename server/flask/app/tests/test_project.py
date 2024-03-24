@@ -1,7 +1,8 @@
 from app import app
 import json
-from app.tests.test_utils import RestrictedEnvironment
-from app.tests.test_utils import import_function_or_class_from_file, load_tips_from_yaml, convert_data
+import requests
+from app.tests.test_utils import RestrictedEnvironment, Model
+from app.tests.test_utils import import_function_or_class_from_file, load_tips_from_yaml, convert_data, clean_function_string
 
 def test_project(file_path, test_data, project):
     passed = 0
@@ -42,6 +43,24 @@ def test_project(file_path, test_data, project):
             except Exception as e:
                 comment.append(str(e))
 
+        # Model evaluation
+        function_string = clean_function_string(imported_function)
+
+        if len(function_string) > 1000:
+            model_response.append("[ERROR]: Over limit")
+        else:
+            url = Model.URL + '/model/' + project
+            data = {'input_string': function_string}
+
+            app.logger.debug('Calling model for ' + project)
+
+            response = requests.post(url, json=data)
+            response_json = response.json()
+            if 'classification' in response_json:
+                model_response.append(response_json['classification'])
+            else:
+                model_response = []
+
     # ============= Final evaluation =============
     if num_tests == passed and passed != 0:
         comment.append("All tests passed without errors.")
@@ -59,12 +78,6 @@ def test_project(file_path, test_data, project):
         "practice_tips": practice_tips,
         "external_tips": external_tips,
         "passed": passed
-    }
-    # ============= Final evaluation =============
-    evaluation = {
-        "num_tests": num_tests,
-        "passed": passed,
-        "comment": list(set(comment))
     }
     
     return evaluation

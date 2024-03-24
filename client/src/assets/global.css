@@ -90,6 +90,10 @@ li {
     color: #00a859;
 }
 
+.black {
+    color: #000000;
+}
+
 .upload-container {
     max-width: 400px;
     margin: 50px auto;

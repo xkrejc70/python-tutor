@@ -27,6 +27,7 @@ function Upload() {
     };
 
     const onFileUpload = () => {
+        setStatus('Uploading...');
         handleFileUpload(selectedFile, selectedProject, setStatus, navigate, projects);
     };
 
