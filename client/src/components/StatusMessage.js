@@ -5,7 +5,7 @@ function StatusMessage({ status }) {
     
     if (status === 'Settings saved' || status === 'New project added' || status === 'Project deleted') {
         className = 'status status-success';
-    } else if (status === 'Uploading...') {
+    } else if (status === 'Uploading...' || status === "Evaluating...") {
         className = 'status black';
     } else {
         className = 'status';

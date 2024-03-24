@@ -28,6 +28,12 @@ function Upload() {
 
     const onFileUpload = () => {
         setStatus('Uploading...');
+        setTimeout(() => {
+            setStatus('Testing...');
+        }, 2000);
+        setTimeout(() => {
+            setStatus('Evaluating...');
+        }, 3000);
         handleFileUpload(selectedFile, selectedProject, setStatus, navigate, projects);
     };
 

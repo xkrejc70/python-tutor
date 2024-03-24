@@ -23,6 +23,7 @@ def get_response(project):
     project_specific_config = project_config.get(project, {})
     # Extract project specific configuration
     translations = project_specific_config.get("translations", {})
+    translations = {int(key): value for key, value in translations.items()}
     # Load model 
     model_url = project_specific_config.get("model_url", "")
 
@@ -36,9 +37,12 @@ def get_response(project):
     input_string = data.get('input_string', '')
 
     # Make classification using the loaded model
+    app.logger.debug("Loading model " + model_url)
     #model = SetFitModel.from_pretrained(model_url)
+    app.logger.debug("Getting classification")
     #numerical_prediction = model([input_string])
     numerical_prediction = '1'
+    app.logger.debug("Result is " + numerical_prediction)
     mapped_result = map_classification_result(numerical_prediction, translations)    
 
     # Extract predictions as needed

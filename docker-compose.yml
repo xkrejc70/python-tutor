@@ -11,8 +11,11 @@ services:
       - "8084"
     image: flask-app-image
     container_name: flask-server-container
+    volumes:
+      - ./uploads:/app/uploads
+      - ./config/:/app/config
+      - ./logs/:/app/logs
     network_mode: host
-    restart: always
 
   # server model
   model:
@@ -24,9 +27,9 @@ services:
     image: model-image
     container_name: model-server-container
     volumes:
-      - ./uploads:/app/uploads
+      - ./config:/app/config
+      - ./logs:/app/logs
     network_mode: host
-    restart: always
 
     # client reactjs
   react-app:
@@ -43,3 +46,5 @@ services:
 
 volumes:
   uploads:
+  config:
+  logs:

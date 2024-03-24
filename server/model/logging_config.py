@@ -2,6 +2,7 @@ import os
 from logging.config import dictConfig
 
 debug_log = os.path.join("logs", "debug_model.log")
+os.makedirs(os.path.dirname(debug_log), exist_ok=True)
 FORMAT = '%(asctime)s : %(levelname)s : %(name)s : %(message)s'
 
 logging_config = {
