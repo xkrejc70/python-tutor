@@ -4,8 +4,6 @@ import logging_config
 import os
 import json
 
-# TODO: add logs
-
 app = Flask(__name__)
 
 def map_classification_result(prediction, classification_mapping):
@@ -18,7 +16,7 @@ with open(file_p, 'r') as f:
     project_config = json.load(f)
 
 @app.route('/model/<string:project>', methods=['POST'])
-def get_response(project):
+def get_response(project): 
 
     project_specific_config = project_config.get(project, {})
     # Extract project specific configuration
@@ -29,8 +27,7 @@ def get_response(project):
 
     if model_url == "":
         app.logger.debug("No model for project " + project)
-        return jsonify({
-    })
+        return jsonify({})
 
     # Get the input string from the request
     data = request.json
@@ -40,10 +37,11 @@ def get_response(project):
     app.logger.debug("Loading model " + model_url)
     #model = SetFitModel.from_pretrained(model_url)
     app.logger.debug("Getting classification")
-    #numerical_prediction = model([input_string])
-    numerical_prediction = '1'
-    app.logger.debug("Result is " + numerical_prediction)
-    mapped_result = map_classification_result(numerical_prediction, translations)    
+    #predictions = model([input_string])
+    #numerical_prediction = predictions.item()
+    numerical_prediction = 1
+    
+    mapped_result = map_classification_result(numerical_prediction, translations)
 
     # Extract predictions as needed
     result = {
@@ -52,7 +50,6 @@ def get_response(project):
     }
 
     return jsonify(result)
-
 
 
 if __name__ == '__main__':
