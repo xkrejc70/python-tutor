@@ -54,7 +54,7 @@ const ModelEditor = ({ models, projs, onModelsChange }) => {
         let defaultModelName = models[selectedProject]?.model_url || '';
         let model_url = prompt('Enter the name of the model in Hugging Face platform (user/model):', defaultModelName);
     
-        if (model_url) {
+        if (model_url !== null) {
             // Ensure there is a selected project
             if (selectedProject) {
                 // Create a copy of the models object
@@ -66,7 +66,7 @@ const ModelEditor = ({ models, projs, onModelsChange }) => {
                 }
     
                 // Update the model_url in the selected project
-                updatedModels[selectedProject].model_url = model_url;
+                updatedModels[selectedProject].model_url = model_url === null ? '' : model_url;
     
                 // Perform any additional actions (e.g., saving to storage)
                 updateModelsandSave(updatedModels, onModelsChange);

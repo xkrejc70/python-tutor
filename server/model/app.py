@@ -12,11 +12,12 @@ def map_classification_result(prediction, classification_mapping):
 
 # Load project configurations from config file
 file_p = os.path.join("config", "project_models.json")
-with open(file_p, 'r') as f:
-    project_config = json.load(f)
 
 @app.route('/model/<string:project>', methods=['POST'])
 def get_response(project): 
+
+    with open(file_p, 'r') as f:
+        project_config = json.load(f)
 
     project_specific_config = project_config.get(project, {})
     # Extract project specific configuration
