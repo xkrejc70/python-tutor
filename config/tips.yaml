@@ -7,6 +7,13 @@ proj4:
       text: Sorting Techniques (Python 3 documentation)
     - url: https://realpython.com/python-sets/
       text: Set Operations in Python
+proj5:
+  external:
+    - url: https://www.linuxtopia.org/online_books/programming_books/python_programming/python_ch15s09.html
+      text: Advanced Parameter Handling For Functions
+    - url: https://uwpce-pythoncert.github.io/ProgrammingInPython/modules/AdvancedArgumentPassing.html
+      text: Advanced Argument Passing
+
 proj6:
   external:
     - url: https://www.pythonlikeyoumeanit.com/Module4_OOP/Special_Methods.html

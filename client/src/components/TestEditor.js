@@ -177,7 +177,7 @@ const TestEditor = ({ tests, projs, onTestsChange }) => {
                         <select className="tests-select" value={selectedProject} onChange={(e) => handleProjectChange(e.target.value)}>
                             <option value="">Select Project</option>
                             {projects
-                                .sort((a, b) => idToNameMap[a].localeCompare(idToNameMap[b])) // Sort by project name
+                                .sort((a, b) => idToNameMap[a].localeCompare(idToNameMap[b])) // Sort projects by name
                                 .map(projectId => (
                                     <option key={projectId} value={projectId}>
                                         {idToNameMap[projectId]}

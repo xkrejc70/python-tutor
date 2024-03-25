@@ -28,12 +28,6 @@ function Upload() {
 
     const onFileUpload = () => {
         setStatus('Uploading...');
-        setTimeout(() => {
-            setStatus('Testing...');
-        }, 2000);
-        setTimeout(() => {
-            setStatus('Evaluating...');
-        }, 3000);
         handleFileUpload(selectedFile, selectedProject, setStatus, navigate, projects);
     };
 
@@ -55,7 +49,8 @@ function Upload() {
                     <div className="upload-form">
                         <input type="file" onChange={onFileChange} />
                         <select value={selectedProject} onChange={handleProjectChange}>
-                            {projects.map(project => (
+                            <option value="">Select Project</option>
+                            {projects.sort((a, b) => a.name.localeCompare(b.name)).map(project => (
                                 <option key={project.id} value={'proj' + project.id.toString()}>{project.name}</option>
                             ))}
                         </select>

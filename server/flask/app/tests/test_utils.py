@@ -23,9 +23,6 @@ class RestrictedEnvironment:
 
 # Projects
 class Project:
-    P1 = 'proj1'
-    P2 = 'proj2'
-    P3 = 'proj3'
     P4 = 'proj4'
     P5 = 'proj5'
     P6 = 'proj6'
@@ -52,6 +49,8 @@ class Function:
     MATCH_PERMUTATIONS_SUBSTRINGS = 'match_permutations_substrings'
     UNIQ_SRT = 'uniq_srt'
     UNIQ_ORIG_ORDER = 'uniq_orig_order'
+    # proj5
+    GEN_QUIZ = 'gen_quiz'
     # proj8
     FIRST_WITH_GIVEN_KEY = 'first_with_given_key'
 

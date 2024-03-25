@@ -83,6 +83,7 @@ function Settings() {
                             <tr className='align-l'>
                                 <th className='checkbox-td'>Project</th>
                                 <th></th>
+                                <th>ID</th>
                                 <th>Description</th>
                                 <th className='align-r'></th>
                             </tr>
@@ -97,6 +98,7 @@ function Settings() {
                                         onChange={() => handleCheckboxChangeWrapper(item)}
                                     /></td>
                                     <td>{item.name}</td>
+                                    <td>{item.id}</td>
                                     <td>{item.info}</td>
                                     <td className='align-r'>
                                         {item.editable ? (

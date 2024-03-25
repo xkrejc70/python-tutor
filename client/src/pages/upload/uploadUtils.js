@@ -46,10 +46,6 @@ export const fetchProjectsFromServer = (setProjects, setSelectedProject) => {
         .then(response => {
             const checkedProjects = response.data.filter(project => project.checked === true);
             setProjects(checkedProjects);
-
-            if (checkedProjects.length > 0) {
-                setSelectedProject('proj' + checkedProjects[0].id.toString());
-            }
         })
         .catch(error => {
             console.error('Error fetching projects:', error);

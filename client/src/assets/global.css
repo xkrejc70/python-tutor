@@ -42,8 +42,8 @@ li {
 .ps-sidebar-container {
     height: 100% !important;
     background-color: #89C4F4 !important;
-    padding-bottom: 5px;
-    padding-top: 5px;
+    padding-bottom: 8px;
+    padding-top: 8px;
 }
 
 .ps-menu-button:hover {

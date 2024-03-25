@@ -30,7 +30,7 @@ def test_project4(file_path, test_data, project):
                     if sorted(all_items) == sorted(expected_output):
                         passed += 1
                     else:
-                        comment.append(f"Test case failed (match_permutations_substrings): {string, words}. Expected {expected_output}, but got {all_items}.")
+                        comment.append(f"Test case failed (match_permutations_substrings): {string, words}.\nExpected {expected_output}, but got {all_items}.")
             except Exception as e:
                 comment.append("Error: " + str(e))
 
@@ -44,7 +44,11 @@ def test_project4(file_path, test_data, project):
             data = {'input_string': function_string}
 
             response = requests.post(url, json=data)
-            model_response.append('match_permutations_substrings: ' + response.json()['classification'])
+            response_json = response.json()
+            if 'classification' in response_json:
+                model_response.append(response_json['classification'])
+            else:
+                model_response = []
 
     # ============= Test uniq_srt =============
     p4_uniq_srt = import_function_or_class_from_file(file_path, Function.UNIQ_SRT)
@@ -65,7 +69,7 @@ def test_project4(file_path, test_data, project):
                     if sorted(all_items) == sorted(expected_output):
                         passed += 1
                     else:
-                        comment.append(f"Test case failed (uniq_srt): {input}. Expected {expected_output}, but got {all_items}.")
+                        comment.append(f"Test case failed (uniq_srt): {input}.\nExpected {expected_output}, but got {all_items}.")
             except Exception as e:
                 comment.append("Error: " + str(e))
 
@@ -79,7 +83,11 @@ def test_project4(file_path, test_data, project):
             data = {'input_string': function_string}
 
             response = requests.post(url, json=data)
-            model_response.append('uniq_srt: ' + response.json()['classification'])
+            response_json = response.json()
+            if 'classification' in response_json:
+                model_response.append(response_json['classification'])
+            else:
+                model_response = []
 
     # ============= Test uniq_orig_order =============
     p4_uniq_orig_order = import_function_or_class_from_file(file_path, Function.UNIQ_ORIG_ORDER)
@@ -100,7 +108,7 @@ def test_project4(file_path, test_data, project):
                     if sorted(all_items) == sorted(expected_output):
                         passed += 1
                     else:
-                        comment.append(f"Test case failed (uniq_orig_order): {input}. Expected {expected_output}, but got {all_items}.")
+                        comment.append(f"Test case failed (uniq_orig_order): {input}.\nExpected {expected_output}, but got {all_items}.")
             except Exception as e:
                 comment.append("Error: " + str(e))
 
@@ -116,7 +124,11 @@ def test_project4(file_path, test_data, project):
             app.logger.debug('Calling model for ' + project)
 
             response = requests.post(url, json=data)
-            model_response.append('uniq_orig_order: ' + response.json()['classification'])
+            response_json = response.json()
+            if 'classification' in response_json:
+                model_response.append(response_json['classification'])
+            else:
+                model_response = []
 
     # ============= Final evaluation =============
     if num_tests == passed and passed != 0:

@@ -38,8 +38,8 @@ def test_project(file_path, test_data, project):
                     if expected_output == result:
                         passed += 1
                     else:
-                        app.logger.debug(f"Test case failed: {input_data}. Expected {expected_output}, but got {result}.")
-                        comment.append(f"Test case failed: {input_data}. Expected {expected_output}, but got {result}.")
+                        app.logger.debug(f"Test case failed: {input_data}.Expected {expected_output}, but got {result}.")
+                        comment.append(f"Test case failed: {input_data}.\nExpected {expected_output}, but got {result}.")
             except Exception as e:
                 comment.append(str(e))
 

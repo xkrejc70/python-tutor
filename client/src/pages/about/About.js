@@ -18,7 +18,7 @@ function About() {
                 <br />
                 <p className='text-about'>Python Tutor is an interactive platform where students can upload their projects for evaluation with feedback and practice exercises on various Python programming topics.</p>
                 <br />
-                <p className='text-about'>In case of any issues or feedback, contact <a href="mailto:pytutor.isj@gmail.com">pytutor.isj@gmail.com</a>.</p>
+                <p className='text-about'>In case of any issues or feedback, contact <a href="mailto:pytutor.isj@gmail.com">pytutor.isj@gmail.com</a>. Thank you!</p>
                 <br />
                 <p className='text-about'><FaExclamation size={20}/><b>Disclaimer: </b>The platform serves as a supplementary tool, test results may not align with official course grading criteria.</p>
             </div>

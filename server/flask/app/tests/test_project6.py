@@ -39,7 +39,7 @@ def test_project6(file_path, test_data, project):
                         if str_result == expected_output:
                             passed += 1
                         else:
-                            comment.append(f"Test case failed: {input_data}. Expected {expected_output}, but got {str_result}.")
+                            comment.append(f"Test case failed: {input_data}.\nExpected {expected_output}, but got {str_result}.")
                 except Exception as e:
                     comment.append("Error: " + str(e))
             

@@ -63,17 +63,18 @@ function LeftSidebar({ onCollapsedChange }) {
               </MenuItem>
             )}
             <hr />
+            <br />
           </Menu>
 
           <Menu>
             <MenuItem icon={<FaUpload size={20} />} component={<Link to="/upload" />}>Upload project</MenuItem>
-            <SubMenu defaultOpen label={"Practice"} icon={<FaChalkboardTeacher size={22} />}>
+            <SubMenu defaultClose label={"Practice"} icon={<FaChalkboardTeacher size={22} />}>
               <MenuItem icon={<TbLetterS size={20} />} component={<Link to="/proj4" />} >Scrabble</MenuItem>
               <MenuItem icon={<MdOutlineMailOutline size={20} />} component={<Link to="/proj8" />} >Email Queue</MenuItem>
             </SubMenu>
           </Menu>
           <Menu>
-            <MenuItem icon={<IoInformationCircleOutline size={23} />} component={<Link to="/about" />}>About</MenuItem>
+            <MenuItem icon={<IoInformationCircleOutline size={24} />} component={<Link to="/about" />}>About</MenuItem>
           </Menu>
 
           <Menu>

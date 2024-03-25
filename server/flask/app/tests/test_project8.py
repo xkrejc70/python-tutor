@@ -34,7 +34,7 @@ def test_project8(file_path, test_data, project):
                     if all_items == expected_output:
                         passed += 1
                     else:
-                        comment.append(f"Test case failed: {input_data}. Expected {expected_output}, but got {all_items}.")
+                        comment.append(f"Test case failed: {input_data}.\nExpected {expected_output}, but got {all_items}.")
             except Exception as e:
                 comment.append("Error: " + str(e))
 
@@ -50,7 +50,11 @@ def test_project8(file_path, test_data, project):
             app.logger.debug('Calling model for ' + project)
 
             response = requests.post(url, json=data)
-            model_response.append(response.json()['classification'])
+            response_json = response.json()
+            if 'classification' in response_json:
+                model_response.append(response_json['classification'])
+            else:
+                model_response = []
 
     # ============= Final evaluation =============
     if num_tests == passed and passed != 0:

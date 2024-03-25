@@ -18,7 +18,7 @@ const ModelEditor = ({ models, projs, onModelsChange }) => {
     }
 
     // Populate project dropdown options
-    const projects = Object.keys(models);
+    let projects = Object.keys(models);
 
     // Create an object to store the mapping of projX to names
     const idToNameMap = {};
@@ -29,6 +29,14 @@ const ModelEditor = ({ models, projs, onModelsChange }) => {
         const name = getNameById(numericId);
         idToNameMap[id] = name;
     });
+
+    projects = Object.keys(models).map(id => ({
+        id,
+        name: idToNameMap[id]
+    }));
+
+    // Sort projects by name
+    projects.sort((a, b) => a.name.localeCompare(b.name));
 
     // Update input values when a translation is selected for modification
     useEffect(() => {
@@ -53,18 +61,18 @@ const ModelEditor = ({ models, projs, onModelsChange }) => {
     const handleModelUrlChange = () => {
         let defaultModelName = models[selectedProject]?.model_url || '';
         let model_url = prompt('Enter the name of the model in Hugging Face platform (user/model):', defaultModelName);
-    
+
         if (model_url !== null) {
             // Ensure there is a selected project
             if (selectedProject) {
                 // Create a copy of the models object
                 const updatedModels = { ...models };
-    
+
                 // Check if the selected project exists
                 if (!updatedModels[selectedProject]) {
                     updatedModels[selectedProject] = { model_url: '', translations: {} };
                 }
-    
+
                 // Update the model_url in the selected project
                 updatedModels[selectedProject].model_url = model_url === null ? '' : model_url;
     
@@ -75,8 +83,8 @@ const ModelEditor = ({ models, projs, onModelsChange }) => {
             }
         }
     };
-    
-    
+
+
 
     // Handle project selection
     const handleProjectChange = (selectedProject) => {
@@ -151,8 +159,8 @@ const ModelEditor = ({ models, projs, onModelsChange }) => {
                             Select Project:
                             <select className="tests-select" value={selectedProject} onChange={(e) => handleProjectChange(e.target.value)}>
                                 <option value="">Select Project</option>
-                                {projects.map((id) => (
-                                    <option key={id} value={id}>{idToNameMap[id]}</option>
+                                {projects.map(project => (
+                                    <option key={project.id} value={project.id}>{project.name}</option>
                                 ))}
                             </select>
                         </label>
