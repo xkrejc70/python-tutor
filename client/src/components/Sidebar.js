@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Sidebar, SubMenu, Menu, MenuItem } from 'react-pro-sidebar';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from 'AuthContext';
 // icons
 import { FiChevronsLeft, FiChevronsRight, FiLogIn, FiLogOut } from 'react-icons/fi';
@@ -13,6 +13,7 @@ import 'assets/global.css';
 
 function LeftSidebar({ onCollapsedChange }) {
   const navigate = useNavigate();
+  const { pathname: currentPath } = useLocation()
   const [collapsed, setCollapsed] = useState(false);
   const [toggled, setToggled] = useState(false);
 
@@ -67,9 +68,9 @@ function LeftSidebar({ onCollapsedChange }) {
           </Menu>
 
           <Menu>
-            <MenuItem icon={<FaUpload size={20} />} component={<Link to="/upload" />}>Upload project</MenuItem>
-            <SubMenu defaultClose label={"Practice"} icon={<FaChalkboardTeacher size={22} />}>
-              <MenuItem icon={<TbLetterS size={20} />} component={<Link to="/proj4" />} >Scrabble</MenuItem>
+            <MenuItem icon={<FaUpload size={18} />} component={<Link to="/upload" />}>Upload project</MenuItem>
+            <SubMenu defaultOpen={currentPath.startsWith("/proj")} label={"Practice"} icon={<FaChalkboardTeacher size={22} />}>
+              <MenuItem icon={<TbLetterS size={19} />} component={<Link to="/proj4" />} >Scrabble</MenuItem>
               <MenuItem icon={<MdOutlineMailOutline size={20} />} component={<Link to="/proj8" />} >Email Queue</MenuItem>
             </SubMenu>
           </Menu>
