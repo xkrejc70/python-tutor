@@ -3,9 +3,8 @@ import Sidebar from "components/Sidebar";
 import { useLocation, Navigate } from 'react-router-dom';
 import "assets/global.css";
 import { ExpandableContainer } from './evaluationUtils';
-import { FaCheckSquare } from "react-icons/fa";
+import { FaCheckSquare, FaCode, FaCommentAlt } from "react-icons/fa";
 import { FaSquareXmark } from "react-icons/fa6";
-import { FaCommentAlt } from "react-icons/fa";
 import { MdTipsAndUpdates } from "react-icons/md";
 import { BsFillFileEarmarkFill } from "react-icons/bs";
 
@@ -25,17 +24,18 @@ function Evaluation() {
 
     const file_content = uploadData?.test?.file_content;
     const filename = uploadData?.test?.filename;
-    const project = uploadData?.test?.project;
     const numTests = uploadData?.test?.test_result?.num_tests;
     const passed = uploadData?.test?.test_result?.passed;
     const percentage = numTests > 0 ? ((passed / numTests) * 100).toFixed(2) : 0;
     const comments = uploadData?.test?.test_result?.comment;
     const practice_tips = uploadData?.test?.test_result?.practice_tips?.length ?? 0;
     const external_tips = uploadData?.test?.test_result?.external_tips?.length ?? 0;
-    const tips_num = practice_tips + external_tips
+    const tips_num = practice_tips + external_tips;
 
     const model_response = uploadData?.test?.test_result?.model_response;
     const response_len = model_response ? model_response.length : 0;
+
+    const analysis_result = uploadData?.test?.analysis_result;
 
     return (
         <div>
@@ -45,13 +45,13 @@ function Evaluation() {
 
                 <br />
 
-                <ExpandableContainer className="feedback-title" title={
+                {/* Display test results */}
+                <ExpandableContainer className="expandable-container feedback-title" title={
                     <div>
-                        {percentage > 99 ? <FaCheckSquare size={23} className="test-passed feedback-icon" /> : <FaSquareXmark size={23} className="test-failed feedback-icon" />}
+                        {percentage > 99 ? <FaCheckSquare size={22} className="test-passed feedback-icon" /> : <FaSquareXmark size={23} className="test-failed feedback-icon" />}
                         {`${passed}/${numTests} tests passed (${percentage}%)`}
                     </div>
                 }>
-
                     {comments && comments.map((item, index) => (
                         <p key={index}>{item}</p>
                     ))}
@@ -59,9 +59,9 @@ function Evaluation() {
 
                 <hr className="container-divider" />
 
+                {/* Display model feedback */}
                 {model_response && model_response.length > 0 && (
                     <>
-
                         <ExpandableContainer title={
                             <div>
                                 {<FaCommentAlt size={20} className="feedback-icon" />}
@@ -76,8 +76,7 @@ function Evaluation() {
                     </>
                 )}
 
-
-
+                {/* Display practice and external tips */}
                 {tips_num > 0 && (
                     <>
                         <ExpandableContainer title={
@@ -124,13 +123,28 @@ function Evaluation() {
                     </>
                 )}
 
+                {/* Display analysis results */}
+                {analysis_result && (
+                    <>
+                        <ExpandableContainer title={
+                            <div>
+                                {<FaCode size={23} className="feedback-icon" />}
+                                {`Static Code Analysis`}
+                            </div>
+                        } useSyntaxHighlighting={true} lang='json'>
+                            {analysis_result.stdout}
+                        </ExpandableContainer>
+                        <hr className="container-divider" />
+                    </>
+                )}
 
+                {/* Display uploaded file */}
                 <ExpandableContainer defaultOpen={true} title={
                     <div>
                         {<BsFillFileEarmarkFill size={20} className="feedback-icon" />}
                         {`Uploaded file (${filename})`}
                     </div>
-                } useSyntaxHighlighting={true}>
+                } useSyntaxHighlighting={true} lang='python'>
                     {file_content}
                 </ExpandableContainer>
 

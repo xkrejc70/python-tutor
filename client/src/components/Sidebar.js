@@ -64,7 +64,6 @@ function LeftSidebar({ onCollapsedChange }) {
               </MenuItem>
             )}
             <hr />
-            <br />
           </Menu>
 
           <Menu>

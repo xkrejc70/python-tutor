@@ -1,9 +1,9 @@
-# Import necessary modules
 from app import app
-import yaml
 import json
+import yaml
 import os
 
+from app.tests.static_analysis import run_code_analysis
 from app.tests.test_project4 import test_project4
 from app.tests.test_project5 import test_project5
 from app.tests.test_project6 import test_project6
@@ -14,7 +14,7 @@ TESTS = 'test_data.json'
 CONFIG = 'config'
 
 # Define paths to test data files
-tests_p = os.path.join(CONFIG, TESTS)
+TEST_P = os.path.join(CONFIG, TESTS)
 
 # Function to run tests for a specific project
 def run_tests_for_project(file_path, project, test_data, test_data_special):
@@ -51,7 +51,7 @@ def test(file_path, project):
         test_data = yaml.safe_load(file)
 
     # Load JSON test data file
-    with open(tests_p, 'r') as file:
+    with open(TEST_P, 'r') as file:
         test_data_special = json.load(file)
 
     # If project-specific tests exist, get them
@@ -61,4 +61,6 @@ def test(file_path, project):
     # Run tests for the specified project
     result = run_tests_for_project(file_path, project, test_data, project_tests)
 
-    return result
+    analysis_result = run_code_analysis(file_path)
+
+    return (result, analysis_result)

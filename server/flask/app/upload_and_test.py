@@ -17,9 +17,10 @@ def upload_and_test(request):
 
         try:
             # Test
-            test_result = test(file_path, project)
+            (test_result, analysis_result) = test(file_path, project)
             response_data = {
                 "test_result": test_result,
+                "analysis_result": analysis_result,
                 "file_content": file_content,
                 "filename": filename,
                 "project": project
