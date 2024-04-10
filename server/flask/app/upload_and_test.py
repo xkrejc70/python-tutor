@@ -29,6 +29,6 @@ def upload_and_test(request):
       
         except Exception as e:
             app.logger.error(f"Error during test: {str(e)}")
-            return jsonify({"error": f"An error occurred during test: {str(e)}"}), 500
+            return jsonify({"error": f"An error occurred during test"}), 500
     else:
         return upload_result
