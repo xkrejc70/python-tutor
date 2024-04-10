@@ -40,6 +40,8 @@ services:
       - "5060"
     image: test-image
     container_name: test-server-container
+    volumes:
+      - ./uploads:/app/uploads
     network_mode: host
 
     # client reactjs

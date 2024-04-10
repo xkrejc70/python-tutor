@@ -1,4 +1,3 @@
-from app import app
 import importlib.util
 import sys
 import inspect
@@ -55,7 +54,7 @@ class Function:
 # Model and Test urls
 class Url:
     MODEL = 'http://localhost:5050'
-    TEST = 'http://localhost:5080'
+    TEST = 'http://localhost:5060'
 
 # Import function or class from file
 def import_function_or_class_from_file(file_path, identifier_name):
