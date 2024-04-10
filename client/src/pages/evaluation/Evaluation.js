@@ -41,7 +41,7 @@ function Evaluation() {
         <div>
             <Sidebar onCollapsedChange={handleSidebarCollapsedChange} />
             <div className={"main-layout"} style={{ marginLeft: sidebarCollapsed ? "80px" : "250px" }}>
-                <h1>Evaluation</h1>
+                <h1>Project Evaluation</h1>
 
                 <br />
 

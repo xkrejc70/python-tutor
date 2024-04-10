@@ -26,7 +26,7 @@ const TestEditor = ({ tests, projs, onTestsChange }) => {
 
     // Populate project and function dropdown options
     const projects = Object.keys(tests);
-    const functions = useMemo(() => selectedProject ? Object.keys(tests[selectedProject]) : [], [selectedProject, tests]);
+    const functions = useMemo(() => selectedProject && tests[selectedProject] ? Object.keys(tests[selectedProject]) : [], [selectedProject, tests]);
 
     // Create an object to store the mapping of projX to names
     const idToNameMap = {};

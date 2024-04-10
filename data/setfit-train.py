@@ -4,8 +4,6 @@ from sentence_transformers.losses import CosineSimilarityLoss
 
 dataset_id = "hojzas/proj8-label2"
 dataset_valid_id = "hojzas/proj8-label-validation"
-# model_id = "sentence-transformers/paraphrase-mpnet-base-v2"
-# model_id = "flax-sentence-embeddings/st-codesearch-distilroberta-base"
 model_id = "sentence-transformers/all-mpnet-base-v2"
 
 dataset = load_dataset(dataset_id)

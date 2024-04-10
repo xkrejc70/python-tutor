@@ -15,7 +15,8 @@ def test_project4(file_path, test_data, project):
     tests = test_data.get(Project.P4, {}).get(Function.MATCH_PERMUTATIONS_SUBSTRINGS, [])
 
     if p4_match_permutations_substrings[1] != 200:
-        comment.append(p4_match_permutations_substrings[0])
+        app.logger.debug(p4_match_permutations_substrings[0])
+        comment.append("Function not found")
     else:
         for test_case in tests:
             string = test_case.get('string')
@@ -30,9 +31,12 @@ def test_project4(file_path, test_data, project):
                     if sorted(all_items) == sorted(expected_output):
                         passed += 1
                     else:
-                        comment.append(f"Test case failed (match_permutations_substrings): {string, words}.\nExpected {expected_output}, but got {all_items}.")
+                        app.logger.debug(f"Test case failed (match_permutations_substrings): {string, words}.\nExpected {expected_output}, but got {all_items}.")
+                        comment.append(f"Test case failed (match_permutations_substrings): {string, words}.\nExpected {expected_output}")
+                        #comment.append(f"Test case failed (match_permutations_substrings): {string, words}.\nExpected {expected_output}, but got {all_items}.")
             except Exception as e:
-                comment.append("Error: " + str(e))
+                app.logger.debug(str(e))
+                comment.append("Test failed")
 
         # Model evaluation
         function_string = clean_function_string(p4_match_permutations_substrings[0])
@@ -55,7 +59,8 @@ def test_project4(file_path, test_data, project):
     tests = test_data.get(Project.P4, {}).get(Function.UNIQ_SRT, [])
 
     if p4_uniq_srt[1] != 200:
-        comment.append(p4_uniq_srt[0])
+        app.logger.debug(p4_uniq_srt[0])
+        comment.append("Function not found")
     else:
         for test_case in tests:
             input = test_case.get('in')
@@ -69,9 +74,12 @@ def test_project4(file_path, test_data, project):
                     if sorted(all_items) == sorted(expected_output):
                         passed += 1
                     else:
-                        comment.append(f"Test case failed (uniq_srt): {input}.\nExpected {expected_output}, but got {all_items}.")
+                        app.logger.debug(f"Test case failed (uniq_srt): {input}.\nExpected {expected_output}, but got {all_items}.")
+                        comment.append(f"Test case failed (uniq_srt): {input}.\nExpected {expected_output}")
+                        #comment.append(f"Test case failed (uniq_srt): {input}.\nExpected {expected_output}, but got {all_items}.")
             except Exception as e:
-                comment.append("Error: " + str(e))
+                app.logger.debug(str(e))
+                comment.append("Test failed")
 
         # Model evaluation
         function_string = clean_function_string(p4_uniq_srt[0])
@@ -94,7 +102,9 @@ def test_project4(file_path, test_data, project):
     tests = test_data.get(Project.P4, {}).get(Function.UNIQ_ORIG_ORDER, [])
 
     if p4_uniq_orig_order[1] != 200:
-        comment.append(p4_uniq_orig_order[0])
+        app.logger.debug(p4_uniq_orig_order[0])
+        comment.append("Function not found")
+
     else:
         for test_case in tests:
             input = test_case.get('in')
@@ -108,9 +118,12 @@ def test_project4(file_path, test_data, project):
                     if sorted(all_items) == sorted(expected_output):
                         passed += 1
                     else:
-                        comment.append(f"Test case failed (uniq_orig_order): {input}.\nExpected {expected_output}, but got {all_items}.")
+                        app.logger.debug(f"Test case failed (uniq_orig_order): {input}.\nExpected {expected_output}, but got {all_items}.")
+                        comment.append(f"Test case failed (uniq_orig_order): {input}.\nExpected {expected_output}")
+                        #comment.append(f"Test case failed (uniq_orig_order): {input}.\nExpected {expected_output}, but got {all_items}.")
             except Exception as e:
-                comment.append("Error: " + str(e))
+                app.logger.debug(str(e))
+                comment.append("Test failed")
 
         # Model evaluation
         function_string = clean_function_string(p4_uniq_orig_order[0])

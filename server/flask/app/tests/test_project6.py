@@ -18,7 +18,8 @@ def test_project6(file_path, test_data, project):
         tests = test_data.get(Project.P6, {}).get(test_type, [])
 
         if p6_polynomial[1] != 200:
-            comment.append(p6_polynomial[0])
+            app.logger.debug(p6_polynomial[0])
+            comment.append("Function not found")
         else:
             for test_case in tests:
                 input_data_str = test_case.get('in')
@@ -39,9 +40,10 @@ def test_project6(file_path, test_data, project):
                         if str_result == expected_output:
                             passed += 1
                         else:
-                            comment.append(f"Test case failed: {input_data}.\nExpected {expected_output}, but got {str_result}.")
+                            #comment.append(f"Test case failed: {input_data}.\nExpected {expected_output}, but got {str_result}.")
+                            comment.append(f"Test case failed: {input_data}.\nExpected {expected_output}.")
                 except Exception as e:
-                    comment.append("Error: " + str(e))
+                    app.logger.debug("Error: " + str(e))
             
     def run_ops_tests(test_op):
         nonlocal num_tests
@@ -51,7 +53,7 @@ def test_project6(file_path, test_data, project):
         p6_polynomial = import_function_or_class_from_file(file_path, Classes.POLYNOMIAL)
 
         if p6_polynomial[1] != 200:
-            comment.append(p6_polynomial[0])
+            app.logger.debug(p6_polynomial[0])
         else:
             try:
                 with RestrictedEnvironment():
@@ -62,7 +64,8 @@ def test_project6(file_path, test_data, project):
                         if pol1 == pol2:
                             passed += 1
                         else:
-                            comment.append(f"Test case failed: {test_op}.")
+                            #comment.append(f"Test case failed: {test_op}.")
+                            app.logger.debug(f"Test case failed: {test_op}.")
                     elif test_op == Classes.POLYNOMIAL_ADD:
                         pol1 = p6_polynomial[0](x2=3, x0=1)
                         pol2 = p6_polynomial[0](x1=1, x3=0)
@@ -70,12 +73,14 @@ def test_project6(file_path, test_data, project):
                         if str(pol1+pol2) == "3x^2 + x + 1":
                             passed += 1
                         else:
-                            comment.append(f"Test case failed: {test_op}.")
+                            #comment.append(f"Test case failed: {test_op}.")
+                            app.logger.debug(f"Test case failed: {test_op}.")
                         num_tests += 1
                         if str(pol2+pol1) == "3x^2 + x + 1":
                             passed += 1
                         else:
-                            comment.append(f"Test case failed: {test_op}.")
+                            #comment.append(f"Test case failed: {test_op}.")
+                            app.logger.debug(f"Test case failed: {test_op}.")
                     elif test_op == Classes.POLYNOMIAL_POW:
                         pol1 = str(p6_polynomial[0]([1, 1, 1]) ** 2)
                         pol2 = str(p6_polynomial[0](x0=-1, x1=1) ** 2)
@@ -83,12 +88,14 @@ def test_project6(file_path, test_data, project):
                         if pol1 == "x^4 + 2x^3 + 3x^2 + 2x + 1":
                             passed += 1
                         else:
-                            comment.append(f"Test case failed: {test_op}.")
+                            #comment.append(f"Test case failed: {test_op}.")
+                            app.logger.debug(f"Test case failed: {test_op}.")
                         num_tests += 1
                         if pol2 == "x^2 - 2x + 1":
                             passed += 1
                         else:
-                            comment.append(f"Test case failed: {test_op}.")
+                            #comment.append(f"Test case failed: {test_op}.")
+                            app.logger.debug(f"Test case failed: {test_op}.")
                     elif test_op == Classes.POLYNOMIAL_DERIVATE:
                         pol1 = str(p6_polynomial[0](x2=1).derivative())
                         pol2 = str(p6_polynomial[0](x3=2,x1=3,x0=2).derivative().derivative())
@@ -98,22 +105,26 @@ def test_project6(file_path, test_data, project):
                         if pol1 == "2x":
                             passed += 1
                         else:
-                            comment.append(f"Test case failed: {test_op}.")
+                            #comment.append(f"Test case failed: {test_op}.")
+                            app.logger.debug(f"Test case failed: {test_op}.")
                         num_tests += 1
                         if pol2 == "12x":
                             passed += 1
                         else:
-                            comment.append(f"Test case failed: {test_op}.")
+                            #comment.append(f"Test case failed: {test_op}.")
+                            app.logger.debug(f"Test case failed: {test_op}.")
                         num_tests += 1
                         if pol3 == "12x^2 + 6x + 2":
                             passed += 1
                         else:
-                            comment.append(f"Test case failed: {test_op}.")
+                            #comment.append(f"Test case failed: {test_op}.")
+                            app.logger.debug(f"Test case failed: {test_op}.")
                         num_tests += 1
                         if pol4 == "6x^2 + 3":
                             passed += 1
                         else:
-                            comment.append(f"Test case failed: {test_op}.")
+                            #comment.append(f"Test case failed: {test_op}.")
+                            app.logger.debug(f"Test case failed: {test_op}.")
                     elif test_op == Classes.POLYNOMIAL_AT_VALUE:
                         pol1 = p6_polynomial[0](-2, 3, 4, -5).at_value(0)
                         pol2 = p6_polynomial[0](x2=3, x0=-1, x1=-2).at_value(3)
@@ -123,24 +134,29 @@ def test_project6(file_path, test_data, project):
                         if pol1 == -2:
                             passed += 1
                         else:
-                            comment.append(f"Test case failed: {test_op}.")
+                            #comment.append(f"Test case failed: {test_op}.")
+                            app.logger.debug(f"Test case failed: {test_op}.")
                         num_tests += 1
                         if pol2 == 20:
                             passed += 1
                         else:
-                            comment.append(f"Test case failed: {test_op}.")
+                            #comment.append(f"Test case failed: {test_op}.")
+                            app.logger.debug(f"Test case failed: {test_op}.")
                         num_tests += 1
                         if pol3 == -10.52:
                             passed += 1
                         else:
-                            comment.append(f"Test case failed: {test_op}.")
+                            #comment.append(f"Test case failed: {test_op}.")
+                            app.logger.debug(f"Test case failed: {test_op}.")
                         num_tests += 1
                         if pol4 == -23.92:
                             passed += 1
                         else:
-                            comment.append(f"Test case failed: {test_op}.")
+                            #comment.append(f"Test case failed: {test_op}.")
+                            app.logger.debug(f"Test case failed: {test_op}.")
             except Exception as e:
-                comment.append("Error: " + str(e))
+                app.logger.debug("Error: " + str(e))
+                comment.append("Test failed")
 
 
 

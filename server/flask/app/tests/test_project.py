@@ -17,7 +17,8 @@ def test_project(file_path, test_data, project):
             if status_code != 200:
                 raise Exception(imported_function)  # Raise exception if function import failed
         except Exception as e:
-            comment.append(str(e))
+            app.logger.debug(str(e))
+            comment.append("Function not found")
             continue
 
         for test_case in test_cases:
@@ -39,9 +40,11 @@ def test_project(file_path, test_data, project):
                         passed += 1
                     else:
                         app.logger.debug(f"Test case failed: {input_data}.Expected {expected_output}, but got {result}.")
-                        comment.append(f"Test case failed: {input_data}.\nExpected {expected_output}, but got {result}.")
+                        #comment.append(f"Test case failed: {input_data}.\nExpected {expected_output}, but got {result}.")
+                        comment.append(f"Test case failed: {input_data}.\nExpected {expected_output}")
             except Exception as e:
-                comment.append(str(e))
+                app.logger.debug(str(e))
+                comment.append("Test failed")
 
         # Model evaluation
         function_string = clean_function_string(imported_function)

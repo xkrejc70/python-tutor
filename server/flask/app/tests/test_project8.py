@@ -18,7 +18,8 @@ def test_project8(file_path, test_data, project):
     tests = test_data.get(Project.P8, {}).get(Function.FIRST_WITH_GIVEN_KEY, [])
 
     if p8_first_with_given_key[1] != 200:
-        comment.append(p8_first_with_given_key[0])
+        app.logger.debug(p8_first_with_given_key[0])
+        comment.append("Function not found")
     else:
         for test_case in tests:
             input_data = test_case.get('in')
@@ -34,9 +35,12 @@ def test_project8(file_path, test_data, project):
                     if all_items == expected_output:
                         passed += 1
                     else:
-                        comment.append(f"Test case failed: {input_data}.\nExpected {expected_output}, but got {all_items}.")
+                        #comment.append(f"Test case failed: {input_data}.\nExpected {expected_output}, but got {all_items}.")
+                        comment.append(f"Test case failed: {input_data}.\nExpected {expected_output}.")
+                        app.logger.debug(f"Test case failed: {input_data}.\nExpected {expected_output}, but got {all_items}.")
             except Exception as e:
-                comment.append("Error: " + str(e))
+                app.logger.debug(str(e))
+                comment.append("Test failed")
 
         # Model evaluation
         function_string = clean_function_string(p8_first_with_given_key[0])

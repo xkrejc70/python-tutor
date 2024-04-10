@@ -43,11 +43,11 @@ function Settings() {
     const handleDeleteProject = (item) => {
         handleDeleteProjectRequest(item, setItems, setSelectedItems, setStatus, setTests, setModels);
         // Update tests state after deleting project
-        if (Array.isArray(tests)) {
-            const updatedTests = tests.filter(test => test.projectId !== item.id);
-            setTests(updatedTests);
-        }
-
+        const updatedTests = { ...tests };
+        delete updatedTests[`proj${item.id}`];
+        setTests(updatedTests);
+        
+        // Update models state
         const updatedModels = { ...models };
         delete updatedModels[`proj${item.id}`];
         setModels(updatedModels);
