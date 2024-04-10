@@ -31,6 +31,17 @@ services:
       - ./logs:/app/logs
     network_mode: host
 
+  # server test
+  test:
+    build:
+      context: ./server/test
+      network: host
+    ports:
+      - "5060"
+    image: test-image
+    container_name: test-server-container
+    network_mode: host
+
     # client reactjs
   react-app:
     build:

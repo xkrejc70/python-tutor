@@ -1,8 +1,7 @@
 from app import app
 import json
 import requests
-from app.tests.test_utils import RestrictedEnvironment, Model
-from app.tests.test_utils import import_function_or_class_from_file, load_tips_from_yaml, convert_data, clean_function_string
+from app.tests.test_utils import Url, load_tips_from_yaml
 
 def test_project(file_path, test_data, project):
     passed = 0
@@ -10,59 +9,24 @@ def test_project(file_path, test_data, project):
     comment = []
     model_response = []
 
-    for function_name, test_cases in test_data.items():
-        try:
-            # Import the function dynamically
-            imported_function, status_code = import_function_or_class_from_file(file_path, function_name)
-            if status_code != 200:
-                raise Exception(imported_function)  # Raise exception if function import failed
-        except Exception as e:
-            app.logger.debug(str(e))
-            comment.append("Function not found")
-            continue
+    data = {
+        "file_path": file_path,
+        "test_data": test_data,
+        "project": project
+    }
 
-        for test_case in test_cases:
-            input_data = test_case.get('in')
-            expected_output = test_case.get('out')
-            input_type = test_case.get('inputType')
-            output_type = test_case.get('outputType')
+    app.logger.debug(f"Calling test for {project}.")
 
-            num_tests += 1
-            try:
-                input_data = convert_data(input_data, input_type)
+    response = requests.post(Url.TEST + '/test', json=data)
+    result = response.json()
 
-                with RestrictedEnvironment():
-                    result = imported_function(input_data)
+    # Extract values from the result
+    comment = result.get("comment", [])
+    model_response = result.get("model_response", [])
+    num_tests = result.get("num_tests", 0)
+    passed = result.get("passed", 0)
 
-                    expected_output = convert_data(expected_output, output_type)
-
-                    if expected_output == result:
-                        passed += 1
-                    else:
-                        app.logger.debug(f"Test case failed: {input_data}.Expected {expected_output}, but got {result}.")
-                        #comment.append(f"Test case failed: {input_data}.\nExpected {expected_output}, but got {result}.")
-                        comment.append(f"Test case failed: {input_data}.\nExpected {expected_output}")
-            except Exception as e:
-                app.logger.debug(str(e))
-                comment.append("Test failed")
-
-        # Model evaluation
-        function_string = clean_function_string(imported_function)
-
-        if len(function_string) > 1000:
-            model_response.append("[ERROR]: Over limit")
-        else:
-            url = Model.URL + '/model/' + project
-            data = {'input_string': function_string}
-
-            app.logger.debug('Calling model for ' + project)
-
-            response = requests.post(url, json=data)
-            response_json = response.json()
-            if 'classification' in response_json:
-                model_response.append(response_json['classification'])
-            else:
-                model_response = []
+    app.logger.debug(f"Test results: {comment}, {model_response}, {passed}/{num_tests}.")
 
     # ============= Final evaluation =============
     if num_tests == passed and passed != 0:

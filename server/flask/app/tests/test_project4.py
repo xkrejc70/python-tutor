@@ -1,6 +1,5 @@
 from app import app
-from app.tests.test_utils import RestrictedEnvironment, Project, Function, Model
-from app.tests.test_utils import import_function_or_class_from_file, clean_function_string, load_tips_from_yaml
+from app.tests.test_utils import Url, load_tips_from_yaml
 import requests
 
 # Test project 4
@@ -10,138 +9,22 @@ def test_project4(file_path, test_data, project):
     comment = []
     model_response = []
 
-    # ============= Test match_permutations_substrings =============
-    p4_match_permutations_substrings = import_function_or_class_from_file(file_path, Function.MATCH_PERMUTATIONS_SUBSTRINGS)
-    tests = test_data.get(Project.P4, {}).get(Function.MATCH_PERMUTATIONS_SUBSTRINGS, [])
+    data = {
+        "file_path": file_path,
+        "test_data": test_data,
+        "project": project
+    }
 
-    if p4_match_permutations_substrings[1] != 200:
-        app.logger.debug(p4_match_permutations_substrings[0])
-        comment.append("Function not found")
-    else:
-        for test_case in tests:
-            string = test_case.get('string')
-            words = test_case.get('words')
-            expected_output = test_case.get('out')
+    response = requests.post(Url.TEST + '/test/proj4', json=data)
+    result = response.json()
 
-            num_tests += 1
-            try:
-                with RestrictedEnvironment():
-                    result = p4_match_permutations_substrings[0](string, words)
-                    all_items = [item for item in result]
-                    if sorted(all_items) == sorted(expected_output):
-                        passed += 1
-                    else:
-                        app.logger.debug(f"Test case failed (match_permutations_substrings): {string, words}.\nExpected {expected_output}, but got {all_items}.")
-                        comment.append(f"Test case failed (match_permutations_substrings): {string, words}.\nExpected {expected_output}")
-                        #comment.append(f"Test case failed (match_permutations_substrings): {string, words}.\nExpected {expected_output}, but got {all_items}.")
-            except Exception as e:
-                app.logger.debug(str(e))
-                comment.append("Test failed")
+    # Extract values from the result
+    comment = result.get("comment", [])
+    model_response = result.get("model_response", [])
+    num_tests = result.get("num_tests", 0)
+    passed = result.get("passed", 0)
 
-        # Model evaluation
-        function_string = clean_function_string(p4_match_permutations_substrings[0])
-
-        if len(function_string) > 3000:
-            model_response.append("[ERROR]: Over limit")
-        else:
-            url = Model.URL + '/model/' + project
-            data = {'input_string': function_string}
-
-            response = requests.post(url, json=data)
-            response_json = response.json()
-            if 'classification' in response_json:
-                model_response.append(response_json['classification'])
-            else:
-                model_response = []
-
-    # ============= Test uniq_srt =============
-    p4_uniq_srt = import_function_or_class_from_file(file_path, Function.UNIQ_SRT)
-    tests = test_data.get(Project.P4, {}).get(Function.UNIQ_SRT, [])
-
-    if p4_uniq_srt[1] != 200:
-        app.logger.debug(p4_uniq_srt[0])
-        comment.append("Function not found")
-    else:
-        for test_case in tests:
-            input = test_case.get('in')
-            expected_output = test_case.get('out')
-
-            num_tests += 1
-            try:
-                with RestrictedEnvironment():
-                    result = p4_uniq_srt[0](input)
-                    all_items = [item for item in result]
-                    if sorted(all_items) == sorted(expected_output):
-                        passed += 1
-                    else:
-                        app.logger.debug(f"Test case failed (uniq_srt): {input}.\nExpected {expected_output}, but got {all_items}.")
-                        comment.append(f"Test case failed (uniq_srt): {input}.\nExpected {expected_output}")
-                        #comment.append(f"Test case failed (uniq_srt): {input}.\nExpected {expected_output}, but got {all_items}.")
-            except Exception as e:
-                app.logger.debug(str(e))
-                comment.append("Test failed")
-
-        # Model evaluation
-        function_string = clean_function_string(p4_uniq_srt[0])
-
-        if len(function_string) > 3000:
-            model_response.append("[ERROR]: Over limit")
-        else:
-            url = Model.URL + '/model/' + project
-            data = {'input_string': function_string}
-
-            response = requests.post(url, json=data)
-            response_json = response.json()
-            if 'classification' in response_json:
-                model_response.append(response_json['classification'])
-            else:
-                model_response = []
-
-    # ============= Test uniq_orig_order =============
-    p4_uniq_orig_order = import_function_or_class_from_file(file_path, Function.UNIQ_ORIG_ORDER)
-    tests = test_data.get(Project.P4, {}).get(Function.UNIQ_ORIG_ORDER, [])
-
-    if p4_uniq_orig_order[1] != 200:
-        app.logger.debug(p4_uniq_orig_order[0])
-        comment.append("Function not found")
-
-    else:
-        for test_case in tests:
-            input = test_case.get('in')
-            expected_output = test_case.get('out')
-
-            num_tests += 1
-            try:
-                with RestrictedEnvironment():
-                    result = p4_uniq_orig_order[0](input)
-                    all_items = [item for item in result]
-                    if sorted(all_items) == sorted(expected_output):
-                        passed += 1
-                    else:
-                        app.logger.debug(f"Test case failed (uniq_orig_order): {input}.\nExpected {expected_output}, but got {all_items}.")
-                        comment.append(f"Test case failed (uniq_orig_order): {input}.\nExpected {expected_output}")
-                        #comment.append(f"Test case failed (uniq_orig_order): {input}.\nExpected {expected_output}, but got {all_items}.")
-            except Exception as e:
-                app.logger.debug(str(e))
-                comment.append("Test failed")
-
-        # Model evaluation
-        function_string = clean_function_string(p4_uniq_orig_order[0])
-
-        if len(function_string) > 3000:
-            model_response.append("[ERROR]: Over limit")
-        else:
-            url = Model.URL + '/model/' + project
-            data = {'input_string': function_string}
-
-            app.logger.debug('Calling model for ' + project)
-
-            response = requests.post(url, json=data)
-            response_json = response.json()
-            if 'classification' in response_json:
-                model_response.append(response_json['classification'])
-            else:
-                model_response = []
+    app.logger.debug(f"Test results: {comment}, {model_response}, {passed}/{num_tests}.")
 
     # ============= Final evaluation =============
     if num_tests == passed and passed != 0:
