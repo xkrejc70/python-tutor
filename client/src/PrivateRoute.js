@@ -1,7 +1,7 @@
 // PrivateRoute.js
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAuth } from './AuthContext'; // Update the path based on your actual structure
+import { useAuth } from './AuthContext';
 
 const PrivateRoute = ({ children }) => {
   const { isLoggedIn } = useAuth();

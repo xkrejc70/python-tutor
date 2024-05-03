@@ -30,8 +30,10 @@ export const handleFileUpload = (selectedFile, selectedProject, setStatus, navig
                 .catch(error => {
                     if (error.response) {
                         setStatus(`Error: ${error.response.data.error}`);
+                    } else if (error.request) {
+                        setStatus('Error: No response received from the server');
                     } else {
-                        setStatus(`Error: ${error.response.data}`);
+                        setStatus(`Error: ${error.message}`);
                     }
                 });
         }

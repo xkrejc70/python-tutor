@@ -25,6 +25,7 @@ def upload_and_test(request):
                 "filename": filename,
                 "project": project
             }
+            app.logger.error(response_data)
             return jsonify(response_data), 200
       
         except Exception as e:

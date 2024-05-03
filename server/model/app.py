@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 import logging_config
+#TODO:production
 #from setfit import SetFitModel
 import os
 import json
@@ -35,6 +36,7 @@ def get_response(project):
     input_string = data.get('input_string', '')
 
     # Make classification using the loaded model
+    # TODO: chache it
     app.logger.debug("Loading model " + model_url)
     #model = SetFitModel.from_pretrained(model_url)
     app.logger.debug("Getting classification")

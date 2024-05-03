@@ -12,19 +12,13 @@ Make sure you have Docker and Docker Compose installed on your machine.
 
 ### Deployment:
 
-1. Set environment:
-
-    ```bash
-    ./set-env.sh
-    ```
-
 2. Build and run containers:
 
     ```bash
-    docker compose up -d --build --scale flask-app=3
+    docker compose up -d --build
     ```
 
-    This command builds the images, starts containers, and scales the Flask app service to three instances. Adjust the scale value based on your requirements.
+    This command builds the images, starts containers
 
 3. To stop and remove containers:
 
@@ -38,33 +32,28 @@ Make sure you have Docker and Docker Compose installed on your machine.
     docker ps
     ```
 
-5. App is running on `http://localhost:3000/`
-
 ### Development
 
-For developing there is no need to use Docker and scaling.
+For developing there is no need to use Docker.
 
-1. To run the project for development, use these commands:
+#### Frontend
 
-```bash
-./start-client.sh
-```
+For client, it needs to change `API_BASE_URL` to LOCALHOST
 
-For client, it changes proxy in `package.json` to `http://localhost:5000` (no use of load balancer)
-
-Frontend is running on `http://localhost:3000/`
+To start client frontend, run:
 
 ```bash
-python3 server/flask/run.py
+npm install && npm start
 ```
 
-Backend is running on `http://localhost:5000/`
+#### Backend
+
+To start flask servers, navigate to each server directory (`/server/{falsk, model, test}`) and run:
 
 ```bash
-python3 server/model/app.py
+pip install -r requirements.txt
+flask run || python3 server/[servername]/[main_file].py
 ```
-
-Model is running on `http://localhost:6000/`
 
 ## Fine-tuning
 

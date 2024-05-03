@@ -51,7 +51,7 @@ def test_project4(request):
             response = requests.post(url, json=data)
             response_json = response.json()
             if 'classification' in response_json:
-                model_response.append(response_json['classification'])
+                model_response.append(tu.Function.MATCH_PERMUTATIONS_SUBSTRINGS + ": " + response_json['classification'])
             else:
                 model_response = []
 
@@ -91,7 +91,7 @@ def test_project4(request):
             response = requests.post(url, json=data)
             response_json = response.json()
             if 'classification' in response_json:
-                model_response.append(response_json['classification'])
+                model_response.append(tu.Function.UNIQ_SRT + ": " + response_json['classification'])
             else:
                 model_response = []
 
@@ -132,7 +132,7 @@ def test_project4(request):
             response = requests.post(url, json=data)
             response_json = response.json()
             if 'classification' in response_json:
-                model_response.append(response_json['classification'])
+                model_response.append(tu.Function.UNIQ_ORIG_ORDER + ": " + response_json['classification'])
             else:
                 model_response = []
 

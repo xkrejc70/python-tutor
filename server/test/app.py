@@ -5,6 +5,7 @@ from test_project4 import test_project4
 from test_project5 import test_project5
 from test_project6 import test_project6
 from test_project8 import test_project8
+from test_project_urls import test_project_urls
 
 app = Flask(__name__)
 
@@ -23,6 +24,10 @@ def test_proj6():
 @app.route('/test/proj8', methods=['POST'])
 def test_proj8():
     return test_project8(request)
+
+@app.route('/test/projurls', methods=['POST'])
+def test_proj_urls():
+    return test_project_urls(request)
 
 @app.route('/test', methods=['POST'])
 def test_proj():
@@ -103,4 +108,4 @@ def test_proj():
 
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', port=5060)
+    app.run(debug=False, host='0.0.0.0', port=5080)

@@ -7,8 +7,9 @@ CONFIG = 'config'
 
 # Model and Test urls
 class Url:
+    # TODO:production
     MODEL = 'http://localhost:5050'
-    TEST = 'http://localhost:5060'
+    TEST = 'http://localhost:5080'
 
 def load_tips_from_yaml(project, category):
     file_p = os.path.join(CONFIG, MODELS)

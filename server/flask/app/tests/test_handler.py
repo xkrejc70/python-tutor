@@ -8,6 +8,7 @@ from app.tests.test_project4 import test_project4
 from app.tests.test_project5 import test_project5
 from app.tests.test_project6 import test_project6
 from app.tests.test_project8 import test_project8
+from app.tests.test_project_urls import test_project_urls
 from app.tests.test_project import test_project
 
 TESTS = 'test_data.json'
@@ -24,7 +25,8 @@ def run_tests_for_project(file_path, project, test_data, test_data_special):
         'proj5': test_project5,
         'proj6': test_project6,
         # 'proj7': test_project7,
-        'proj8': test_project8
+        'proj8': test_project8,
+        'proj20': test_project_urls
     }
 
     # Determine which test data to use based on the project
