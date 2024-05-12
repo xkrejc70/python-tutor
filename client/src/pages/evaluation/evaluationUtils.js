@@ -19,6 +19,7 @@ export const ExpandableContainer = ({ title, children, defaultOpen = false, lang
         <div className={`expandable-container ${isExpanded ? 'expanded' : 'collapsed'}`}>
             <div className="container-title" onClick={toggleExpansion}>
                 {title}
+                <span className={`arrow ${isExpanded ? 'down' : 'right'}`}>&#9660;</span>
             </div>
             {isExpanded && (
                 <div className="container-content">

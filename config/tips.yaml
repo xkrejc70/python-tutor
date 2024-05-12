@@ -47,3 +47,9 @@ proj11:
       text: 'Learn Python 3: Loops Cheatsheet'
     - url: https://pynative.com/python-if-else-and-for-loop-exercise-with-solutions/
       text: Python if else, for loop, and range() Exercises with Solutions
+proj20:
+  external:
+    - url: https://docs.aiohttp.org/en/stable/
+      text: Official documentation
+    - url: https://www.twilio.com/en-us/blog/asynchronous-http-requests-in-python-with-aiohttp
+      text: Asynchronous HTTP Requests in Python with aiohttp and asyncio

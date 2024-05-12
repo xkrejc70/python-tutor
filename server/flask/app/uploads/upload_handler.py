@@ -39,6 +39,7 @@ def upload_handler(request):
             
             # Check for maximum content length
             if file.content_length > app.config['MAX_CONTENT_LENGTH']:
+                app.logger.debug('File size exceeds the maximum allowed limit')
                 return jsonify({"error": f"File size exceeds the maximum allowed limit of {app.config['MAX_CONTENT_LENGTH']} bytes."}), 400
             
             if not allowed_file(file.filename):
