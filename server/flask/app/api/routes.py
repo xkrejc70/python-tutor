@@ -24,7 +24,6 @@ def upload():
 def get_items():
     return load_settings()
 
-# todo: secure admin requests
 @app.route(f'{API_BASE_URL}/admin/test/get', methods=['GET'])
 def admin_test_get():
     return get_tests()

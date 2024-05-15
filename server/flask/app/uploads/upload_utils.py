@@ -17,7 +17,6 @@ def generate_unique_filename(project_folder, filename):
             return unique_filename
         iteration += 1
 
-# TODO: unittest
 # Check filename format
 def check_filename(filename, project):
     return True
@@ -32,7 +31,6 @@ def check_filename(filename, project):
         return False
     
 # Allowed file type
-# TODO: unittest
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
