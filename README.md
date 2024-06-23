@@ -1,5 +1,8 @@
 # Python tutor
 
+![xkrejc70_poster](https://github.com/xkrejc70/python-tutor/assets/95762954/1fa6603a-c091-4038-87ac-8f2168fff012)
+
+
 ## Flask Server with Nginx Load Balancer and ReactJS Client
 
 This project includes a Flask server, a Nginx load balancer, and a ReactJS client, all orchestrated using Docker Compose. The Flask server is served by Gunicorn, and Nginx acts as a load balancer to distribute requests. The ReactJS client communicates with the Flask API.
